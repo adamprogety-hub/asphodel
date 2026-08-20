@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --bg:     #FFFFFF;
+  --bg-2:   #F5F5F5;
+  --page:   #FFFFFF;   /* outer page bg — white sections float dark plaques */
+  --dark:   #141414;
+  --dark-2: #1E1E1E;
+  --dark-3: #282828;
+  --text:   #141414;
+  --text-2: #888888;
+  --sub:    #BBBBBB;
+  --border: #E4E4E4;
+  --border-d: rgba(255,255,255,0.10);
+  --green:    #CDFF00;
+  --green-d:  #AADD00;
+
+  --ff-d: 'Manrope', system-ui, sans-serif;
+  --ff-b: 'Inter', system-ui, sans-serif;
+
+  --r-sm:    6px;
+  --r-md:    14px;
+  --r-lg:    20px;
+  --r-pill:  50px;
+  --r-plaq:  28px;   /* dark plaque corner radius */
+  --px:      48px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  /* White page bg so dark plaques float on it */
+  background: var(--page);
+}
+
+body {
+  background: var(--page);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Marquee scroll animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

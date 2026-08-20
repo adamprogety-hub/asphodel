@@ -1,0 +1,103 @@
+'use client'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+
+// Pill tag component — Titan "Sport center" label
+const Tag = ({ label }: { label: string }) => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center',
+    fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px', color: '#111',
+    border: '1px solid #ddd', borderRadius: 'var(--r-pill)',
+    padding: '6px 18px', marginBottom: '24px',
+  }}>
+    {label}
+  </span>
+)
+
+// "More ↗" pill button — Titan style
+const MoreBtn = ({ href, label = 'Подробнее', dark = false }: { href: string; label?: string; dark?: boolean }) => (
+  <Link href={href} style={{
+    display: 'inline-flex', alignItems: 'center', gap: '8px',
+    fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px',
+    color: dark ? '#111' : '#fff',
+    background: dark ? 'transparent' : '#111',
+    border: dark ? '1px solid #111' : 'none',
+    padding: '10px 20px', borderRadius: 'var(--r-pill)', textDecoration: 'none',
+    transition: 'opacity 0.2s',
+  }} className="hover:opacity-75">
+    {label}
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </Link>
+)
+
+export default function About() {
+  return (
+    <section id="about" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '380px 1fr', gap: '60px', alignItems: 'start' }}>
+
+        {/* Left: tag + heading + text + button */}
+        <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
+          <Tag label="О нас" />
+          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(26px,2.8vw,40px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'20px' }}>
+            Делаем маркетинг для тех, кто только выходит на рынок.
+          </h2>
+          <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.78, marginBottom:'28px' }}>
+            Нас двое — Илья Хаймин (бренд-менеджер, 5+ лет) и Александр Герасимов (маркетолог, 6 лет). Помогаем начинающим предпринимателям и фрилансерам получить первых клиентов из интернета.
+          </p>
+          <MoreBtn href="#contact" label="Обсудить проект" />
+        </motion.div>
+
+        {/* Right: 2 dark zone cards — Titan "Power zone / Cardio zone" */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '12px', height: '420px' }}>
+          {/* Card 1 — Сайты */}
+          <motion.div
+            initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}
+            style={{ background:'#141414', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
+          >
+            {/* Zone label top-left — Titan "Power zone" badge */}
+            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.1)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
+              <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Разработка сайтов</span>
+            </div>
+            {/* Bottom: label + arrow */}
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
+              <div>
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.6vw,22px)', color:'#fff', lineHeight:1.25 }}>
+                  Лендинги, корпоративные сайты, мультистраничные
+                </p>
+              </div>
+              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer' }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2 — Реклама */}
+          <motion.div
+            initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.18 }}
+            style={{ background:'#1E1E1E', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
+          >
+            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
+              <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Реклама и продвижение</span>
+            </div>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
+              <div>
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(15px,1.4vw,20px)', color:'#fff', lineHeight:1.3 }}>
+                  Яндекс Директ, VK, Telegram Ads
+                </p>
+              </div>
+              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'var(--green)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer' }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
