@@ -31,6 +31,7 @@ export default function Services() {
             gridTemplateRows: 'repeat(3, auto)',
             gap: '10px',
           }}
+          className="services-grid"
         >
           {/* Row 1, Col 1: asterisk + Professional */}
           <Cell icon="✦" text="Работаем только по договору — без устных обещаний" />
@@ -39,7 +40,7 @@ export default function Services() {
             gridRow: '1 / 4', background: '#1E1E1E', borderRadius: '18px',
             display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden',
             minHeight: '340px',
-          }}>
+          }} className="services-brand-cell">
             {/* Large brand letter like Titan's "T" */}
             <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(100px,14vw,200px)', color: 'var(--green)', lineHeight:1, letterSpacing:'-0.06em', userSelect:'none' }}>
               VR

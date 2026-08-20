@@ -15,7 +15,7 @@ export default function FinalCTA() {
 
   return (
     <section id="contact" style={{ background:'#fff', padding:'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth:'1280px', margin:'0 auto', display:'grid', gridTemplateColumns:'420px 1fr', gap:'80px', alignItems:'start' }}>
+      <div style={{ maxWidth:'1280px', margin:'0 auto', display:'grid', gridTemplateColumns:'420px 1fr', gap:'80px', alignItems:'start' }} className="contact-grid">
         <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Контакт

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer style={{ background: 'var(--dark)', borderTop: '1px solid rgba(255,255,255,0.07)', padding: '48px 40px 32px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:'32px', marginBottom:'48px' }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:'32px', marginBottom:'48px' }} className="footer-top">
           {/* Logo */}
           <div>
             <div style={{ display:'flex', alignItems:'baseline', gap:'1px', marginBottom:'12px' }}>

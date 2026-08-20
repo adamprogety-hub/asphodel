@@ -30,7 +30,6 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  /* White page bg so dark plaques float on it */
   background: var(--page);
 }
 
@@ -45,4 +44,152 @@ body {
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SAFE MOBILE & TABLET ADAPTIVITY OVERRIDES (Using exact target classes)
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  /* Dynamic layout adjustments for outer margins & padding */
+  section, footer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Nav Adaptivity */
+  .nav-grid-container {
+    grid-template-columns: 1fr auto !important;
+    padding: 0 16px !important;
+    height: 56px !important;
+  }
+  .nav-links, .nav-actions {
+    display: none !important;
+  }
+  .mobile-hamburger {
+    display: flex !important;
+  }
+  .mobile-menu-drawer {
+    display: block !important;
+    border-radius: 16px !important;
+    margin-top: 10px !important;
+  }
+
+  /* Hero Adaptivity */
+  #hero {
+    min-height: auto !important;
+    padding-bottom: 32px !important;
+  }
+  .hero-top-container {
+    padding: 96px 0 32px !important;
+  }
+  .hero-title {
+    font-size: 38px !important;
+    line-height: 1.1 !important;
+  }
+  .hero-bottom-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 0 24px !important;
+  }
+
+  /* About Adaptivity */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .about-zones-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    gap: 12px !important;
+  }
+
+  /* Video Adaptivity */
+  .video-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Services Bento Grid Adaptivity */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .services-brand-cell {
+    grid-row: auto !important;
+    order: -1 !important;
+    min-height: 200px !important;
+  }
+
+  /* Lead Magnets Adaptivity */
+  .magnet-block-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .magnet-left {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    padding: 32px 20px !important;
+  }
+  .magnet-right {
+    padding: 32px 20px !important;
+  }
+
+  /* Process Adaptivity */
+  .process-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .process-left-sticky {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  /* Portfolio Adaptivity */
+  .portfolio-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .portfolio-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Calculator Adaptivity */
+  .calculator-plans-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .calculator-inner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Reviews Adaptivity */
+  .reviews-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .reviews-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* FAQ Adaptivity */
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Contact Form Adaptivity */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Footer Adaptivity */
+  .footer-top {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
 }

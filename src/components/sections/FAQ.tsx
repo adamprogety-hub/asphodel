@@ -15,7 +15,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number|null>(null)
   return (
     <section id="faq" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '360px 1fr', gap: '80px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '360px 1fr', gap: '80px' }} className="faq-grid">
         <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Вопросы

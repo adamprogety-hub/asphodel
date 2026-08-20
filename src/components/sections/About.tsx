@@ -35,7 +35,7 @@ const MoreBtn = ({ href, label = 'Подробнее', dark = false }: { href: s
 export default function About() {
   return (
     <section id="about" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '380px 1fr', gap: '60px', alignItems: 'start' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '380px 1fr', gap: '60px', alignItems: 'start' }} className="about-grid">
 
         {/* Left: tag + heading + text + button */}
         <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
@@ -50,7 +50,7 @@ export default function About() {
         </motion.div>
 
         {/* Right: 2 dark zone cards — Titan "Power zone / Cardio zone" */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '12px', height: '420px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '12px', height: '420px' }} className="about-zones-grid">
           {/* Card 1 — Сайты */}
           <motion.div
             initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}

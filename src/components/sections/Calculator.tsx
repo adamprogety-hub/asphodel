@@ -93,7 +93,7 @@ export default function Calculator() {
         </motion.div>
 
         {/* ── Pricing cards ── */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'10px', marginBottom:'16px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'10px', marginBottom:'16px' }} className="calculator-plans-grid">
           {plans.map((p, idx) => (
             <motion.div key={idx}
               initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
@@ -151,7 +151,7 @@ export default function Calculator() {
             Выберите нужное — получите предварительную стоимость прямо здесь.
           </p>
 
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'40px' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'40px' }} className="calculator-inner-grid">
             {/* Left: options */}
             <div style={{ display:'flex', flexDirection:'column', gap:'24px' }}>
 

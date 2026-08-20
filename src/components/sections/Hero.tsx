@@ -23,7 +23,7 @@ export default function Hero() {
       <div style={{
         flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         padding: 'clamp(52px,7vw,88px) 40px 0',
-      }}>
+      }} className="hero-top-container">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,6 +92,7 @@ export default function Hero() {
           gap: '10px',
           padding: '0 40px 36px',
         }}
+        className="hero-bottom-grid"
       >
         {/* Card 1: WHITE — social proof (Titan: 10,000+ clients) */}
         <div style={{

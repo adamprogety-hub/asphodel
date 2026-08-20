@@ -11,7 +11,7 @@ export default function VideoSection() {
 
   return (
     <section id="video" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '340px 1fr', gap: '64px', alignItems: 'center' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '340px 1fr', gap: '64px', alignItems: 'center' }} className="video-grid">
 
         {/* Left: text block */}
         <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>

@@ -100,9 +100,9 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
       initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
       style={{ background:bg, borderRadius:'24px', overflow:'hidden' }}
     >
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0' }} className="magnet-block-grid">
         {/* Left: description */}
-        <div style={{ padding:'48px 40px', borderRight:`1px solid ${brd}` }}>
+        <div style={{ padding:'48px 40px', borderRight:`1px solid ${brd}` }} className="magnet-left">
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color: isDark ? 'var(--green)' : isGreen ? '#000' : '#111', border:`1px solid ${brd}`, borderRadius:'var(--r-pill)', padding:'5px 16px', marginBottom:'22px', letterSpacing:'0.02em' }}>
             {m.tag}
           </span>
@@ -129,7 +129,7 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
         </div>
 
         {/* Right: form */}
-        <div style={{ padding:'48px 40px', display:'flex', flexDirection:'column', justifyContent:'center' }}>
+        <div style={{ padding:'48px 40px', display:'flex', flexDirection:'column', justifyContent:'center' }} className="magnet-right">
           <AnimatePresence mode="wait">
             {!sent ? (
               <motion.form key="form" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
