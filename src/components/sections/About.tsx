@@ -55,6 +55,7 @@ export default function About() {
           <motion.div
             initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}
             style={{ background:'#141414', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
+            className="about-zone-card"
           >
             {/* Zone label top-left — Titan "Power zone" badge */}
             <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.1)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
@@ -79,6 +80,7 @@ export default function About() {
           <motion.div
             initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.18 }}
             style={{ background:'#1E1E1E', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
+            className="about-zone-card"
           >
             <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
               <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Реклама и продвижение</span>

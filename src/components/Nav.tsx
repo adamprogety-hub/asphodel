@@ -30,14 +30,21 @@ export default function Nav() {
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 100,
-        top:          scrolled ? '14px'                    : '0px',
+
+        /* Scroll state & mobile menu state transitions */
+        top:          scrolled ? '14px' : '0px',
         width:        scrolled ? 'min(920px, calc(100% - 48px))' : '100%',
-        borderRadius: scrolled ? 'var(--r-pill)'           : '0px',
-        background:   scrolled ? 'rgba(20,20,20,0.88)'     : 'transparent',
-        backdropFilter: scrolled ? 'blur(24px)'            : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(24px)'      : 'none',
-        border:       scrolled ? '1px solid rgba(255,255,255,0.10)' : '1px solid transparent',
-        boxShadow:    scrolled ? '0 8px 32px rgba(0,0,0,0.25)' : 'none',
+        
+        // Harmonize border radius: when menu is open, use pill radius (50px) to match scrolled header
+        borderRadius: mobileMenuOpen ? 'var(--r-pill)' : (scrolled ? 'var(--r-pill)' : '0px'),
+        
+        // Ensure menu is readable even if header is not scrolled yet
+        background:   (scrolled || mobileMenuOpen) ? 'rgba(20,20,20,0.94)' : 'transparent',
+        backdropFilter: (scrolled || mobileMenuOpen) ? 'blur(24px)' : 'none',
+        WebkitBackdropFilter: (scrolled || mobileMenuOpen) ? 'blur(24px)' : 'none',
+        border:       (scrolled || mobileMenuOpen) ? '1px solid rgba(255,255,255,0.10)' : '1px solid transparent',
+        boxShadow:    (scrolled || mobileMenuOpen) ? '0 8px 32px rgba(0,0,0,0.25)' : 'none',
+        
         transition: 'top 0.4s cubic-bezier(0.22,1,0.36,1), width 0.4s cubic-bezier(0.22,1,0.36,1), border-radius 0.4s cubic-bezier(0.22,1,0.36,1), background 0.35s ease, border 0.35s ease, box-shadow 0.35s ease',
       }}
     >
@@ -46,8 +53,8 @@ export default function Nav() {
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
         gap: '24px',
-        padding: scrolled ? '10px 24px' : '0 48px',
-        height: scrolled ? 'auto' : '64px',
+        padding: (scrolled || mobileMenuOpen) ? '10px 24px' : '0 48px',
+        height: (scrolled && !mobileMenuOpen) ? 'auto' : '64px',
         transition: 'padding 0.35s ease, height 0.35s ease',
       }} className="nav-grid-container">
 
@@ -80,7 +87,7 @@ export default function Nav() {
           </Link>
         </div>
 
-        {/* Mobile Hamburger toggle (styled hidden in CSS by default) */}
+        {/* Mobile Hamburger toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="mobile-hamburger"
@@ -104,7 +111,7 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* Mobile Drawer (styled hidden in CSS by default) */}
+      {/* Mobile Drawer (Transparent background — blends with header) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -114,12 +121,11 @@ export default function Nav() {
             transition={{ duration: 0.25 }}
             style={{
               overflow: 'hidden',
-              background: 'var(--dark)',
-              borderTop: '1px solid rgba(255,255,255,0.06)',
+              background: 'transparent', // removed inner dark card background
             }}
             className="mobile-menu-drawer"
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px 8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px 24px 24px' }}>
               {links.map(l => (
                 <Link
                   key={l.href} href={l.href}
@@ -143,7 +149,7 @@ export default function Nav() {
                 style={{
                   fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
                   color: '#000', background: '#ffffff', padding: '12px',
-                  borderRadius: '12px', textDecoration: 'none', textAlign: 'center',
+                  borderRadius: 'var(--r-pill)', textDecoration: 'none', textAlign: 'center',
                   display: 'block', marginTop: '6px'
                 }}
               >
