@@ -38,7 +38,7 @@ export default function Services() {
           className="services-grid"
         >
           {/* Row 1, Col 1: asterisk + Professional */}
-          <Cell icon="✦" text="Работаем только по договору — без устных обещаний" />
+          <Cell icon="✦" text="Никаких шаблонов — проектируем уникальный интерфейс под ваш продукт" />
           {/* Row 1, Col 2: CENTER — big brand visual, rowSpan 3 */}
           <div style={{
             gridRow: '1 / 4', background: '#1E1E1E', borderRadius: '18px',
@@ -56,17 +56,17 @@ export default function Services() {
             </div>
           </div>
           {/* Row 1, Col 3 */}
-          <Cell icon="📡" text="Яндекс Директ" />
+          <Cell icon="📡" text="Яндекс Директ — жестко чистим мусорный трафик и боремся за конверсии" />
 
           {/* Row 2, Col 1 */}
-          <Cell icon="+" text="Полная прозрачность рекламных расходов" />
+          <Cell icon="+" text="Честные медиапланы — рассчитываем окупаемость рекламы до её запуска" />
           {/* Row 2, Col 3 */}
-          <Cell icon="📱" text="VK Реклама и Telegram Ads" />
+          <Cell icon="📱" text="Трафик-системы — от точечного парсинга аудиторий до умных чат-ботов" />
 
           {/* Row 3, Col 1: number */}
-          <Cell icon="5+" text="лет в профессии" />
+          <Cell icon="5+" text="лет создаем сайты, которые вызывают доверие с первой секунды" />
           {/* Row 3, Col 3: wide with text */}
-          <Cell icon="100%" text="работа по договору с отчётами" />
+          <Cell icon="100%" text="понятная аналитика — еженедельные отчеты о цене лида простым языком" />
         </motion.div>
       </div>
     </section>
