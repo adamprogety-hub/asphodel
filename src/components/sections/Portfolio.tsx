@@ -10,8 +10,8 @@ const cases = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <section id="portfolio" style={{ background: 'transparent', padding: 'clamp(60px,7vw,96px) 40px', position: 'relative' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         {/* Header row */}
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'36px' }} className="portfolio-header">
           <div>

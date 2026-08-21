@@ -2,6 +2,7 @@ import Nav            from '@/components/Nav'
 import Hero           from '@/components/sections/Hero'
 import About          from '@/components/sections/About'
 import VideoSection   from '@/components/sections/VideoSection'
+import ShimmeringGrid from '@/components/ShimmeringGrid'
 import Services       from '@/components/sections/Services'
 import Responsibility from '@/components/sections/Responsibility'
 import LeadMagnets    from '@/components/sections/LeadMagnets'
@@ -42,8 +43,9 @@ export default function HomePage() {
         {/* ─── White section ─── */}
         <Process />
 
-        {/* ═══ PLAQUE 3: Portfolio + Calculator ═══ */}
-        <div style={{ borderRadius: R, overflow: 'hidden', margin: '12px 0' }}>
+        {/* ═══ PLAQUE 3: Portfolio + Calculator (Seamless Unified Background) ═══ */}
+        <div style={{ borderRadius: R, overflow: 'hidden', margin: '12px 0', position: 'relative', background: 'var(--dark)' }}>
+          <ShimmeringGrid position="right" height="100%" id="portfolio" />
           <Portfolio />
           <Calculator />
         </div>

@@ -31,12 +31,22 @@ export default function VideoSection() {
           {/* Team */}
           <div style={{ display:'flex', flexDirection:'column', gap:'14px' }}>
             {[
-              { name:'Илья Хаймин', role:'Бренд-менеджер · 5+ лет' },
-              { name:'Александр Герасимов', role:'Маркетолог · 6 лет' },
+              { name:'Илья Хаймин', role:'Бренд-менеджер · 5+ лет', avatar: '/avatars/ilya.png' },
+              { name:'Александр Герасимов', role:'Маркетолог · 6 лет', avatar: '/avatars/alexander.png' },
             ].map((p,i) => (
               <div key={i} style={{ display:'flex', alignItems:'center', gap:'12px' }}>
-                <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'var(--dark)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                  <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'var(--green)' }}>{p.name[0]}</span>
+                <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#f0f0f0', overflow: 'hidden', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, border: '1px solid #e2e2e2' }}>
+                  <img 
+                    src={p.avatar} 
+                    alt={p.name} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover', 
+                      transform: 'scale(2.0) translateY(3px)', 
+                      transformOrigin: 'top center' 
+                    }} 
+                  />
                 </div>
                 <div>
                   <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'#111' }}>{p.name}</p>

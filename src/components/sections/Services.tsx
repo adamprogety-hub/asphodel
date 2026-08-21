@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import ShimmeringGrid from '@/components/ShimmeringGrid'
 
 // Titan bottom grid section: dark bento-style grid of features
 // Icons: ✦ ✚ and numbers, like "Professional coaches * | Medical office + | 4 zones | center image | WiFi | Tanning | etc."
@@ -19,8 +20,11 @@ const tiles = [
 
 export default function Services() {
   return (
-    <section id="services" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <section id="services" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px', position: 'relative', overflow: 'hidden' }}>
+      {/* Background decoration: alternating top-left grid */}
+      <ShimmeringGrid position="left" id="services" />
+
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
 
         {/* Bento grid — 3 col × 3 row, center = large brand cell */}
         <motion.div

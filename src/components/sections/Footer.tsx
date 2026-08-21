@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Logo */}
           <div>
             <div style={{ display:'flex', alignItems:'baseline', gap:'1px', marginBottom:'12px' }}>
-              <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:'var(--green)', lineHeight:1, letterSpacing:'-0.04em' }}>.</span>
+              <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:'var(--green)', lineHeight:1, letterSpacing:'-0.04em' }}>V.R.</span>
               <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:'#fff', lineHeight:1, letterSpacing:'-0.04em', textTransform:'uppercase' }}>ASPHODEL</span>
             </div>
             <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.3)', lineHeight:1.65, maxWidth:'220px' }}>

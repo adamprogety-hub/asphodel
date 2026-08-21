@@ -79,8 +79,8 @@ export default function Calculator() {
   if (sv.audit)                   { min += P.audit; parts.push(`Аудит: от ${fmt(P.audit)}`) }
 
   return (
-    <section id="calculator" style={{ background:'var(--dark)', padding:'clamp(60px,7vw,96px) 40px' }}>
-      <div style={{ maxWidth:'1280px', margin:'0 auto' }}>
+    <section id="calculator" style={{ background:'transparent', padding:'clamp(60px,7vw,96px) 40px', position: 'relative' }}>
+      <div style={{ maxWidth:'1280px', margin:'0 auto', position: 'relative', zIndex: 2 }}>
 
         {/* Header */}
         <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }} style={{ marginBottom:'40px' }}>

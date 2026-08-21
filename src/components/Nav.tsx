@@ -60,7 +60,7 @@ export default function Nav() {
 
         {/* Logo */}
         <Link href="#" style={{ textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1px', justifySelf: 'start' }}>
-          <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '20px', color: 'var(--green)', lineHeight: 1, letterSpacing: '-0.04em' }}>.</span>
+          <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '20px', color: 'var(--green)', lineHeight: 1, letterSpacing: '-0.04em' }}>V.R.</span>
           <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '20px', color: '#ffffff', lineHeight: 1, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>ASPHODEL</span>
         </Link>
 
@@ -83,7 +83,7 @@ export default function Nav() {
             О нас
           </Link>
           <Link href="#contact" style={{ fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px', color: '#000', background: '#ffffff', padding: '9px 20px', borderRadius: 'var(--r-pill)', textDecoration: 'none', transition: 'opacity 0.2s', whiteSpace: 'nowrap' }} className="hover:opacity-85">
-            Оставить заявку
+            Задать вопрос
           </Link>
         </div>
 
@@ -153,7 +153,7 @@ export default function Nav() {
                   display: 'block', marginTop: '6px'
                 }}
               >
-                Оставить заявку
+                Задать вопрос
               </Link>
             </div>
           </motion.div>

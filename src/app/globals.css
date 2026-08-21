@@ -105,6 +105,9 @@ body {
   .about-zone-card {
     min-height: 260px !important;
   }
+  .about-photo-alexander {
+    right: -10px !important;
+  }
 
   /* Video Adaptivity */
   .video-grid {

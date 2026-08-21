@@ -1,8 +1,24 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import ShimmeringGrid from '@/components/ShimmeringGrid'
+
+
+
+const workSlides = [
+  { text: 'Рекламный бюджет уходит напрямую в Яндекс — не через нас. Мы берём только за работу.', category: 'О прозрачности' },
+  { text: 'На связи каждый день. Составляем еженедельные понятные отчёты о стоимости лида и продажах.', category: 'О коммуникации' },
+  { text: 'Не бросаем проекты после сдачи. Сопровождаем, делаем доработки и помогаем расти.', category: 'О поддержке' },
+  { text: 'Фиксируем в договоре сроки, финальную стоимость и финансовые гарантии.', category: 'О договоре' },
+]
 
 export default function Hero() {
+  const [slideIdx, setSlideIdx] = useState(0)
+
+  const nextSlide = () => setSlideIdx((prev) => (prev + 1) % workSlides.length)
+  const prevSlide = () => setSlideIdx((prev) => (prev - 1 + workSlides.length) % workSlides.length)
+
   return (
     <section
       id="hero"
@@ -19,17 +35,22 @@ export default function Hero() {
       }}
     >
 
+      {/* ── Decorative Background Pattern (Top-Right Grid & Volumetric Light Rays) ── */}
+      <ShimmeringGrid position="right" id="hero" />
+
       {/* ── Main heading — Titan stacked style ─────────────────── */}
       <div style={{
         flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         padding: 'clamp(52px,7vw,88px) 40px 0',
+        position: 'relative',
+        zIndex: 2,
       }} className="hero-top-container">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* "Be healthier. / Be stronger. / Be confident." — adapted */}
+          {/* Titan-style: each line is its own statement ending with a period */}
           <h1 style={{
             fontFamily: 'var(--ff-d)',
             fontWeight: 800,
@@ -38,10 +59,10 @@ export default function Hero() {
             lineHeight: 1.04,
             letterSpacing: '-0.03em',
             marginBottom: '40px',
-          }}>
-            Запустим сайт.<br />
-            Настроим рекламу.<br />
-            Приведём клиентов.
+          }} className="hero-title">
+            Создаем сайт<br />
+            Запускаем рекламу<br />
+            Приводим клиентов
           </h1>
 
           {/* Dual CTA — green primary + outlined secondary */}
@@ -57,7 +78,7 @@ export default function Hero() {
               }}
               className="hover:opacity-85"
             >
-              Оставить заявку
+              Нужен сайт
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -94,24 +115,24 @@ export default function Hero() {
         }}
         className="hero-bottom-grid"
       >
-        {/* Card 1: WHITE — social proof (Titan: 10,000+ clients) */}
+        {/* Card 1: WHITE — social proof */}
         <div style={{
           background: '#ffffff', borderRadius: 'var(--r-md)', padding: '22px 24px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
             {/* Avatar stack */}
             <div style={{ display: 'flex', flexShrink: 0 }}>
-              {['#555', '#777', '#999'].map((c, i) => (
-                <div key={i} style={{
+              {['/avatars/avatar1.jpg', '/avatars/avatar2.jpg', '/avatars/avatar3.jpg'].map((src, i) => (
+                <img key={i} src={src} alt="Клиент" style={{
                   width: '34px', height: '34px', borderRadius: '50%',
-                  background: c, border: '2px solid #fff',
+                  objectFit: 'cover', border: '2px solid #fff',
                   marginLeft: i === 0 ? 0 : '-10px',
                 }} />
               ))}
             </div>
             <div>
               <p style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '22px', color: '#111', lineHeight: 1 }}>4+</p>
-              <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: '#888' }}>кейса с результатом</p>
+              <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: '#888' }}>совместных кейса с результатом</p>
             </div>
           </div>
           <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '12px', color: '#888', lineHeight: 1.7 }}>
@@ -119,29 +140,67 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Card 2: DARK — scrollable tip (Titan: testimonial with arrows) */}
+        {/* Card 2: DARK — scrollable tip */}
         <div style={{
           background: '#1E1E1E', borderRadius: 'var(--r-md)', padding: '22px 24px',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          minHeight: '160px',
         }}>
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
-            {['←', '→'].map((a, i) => (
-              <button key={i} style={{
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button onClick={prevSlide} style={{
                 width: '28px', height: '28px', borderRadius: '50%',
                 border: '1px solid rgba(255,255,255,0.12)', background: 'transparent',
-                color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '12px',
+                color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '12px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                {a}
+                transition: 'border-color 0.2s',
+              }} className="hover:border-white">
+                ←
               </button>
-            ))}
+              <button onClick={nextSlide} style={{
+                width: '28px', height: '28px', borderRadius: '50%',
+                border: '1px solid rgba(255,255,255,0.12)', background: 'transparent',
+                color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '12px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'border-color 0.2s',
+              }} className="hover:border-white">
+                →
+              </button>
+            </div>
+            <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>
+              {slideIdx + 1} / {workSlides.length}
+            </span>
           </div>
-          <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.72, flex: 1 }}>
-            Рекламный бюджет уходит напрямую в Яндекс — не через нас. Мы берём только за работу.
-          </p>
+
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={slideIdx}
+                initial={{ opacity: 0, x: 8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.2 }}
+                style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.72 }}
+              >
+                {workSlides[slideIdx].text}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
             <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: 'rgba(255,255,255,0.25)' }}>V. R. Asphodel</p>
-            <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: 'rgba(255,255,255,0.25)' }}>О прозрачности</p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={slideIdx}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: 'rgba(255,255,255,0.25)' }}
+              >
+                {workSlides[slideIdx].category}
+              </motion.p>
+            </AnimatePresence>
           </div>
         </div>
 

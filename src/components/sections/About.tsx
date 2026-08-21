@@ -1,6 +1,8 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import ShimmeringGrid from '@/components/ShimmeringGrid'
+
 
 // Pill tag component — Titan "Sport center" label
 const Tag = ({ label }: { label: string }) => (
@@ -58,17 +60,49 @@ export default function About() {
             className="about-zone-card"
           >
             {/* Zone label top-left — Titan "Power zone" badge */}
-            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.1)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
+            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.1)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content', zIndex: 3 }}>
               <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Разработка сайтов</span>
             </div>
+
+            {/* Spotlight shimmer grid behind Ilya */}
+            <div style={{ position: 'absolute', right: 0, bottom: 0, width: '280px', height: '100%', overflow: 'hidden', zIndex: 1 }}>
+              <ShimmeringGrid 
+                position="right" 
+                height="100%" 
+                width="100%" 
+                cols={7} 
+                rows={11} 
+                id="about-ilya" 
+                maskCircle={true} 
+                showRays={false} 
+              />
+            </div>
+
+            {/* Photo background overlay */}
+            <img 
+              src="/avatars/ilya.png" 
+              alt="Илья Хаймин" 
+              style={{
+                position: 'absolute',
+                right: '-10px',
+                bottom: '0',
+                height: '85%',
+                width: 'auto',
+                objectFit: 'contain',
+                zIndex: 2,
+                pointerEvents: 'none',
+                opacity: 0.85
+              }}
+            />
+
             {/* Bottom: label + arrow */}
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
-              <div>
-                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.6vw,22px)', color:'#fff', lineHeight:1.25 }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', zIndex: 2 }}>
+              <div style={{ maxWidth: '70%' }}>
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.6vw,22px)', color:'#fff', lineHeight:1.25, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
                   Лендинги, корпоративные сайты, мультистраничные
                 </p>
               </div>
-              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer' }}>
+              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -82,16 +116,49 @@ export default function About() {
             style={{ background:'#1E1E1E', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
             className="about-zone-card"
           >
-            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content' }}>
+            <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px', width:'fit-content', zIndex: 3 }}>
               <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Реклама и продвижение</span>
             </div>
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
-              <div>
-                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(15px,1.4vw,20px)', color:'#fff', lineHeight:1.3 }}>
+
+            {/* Spotlight shimmer grid behind Alexander */}
+            <div style={{ position: 'absolute', right: 0, bottom: 0, width: '280px', height: '100%', overflow: 'hidden', zIndex: 1 }}>
+              <ShimmeringGrid 
+                position="right" 
+                height="100%" 
+                width="100%" 
+                cols={7} 
+                rows={11} 
+                id="about-alex" 
+                maskCircle={true} 
+                showRays={false} 
+              />
+            </div>
+
+            {/* Photo background overlay */}
+            <img 
+              src="/avatars/alexander.png" 
+              alt="Александр Герасимов" 
+              className="about-photo-alexander"
+              style={{
+                position: 'absolute',
+                right: '-40px',
+                bottom: '0',
+                height: '85%',
+                width: 'auto',
+                objectFit: 'contain',
+                zIndex: 2,
+                pointerEvents: 'none',
+                opacity: 0.85
+              }}
+            />
+
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', zIndex: 2 }}>
+              <div style={{ maxWidth: '70%' }}>
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(15px,1.4vw,20px)', color:'#fff', lineHeight:1.3, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
                   Яндекс Директ, VK, Telegram Ads
                 </p>
               </div>
-              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'var(--green)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer' }}>
+              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'var(--green)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginLeft:'12px', cursor:'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
