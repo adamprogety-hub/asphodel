@@ -37,8 +37,8 @@ export default function Portfolio() {
             <motion.div key={idx}
               initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
               transition={{ duration:0.6, delay:idx*0.07 }}
-              style={{ background:'#1A1A1A', borderRadius:'18px', padding:'28px', display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight:'240px', border:'1px solid rgba(255,255,255,0.05)', transition:'border-color 0.25s', cursor:'pointer' }}
-              whileHover={{ borderColor:'rgba(255,255,255,0.18)' }}
+              className="portfolio-card"
+              style={{ borderRadius:'18px', padding:'28px', display:'flex', flexDirection:'column', justifyContent:'space-between', minHeight:'240px', cursor:'pointer' }}
             >
               <div>
                 <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:'var(--green)', letterSpacing:'0.08em', textTransform:'uppercase' }}>{c.tag}</span>

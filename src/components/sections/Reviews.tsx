@@ -2,9 +2,9 @@
 import { motion } from 'framer-motion'
 
 const reviews = [
-  { name:'Марина К.',   role:'Репетитор по математике',  text:'Сайт за 12 дней, первая заявка на третий день после запуска рекламы. Сами разложили по полочкам — я просто отвечала на вопросы.' },
-  { name:'Алексей Н.',  role:'Юридические услуги',        text:'До этого потратил деньги на другое агентство — результата ноль. Здесь всё прозрачно, по шагам. 23 заявки за первый месяц.' },
-  { name:'Ольга В.',    role:'Студия маникюра',            text:'Честно объяснили про рекламный бюджет — он идёт напрямую в VK, не через них. Клиентов стало значительно больше.' },
+  { name:'Марина К.',   role:'Репетитор по математике',  text:'Сайт за 12 дней, первая заявка на третий день после запуска рекламы. Сами разложили по полочкам — я просто отвечала на вопросы.', avatar: '/avatars/avatar1.jpg' },
+  { name:'Алексей Н.',  role:'Юридические услуги',        text:'До этого потратил деньги на другое агентство — результата ноль. Здесь всё прозрачно, по шагам. 23 заявки за первый месяц.', avatar: '/avatars/avatar2.jpg' },
+  { name:'Ольга В.',    role:'Студия маникюра',            text:'Честно объяснили про рекламный бюджет — он идёт напрямую в VK, не через них. Клиентов стало значительно больше.', avatar: '/avatars/avatar3.jpg' },
 ]
 
 export default function Reviews() {
@@ -37,8 +37,12 @@ export default function Reviews() {
               <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'36px', color:'var(--green)', lineHeight:1, display:'block', marginBottom:'16px', opacity:0.6 }}>"</span>
               <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'rgba(255,255,255,0.65)', lineHeight:1.75, marginBottom:'24px' }}>{r.text}</p>
               <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:'18px', display:'flex', alignItems:'center', gap:'12px' }}>
-                <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#2A2A2A', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                  <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'var(--green)' }}>{r.name[0]}</span>
+                <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#2A2A2A', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, overflow:'hidden', border:'1px solid rgba(255,255,255,0.1)' }}>
+                  {r.avatar ? (
+                    <img src={r.avatar} alt={r.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+                  ) : (
+                    <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'var(--green)' }}>{r.name[0]}</span>
+                  )}
                 </div>
                 <div>
                   <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'#fff' }}>{r.name}</p>

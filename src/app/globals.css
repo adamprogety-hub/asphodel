@@ -13,8 +13,8 @@
   --sub:    #BBBBBB;
   --border: #E4E4E4;
   --border-d: rgba(255,255,255,0.10);
-  --green:    #CDFF00;
-  --green-d:  #AADD00;
+  --green:    #D07BFF;
+  --green-d:  #B557FF;
 
   --ff-d: 'Manrope', system-ui, sans-serif;
   --ff-b: 'Inter', system-ui, sans-serif;
@@ -44,6 +44,185 @@ body {
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* Bento Icon Wrapper (Desktop 120px) */
+.bento-icon {
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px !important;
+  min-height: 120px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  position: relative;
+}
+
+/* Bento Sprite Icons (Cropped strictly to 100px cell size to prevent bleeding!) */
+.bento-sprite {
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+  min-height: 100px !important;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  filter: contrast(1.12) brightness(0.96);
+  mask-image: radial-gradient(circle at center, black 50%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 80%);
+  flex-shrink: 0 !important;
+}
+
+.bento-sprite-sheet1 {
+  background-image: url('/icons_3d_sheet_1.jpg');
+  background-size: 300px 300px !important; /* Square canvas (3 cells of 100px) */
+}
+
+.bento-sprite-sheet2 {
+  background-image: url('/icons_3d_sheet_2.jpg');
+  background-size: 300px 300px !important; /* Square canvas (3 cells of 100px) */
+}
+
+/* Exact grid pixel offsets to isolate 100px cells with micro-alignment transforms */
+.sprite-s1-yandex   { background-position: -31px 0px !important; transform: scale(1.1) translateY(2px) !important; }      /* Megaphone (Col 1 center, Row 1) */
+.sprite-s1-calendar { background-position: -175px 0px !important; transform: scale(1.1) translate(8px, 4px) !important; }  /* Calendar (Col 2 center, Row 1) */
+.sprite-s1-safe     { background-position: -31px -100px !important; transform: scale(1.1) translateY(2px) !important; }   /* Safe (Col 1 center, Row 2) */
+
+.sprite-s2-browser  { background-position: 0px 0px !important; transform: scale(1.15) translateY(-8px) !important; }        /* Browser (Col 1, Row 1) */
+.sprite-s2-chat     { background-position: 0px -200px !important; transform: scale(1.2) translate(-6px, 16px) !important; }   /* Chat (Col 1, Row 3) */
+.sprite-s2-graph    { background-position: -100px -200px !important; transform: scale(1.2) translate(6px, 16px) !important; } /* Graph (Col 2, Row 3) */
+
+/* Bento Plaques Glassmorphic Contour Glow & Highlight */
+.services-card {
+  background: rgba(22, 22, 24, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 0 25px rgba(208, 123, 255, 0.02),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12); /* Glass top refraction edge */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.services-card:hover {
+  border-color: rgba(208, 123, 255, 0.28) !important;
+  box-shadow: 0 0 35px rgba(208, 123, 255, 0.1), /* Bright neon purple glow */
+              inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.01);
+}
+
+/* Hero Bottom Cards Glassmorphic Glow */
+.hero-card-white, .hero-card-dark, .hero-card-purple {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hero-card-white {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03),
+              0 0 20px rgba(208, 123, 255, 0.02);
+}
+
+.hero-card-white:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(208, 123, 255, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06),
+              0 0 25px rgba(208, 123, 255, 0.08);
+}
+
+.hero-card-dark {
+  background: rgba(30, 30, 30, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(208, 123, 255, 0.02),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12); /* Glass edge highlight */
+}
+
+.hero-card-dark:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(208, 123, 255, 0.28) !important;
+  box-shadow: 0 0 35px rgba(208, 123, 255, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.hero-card-purple {
+  background: var(--green) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 0 30px rgba(208, 123, 255, 0.15),
+              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.hero-card-purple:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 45px rgba(208, 123, 255, 0.3),
+              inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Portfolio Cards Glassmorphic Glow */
+.portfolio-card {
+  background: rgba(26, 26, 28, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(208, 123, 255, 0.02),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.portfolio-card:hover {
+  border-color: rgba(208, 123, 255, 0.28) !important;
+  box-shadow: 0 0 35px rgba(208, 123, 255, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-3px) scale(1.01);
+}
+
+/* Pricing Plans Cards Glassmorphic Glow */
+.pricing-card {
+  background: rgba(26, 26, 28, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(208, 123, 255, 0.02),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.pricing-card:hover {
+  border-color: rgba(208, 123, 255, 0.28) !important;
+  box-shadow: 0 0 35px rgba(208, 123, 255, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-3px) scale(1.01);
+}
+
+.pricing-card-featured {
+  background: rgba(30, 30, 34, 0.8) !important;
+  border: 1px solid rgba(208, 123, 255, 0.22) !important;
+  box-shadow: 0 0 30px rgba(208, 123, 255, 0.05),
+              inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+
+.pricing-card-featured:hover {
+  border-color: rgba(208, 123, 255, 0.45) !important;
+  box-shadow: 0 0 45px rgba(208, 123, 255, 0.15),
+              inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Calculator Container Glassmorphic Glow */
+.calculator-card {
+  background: rgba(26, 26, 28, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(208, 123, 255, 0.02),
+              inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.calculator-card:hover {
+  border-color: rgba(208, 123, 255, 0.18) !important;
+  box-shadow: 0 0 35px rgba(208, 123, 255, 0.08),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
 }
 
 /* ──────────────────────────────────────────────────────────────────
@@ -125,6 +304,61 @@ body {
     order: -1 !important;
     min-height: 200px !important;
   }
+  
+  /* Mobile adjustments for Bento cards & sprites */
+  .services-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    min-height: auto !important;
+    padding: 20px !important;
+  }
+  .bento-sprite {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    align-self: flex-end !important; /* Move to bottom right */
+    margin-top: -8px !important;
+  }
+
+  /* Mobile adjustments for Bento cards & sprites */
+  .services-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    min-height: auto !important;
+    padding: 20px !important;
+  }
+  .bento-icon {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    align-self: flex-end !important; /* Move to bottom right */
+    margin-top: -8px !important;
+  }
+  .bento-sprite {
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+  }
+
+  /* Scale mobile sheets to 240px (for 80px containers, 80% size) */
+  .bento-sprite-sheet1 {
+    background-size: 240px 240px !important;
+  }
+  .sprite-s1-yandex   { background-position: -25px 0px !important; transform: scale(1.1) translateY(2px) !important; }
+  .sprite-s1-calendar { background-position: -140px 0px !important; transform: scale(1.1) translate(8px, 4px) !important; }
+  .sprite-s1-safe     { background-position: -25px -80px !important; transform: scale(1.1) translateY(2px) !important; }
+
+  .bento-sprite-sheet2 {
+    background-size: 240px 240px !important;
+  }
+  .sprite-s2-browser  { background-position: 8px 8px !important; transform: scale(1.15) translateY(-8px) !important; }
+  .sprite-s2-chat     { background-position: 8px -158px !important; transform: scale(1.2) translate(-6px, 16px) !important; }
+  .sprite-s2-graph    { background-position: -75px -158px !important; transform: scale(1.2) translate(6px, 16px) !important; }
 
   /* Lead Magnets Adaptivity */
   .magnet-block-grid {

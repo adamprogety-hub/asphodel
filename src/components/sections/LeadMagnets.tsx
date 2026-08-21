@@ -117,7 +117,7 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
           <ul style={{ listStyle:'none', padding:0, display:'flex', flexDirection:'column', gap:'10px' }}>
             {m.items.map((item,i) => (
               <li key={i} style={{ display:'flex', gap:'12px', alignItems:'flex-start' }}>
-                <span style={{ width:'18px', height:'18px', borderRadius:'50%', background: isDark ? 'rgba(205,255,0,0.15)' : 'rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:'1px' }}>
+                <span style={{ width:'18px', height:'18px', borderRadius:'50%', background: isDark ? 'rgba(208, 123, 255, 0.15)' : 'rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:'1px' }}>
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
                     <path d="M1 4.5l2.5 2.5L8 1.5" stroke={ isDark ? 'var(--green)' : '#111' } strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -211,8 +211,9 @@ export default function LeadMagnets() {
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'18px' }}>
             Полезные материалы
           </span>
-          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1 }}>
-            Бесплатно — в обмен<br />на ваш контакт.
+          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.2 }}>
+            Материалы, с которыми вы<br />
+            <span style={{ color: 'var(--green)' }}>ВСЕ</span> поймете
           </h2>
         </motion.div>
 

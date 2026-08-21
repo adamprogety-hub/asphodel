@@ -109,8 +109,8 @@ export default function ShimmeringGrid({
               style={{
                 width: '40px',
                 height: '40px',
-                borderBottom: '1px solid rgba(205, 255, 0, 0.05)',
-                borderRight: '1px solid rgba(205, 255, 0, 0.05)',
+                borderBottom: '1px solid rgba(208, 123, 255, 0.05)',
+                borderRight: '1px solid rgba(208, 123, 255, 0.05)',
                 position: 'relative',
                 boxSizing: 'border-box',
               }}
@@ -120,9 +120,9 @@ export default function ShimmeringGrid({
                 initial={false}
                 animate={{
                   opacity: isGlowing ? 1 : 0,
-                  backgroundColor: isGlowing ? 'rgba(205, 255, 0, 0.04)' : 'rgba(255, 255, 255, 0)',
+                  backgroundColor: isGlowing ? 'rgba(208, 123, 255, 0.04)' : 'rgba(255, 255, 255, 0)',
                   boxShadow: isGlowing 
-                    ? 'inset 0 0 10px rgba(205, 255, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08)' 
+                    ? 'inset 0 0 10px rgba(208, 123, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08)' 
                     : 'none',
                 }}
                 transition={{ duration: 2.2, ease: 'easeInOut' }}
@@ -163,9 +163,9 @@ export default function ShimmeringGrid({
         >
           <defs>
             <linearGradient id={gradId} x1="700" y1="0" x2="200" y2={isTall ? 1100 : 550} gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#CDFF00" stopOpacity="0.45" />
-              <stop offset="50%" stopColor="#CDFF00" stopOpacity="0.12" />
-              <stop offset="100%" stopColor="#CDFF00" stopOpacity="0" />
+              <stop offset="0%" stopColor="#D07BFF" stopOpacity="0.45" />
+              <stop offset="50%" stopColor="#D07BFF" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#D07BFF" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path d={isTall ? "M700 0 L550 1300 L380 1300 Z" : "M700 0 L550 650 L380 650 Z"} fill={`url(#${gradId})`} />

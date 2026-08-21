@@ -38,7 +38,7 @@ export default function Services() {
           className="services-grid"
         >
           {/* Row 1, Col 1: asterisk + Professional */}
-          <Cell icon="✦" text="Никаких шаблонов — проектируем уникальный интерфейс под ваш продукт" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-browser" title="Уникальный дизайн" text="Никаких шаблонов — проектируем уникальный интерфейс под ваш продукт" />
           {/* Row 1, Col 2: CENTER — big brand visual, rowSpan 3 */}
           <div style={{
             gridRow: '1 / 4', background: '#1E1E1E', borderRadius: '18px',
@@ -56,35 +56,51 @@ export default function Services() {
             </div>
           </div>
           {/* Row 1, Col 3 */}
-          <Cell icon="📡" text="Яндекс Директ — жестко чистим мусорный трафик и боремся за конверсии" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-yandex" title="Яндекс Директ" text="Жестко чистим мусорный трафик и боремся за конверсии" />
 
           {/* Row 2, Col 1 */}
-          <Cell icon="+" text="Честные медиапланы — рассчитываем окупаемость рекламы до её запуска" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-safe" title="Честные медиапланы" text="Рассчитываем окупаемость рекламы до её запуска" />
           {/* Row 2, Col 3 */}
-          <Cell icon="📱" text="Трафик-системы — от точечного парсинга аудиторий до умных чат-ботов" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-chat" title="Трафик-системы" text="От точечного парсинга аудиторий до умных чат-ботов" />
 
           {/* Row 3, Col 1: number */}
-          <Cell icon="5+" text="лет создаем сайты, которые вызывают доверие с первой секунды" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-calendar" title="5+ лет опыта" text="Создаем сайты, которые вызывают доверие с первой секунды" />
           {/* Row 3, Col 3: wide with text */}
-          <Cell icon="100%" text="понятная аналитика — еженедельные отчеты о цене лида простым языком" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-graph" title="100% прозрачность" text="Еженедельные отчеты о цене лида простым языком" />
         </motion.div>
       </div>
     </section>
   )
 }
 
-function Cell({ icon, text }: { icon: string; text: string }) {
+function Cell({ spriteClass, title, text }: { spriteClass: string; title: string; text: string }) {
   return (
     <div style={{
-      background: '#1A1A1A', borderRadius: '18px', padding: '28px 24px',
-      display: 'flex', flexDirection: 'column', gap: '14px', minHeight: '108px',
-    }}>
-      <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(22px,2.5vw,32px)', color:'#fff', lineHeight:1, letterSpacing:'-0.02em' }}>
-        {icon}
-      </span>
-      <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'clamp(13px,1.1vw,15px)', color:'rgba(255,255,255,0.55)', lineHeight:1.65 }}>
-        {text}
-      </p>
+      borderRadius: '18px', padding: '20px 24px',
+      display: 'flex', flexDirection: 'row', alignItems: 'stretch', justifyContent: 'space-between',
+      minHeight: '130px',
+      gap: '20px',
+      position: 'relative',
+      overflow: 'hidden',
+    }} className="services-card">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'left' }}>
+        <h4 style={{
+          fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: 'clamp(14px, 1.2vw, 16px)',
+          color: '#fff', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>
+          {title}
+        </h4>
+        <p style={{
+          fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: 'clamp(12px, 1vw, 13px)',
+          color: 'rgba(255, 255, 255, 0.45)', lineHeight: 1.5,
+          margin: 0,
+        }}>
+          {text}
+        </p>
+      </div>
+      <div className="bento-icon">
+        <div className={`bento-sprite ${spriteClass}`} />
+      </div>
     </div>
   )
 }

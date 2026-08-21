@@ -116,8 +116,8 @@ export default function Hero() {
         className="hero-bottom-grid"
       >
         {/* Card 1: WHITE — social proof */}
-        <div style={{
-          background: '#ffffff', borderRadius: 'var(--r-md)', padding: '22px 24px',
+        <div className="hero-card-white" style={{
+          borderRadius: 'var(--r-md)', padding: '22px 24px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
             {/* Avatar stack */}
@@ -141,8 +141,8 @@ export default function Hero() {
         </div>
 
         {/* Card 2: DARK — scrollable tip */}
-        <div style={{
-          background: '#1E1E1E', borderRadius: 'var(--r-md)', padding: '22px 24px',
+        <div className="hero-card-dark" style={{
+          borderRadius: 'var(--r-md)', padding: '22px 24px',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           minHeight: '160px',
         }}>
@@ -204,40 +204,50 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Card 3: GREEN — "Get X days for free" (Titan: free trial) */}
-        <div style={{
-          background: 'var(--green)', borderRadius: 'var(--r-md)', padding: '22px 24px',
+        <div className="hero-card-purple" style={{
+          borderRadius: 'var(--r-md)', padding: '22px 24px',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          minHeight: '160px',
         }}>
-          {/* Arrow top-right — Titan icon */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
-            <div style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          {/* Header at the top */}
+          <h4 style={{
+            fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '16px',
+            color: '#000', lineHeight: 1.25, margin: 0, textTransform: 'uppercase',
+            letterSpacing: '0.04em'
+          }}>
+            Бесплатная<br />консультация
+          </h4>
+
+          {/* Bottom row: Description left, Button + Circle right */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%', gap: '12px' }}>
+            <p style={{
+              fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px',
+              color: 'rgba(0,0,0,0.55)', lineHeight: 1.6, margin: 0, maxWidth: '160px'
             }}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#CDFF00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </div>
-          <div>
-            <p style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '19px', color: '#000', lineHeight: 1.25, marginBottom: '8px' }}>
-              Бесплатная<br />консультация
-            </p>
-            <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '12px', color: 'rgba(0,0,0,0.55)', lineHeight: 1.65 }}>
               Просто напишите нам — расскажите о задаче.
             </p>
+            <Link
+              href="#contact"
+              style={{
+                fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '12px',
+                color: '#000', textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                flexShrink: 0
+              }}
+              className="group"
+            >
+              <span>Написать</span>
+              <div style={{
+                width: '28px', height: '28px', borderRadius: '50%',
+                background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'transform 0.3s ease'
+              }} className="group-hover:translate-x-1 group-hover:-translate-y-1">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 12L12 2M12 2H4M12 2v8" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </Link>
           </div>
-          <Link
-            href="#contact"
-            style={{
-              marginTop: '16px', fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '12px',
-              color: '#000', textDecoration: 'none',
-              display: 'inline-flex', alignItems: 'center', gap: '6px',
-            }}
-          >
-            Написать →
-          </Link>
         </div>
       </motion.div>
     </section>

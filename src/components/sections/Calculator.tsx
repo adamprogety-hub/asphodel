@@ -98,7 +98,8 @@ export default function Calculator() {
             <motion.div key={idx}
               initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
               transition={{ duration:0.6, delay:idx*0.08 }}
-              style={{ background: p.dark ? '#1E1E1E' : '#1A1A1A', borderRadius:'18px', padding:'32px 28px', border:'1px solid rgba(255,255,255,0.06)', display:'flex', flexDirection:'column', gap:'20px', position:'relative' }}
+              className={p.dark ? 'pricing-card pricing-card-featured' : 'pricing-card'}
+              style={{ borderRadius:'18px', padding:'32px 28px', display:'flex', flexDirection:'column', gap:'20px', position:'relative' }}
             >
               {/* Popular badge */}
               {p.dark && (
@@ -142,7 +143,8 @@ export default function Calculator() {
         {/* ── Calculator ── */}
         <motion.div
           initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}
-          style={{ background:'#1A1A1A', borderRadius:'18px', padding:'40px', border:'1px solid rgba(255,255,255,0.06)', marginTop:'10px' }}
+          className="calculator-card"
+          style={{ borderRadius:'18px', padding:'40px', marginTop:'10px' }}
         >
           <p style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(20px,2vw,28px)', color:'#fff', marginBottom:'6px', letterSpacing:'-0.015em' }}>
             Калькулятор стоимости
