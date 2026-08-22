@@ -41,15 +41,40 @@ export default function Services() {
           <Cell spriteClass="bento-sprite-sheet2 sprite-s2-browser" title="Уникальный дизайн" text="Никаких шаблонов — проектируем уникальный интерфейс под ваш продукт" />
           {/* Row 1, Col 2: CENTER — big brand visual, rowSpan 3 */}
           <div style={{
-            gridRow: '1 / 4', background: '#1E1E1E', borderRadius: '18px',
+            gridRow: '1 / 4', borderRadius: '18px',
             display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden',
             minHeight: '340px',
-          }} className="services-brand-cell">
-            {/* Large brand letter like Titan's "T" */}
-            <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(100px,14vw,200px)', color: 'var(--green)', lineHeight:1, letterSpacing:'-0.06em', userSelect:'none' }}>
-              VR
-            </span>
-            <div style={{ position:'absolute', bottom:'20px', left:'20px' }}>
+          }} className="services-brand-cell services-card">
+            {/* Ambient purple backlight glow */}
+            <div style={{
+              position: 'absolute',
+              width: '180px',
+              height: '180px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(208, 123, 255, 0.35) 0%, transparent 70%)',
+              filter: 'blur(28px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
+            }} />
+            <img 
+              src="/services_brand_image.png" 
+              alt="VR Brand Visual" 
+              style={{ 
+                width: '105%', 
+                height: 'auto', 
+                maxHeight: '310px',
+                objectFit: 'contain',
+                transform: 'rotate(-15deg)',
+                userSelect: 'none',
+                pointerEvents: 'none',
+                position: 'relative',
+                zIndex: 1
+              }} 
+            />
+            <div style={{ position:'absolute', bottom:'20px', left:'20px', zIndex: 2 }}>
               <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', textTransform:'uppercase' }}>
                 V. R. Asphodel
               </span>

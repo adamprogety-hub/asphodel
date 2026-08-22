@@ -79,7 +79,7 @@ body {
 }
 
 .bento-sprite-sheet2 {
-  background-image: url('/icons_3d_sheet_2.jpg');
+  background-image: url('/icons_3d_sheet_2.png');
   background-size: 300px 300px !important; /* Square canvas (3 cells of 100px) */
 }
 
@@ -264,6 +264,10 @@ body {
   .hero-title {
     font-size: 38px !important;
     line-height: 1.1 !important;
+  }
+  .hero-image-container {
+    margin-top: 112px !important;
+    margin-bottom: 48px !important;
   }
   .hero-bottom-grid {
     grid-template-columns: 1fr !important;

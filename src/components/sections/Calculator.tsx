@@ -9,16 +9,16 @@ const plans = [
     tag:   'Старт',
     title: 'Лендинг',
     price: 'от 65 000 ₽',
-    desc:  'Один экран с продажей одного продукта/услуги. Идеально для первого выхода в интернет.',
+    desc:  'Простой и понятный одностраничный сайт для демонстрации продукта.',
     items: ['Структура и дизайн', 'Верстка (адаптив)', 'Форма заявки', 'Подключение Яндекс.Метрики', 'Инструкция по редактированию'],
     dark: false,
     green: false,
   },
   {
-    tag:   'Популярное',
+    tag:   'Всё включено',
     title: 'Сайт + реклама',
     price: 'от 280 000 ₽',
-    desc:  'Готовая система под ключ: сайт, настройка рекламы и первый месяц ведения включены.',
+    desc:  'Сайт с высокой конверсией и настроенный поток заявок в одной услуге.',
     items: ['Многостраничный сайт (3–5 стр.)', 'Тексты от нас', 'Настройка рекламы (Яндекс/VK)', 'Ведение первого месяца', 'Еженедельные отчёты'],
     dark: true,
     green: false,
@@ -27,7 +27,7 @@ const plans = [
     tag:   'Реклама',
     title: 'Настройка + ведение',
     price: 'от 35 000 ₽/мес',
-    desc:  'Запуск и оптимизация рекламных кампаний. Без посредников — бюджет напрямую в платформу.',
+    desc:  'Полноценный запуск контекстной и таргетированной рекламы с аналитикой.',
     items: ['Яндекс Директ, VK или Telegram', 'Настройка аналитики', 'Еженедельный отчёт', 'Оптимизация кампаний', 'Связь в мессенджере'],
     dark: false,
     green: false,
@@ -103,7 +103,7 @@ export default function Calculator() {
             >
               {/* Popular badge */}
               {p.dark && (
-                <div style={{ position:'absolute', top:'-12px', left:'28px', background:'var(--green)', borderRadius:'var(--r-pill)', padding:'4px 14px' }}>
+                <div style={{ position:'absolute', top:'-12px', right:'28px', background:'var(--green)', borderRadius:'var(--r-pill)', padding:'4px 14px' }}>
                   <span style={{ fontFamily:'var(--ff-b)', fontWeight:700, fontSize:'11px', color:'#000', letterSpacing:'0.04em' }}>Популярное</span>
                 </div>
               )}
@@ -231,11 +231,48 @@ export default function Calculator() {
                     </Link>
                   </motion.div>
                 ) : (
-                  <motion.div key="placeholder" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} style={{ textAlign:'center', padding:'40px 20px' }}>
-                    <div style={{ width:'56px', height:'56px', borderRadius:'50%', border:'1px solid rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 16px' }}>
-                      <span style={{ color:'rgba(255,255,255,0.2)', fontSize:'22px' }}>₽</span>
+                  <motion.div 
+                    key="placeholder" 
+                    initial={{opacity:0}} 
+                    animate={{opacity:1}} 
+                    exit={{opacity:0}} 
+                    style={{ textAlign: 'center', padding: '24px 20px' }}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <div style={{ 
+                      width: '140px', 
+                      height: '140px', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      position: 'relative',
+                      maskImage: 'radial-gradient(circle at center, black 55%, transparent 85%)',
+                      WebkitMaskImage: 'radial-gradient(circle at center, black 55%, transparent 85%)',
+                      mixBlendMode: 'screen',
+                      margin: '0 auto 16px'
+                    }}>
+                      <img 
+                        src="/calculator_illustration.png" 
+                        alt="Payment Illustration" 
+                        style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'contain',
+                          mixBlendMode: 'screen',
+                          filter: 'contrast(1.22) brightness(1.12)',
+                          transform: 'translateX(12px)'
+                        }} 
+                      />
                     </div>
-                    <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'rgba(255,255,255,0.2)', lineHeight:1.65 }}>
+                    <p style={{ 
+                      fontFamily: 'var(--ff-b)', 
+                      fontWeight: 400, 
+                      fontSize: '14px', 
+                      color: 'rgba(255,255,255,0.2)', 
+                      lineHeight: 1.65,
+                      margin: '0 auto',
+                      maxWidth: '280px'
+                    }}>
                       Выберите что нужно слева —<br />увидите стоимость здесь.
                     </p>
                   </motion.div>

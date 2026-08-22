@@ -38,68 +38,86 @@ export default function Hero() {
       {/* ── Decorative Background Pattern (Top-Right Grid & Volumetric Light Rays) ── */}
       <ShimmeringGrid position="right" id="hero" />
 
-      {/* ── Main heading — Titan stacked style ─────────────────── */}
+      {/* ── Main heading & Hero Image ─────────────────── */}
       <div style={{
         flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         padding: 'clamp(52px,7vw,88px) 40px 0',
         position: 'relative',
-        zIndex: 2,
+        zIndex: 10,
       }} className="hero-top-container">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Titan-style: each line is its own statement ending with a period */}
-          <h1 style={{
-            fontFamily: 'var(--ff-d)',
-            fontWeight: 800,
-            fontSize: 'clamp(52px, 7vw, 96px)',
-            color: '#ffffff',
-            lineHeight: 1.04,
-            letterSpacing: '-0.03em',
-            marginBottom: '40px',
-          }} className="hero-title">
-            Создаем сайт<br />
-            Запускаем рекламу<br />
-            Приводим клиентов
-          </h1>
-
-          {/* Dual CTA — green primary + outlined secondary */}
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <Link
-              href="#contact"
-              style={{
-                fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
-                color: 'var(--dark)', background: 'var(--green)',
-                padding: '13px 28px', borderRadius: 'var(--r-pill)', textDecoration: 'none',
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                transition: 'opacity 0.2s',
-              }}
-              className="hover:opacity-85"
+        <div className="w-full max-w-[1280px] mx-auto relative flex flex-col lg:flex-row lg:items-center lg:justify-between">
+          
+          {/* Left Column: Title and CTAs */}
+          <div className="relative z-10 w-full lg:max-w-none">
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              Нужен сайт
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
+              <h1 style={{
+                fontFamily: 'var(--ff-d)',
+                fontWeight: 800,
+                fontSize: 'clamp(52px, 7vw, 96px)',
+                color: '#ffffff',
+                lineHeight: 1.04,
+                letterSpacing: '-0.03em',
+                marginBottom: '40px',
+              }} className="hero-title">
+                Создаем сайт<br />
+                Запускаем рекламу<br />
+                Приводим клиентов
+              </h1>
 
-            <Link
-              href="#about"
-              style={{
-                fontFamily: 'var(--ff-b)', fontWeight: 500, fontSize: '14px',
-                color: 'rgba(255,255,255,0.7)', background: 'transparent',
-                padding: '13px 24px',
-                border: '1px solid rgba(255,255,255,0.18)',
-                borderRadius: 'var(--r-pill)', textDecoration: 'none',
-                transition: 'border-color 0.2s, color 0.2s',
-              }}
-              className="hover:border-white hover:text-white"
-            >
-              О нас и кейсах
-            </Link>
+              {/* Dual CTA — green primary + outlined secondary */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Link
+                  href="#contact"
+                  style={{
+                    fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
+                    color: 'var(--dark)', background: 'var(--green)',
+                    padding: '13px 28px', borderRadius: 'var(--r-pill)', textDecoration: 'none',
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    transition: 'opacity 0.2s',
+                  }}
+                  className="hover:opacity-85"
+                >
+                  Нужен сайт
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
+
+                <Link
+                  href="#about"
+                  style={{
+                    fontFamily: 'var(--ff-b)', fontWeight: 500, fontSize: '14px',
+                    color: 'rgba(255,255,255,0.7)', background: 'transparent',
+                    padding: '13px 24px',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    borderRadius: 'var(--r-pill)', textDecoration: 'none',
+                    transition: 'border-color 0.2s, color 0.2s',
+                  }}
+                  className="hover:border-white hover:text-white"
+                >
+                  О нас и кейсах
+                </Link>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* Right Column: Hero Image (Flow order on mobile, absolute float on desktop) */}
+          <div className="w-full lg:w-[680px] lg:absolute lg:right-[-360px] lg:bottom-0 z-[1] select-none pointer-events-none hero-image-container">
+            <motion.img
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.15 }}
+              src="/hero_img.png"
+              alt="Иллюстрация Hero"
+              className="w-full h-auto object-contain max-h-[320px] lg:max-h-[680px] mx-auto lg:mx-0"
+            />
+          </div>
+
+        </div>
       </div>
 
       {/* ── Three bottom cards — exact Titan layout ─────────────── */}
