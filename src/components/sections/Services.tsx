@@ -108,7 +108,7 @@ function Cell({ spriteClass, title, text }: { spriteClass: string; title: string
       position: 'relative',
       overflow: 'hidden',
     }} className="services-card">
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'left' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'left' }} className="services-card-info">
         <h4 style={{
           fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: 'clamp(14px, 1.2vw, 16px)',
           color: '#fff', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em',
