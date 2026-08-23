@@ -39,6 +39,11 @@ export default function AIChatWidget() {
     }
   }, [messages, isTyping])
 
+  // Dispatch custom window event when open state changes
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('ai-chat-toggle', { detail: { open: isOpen } }))
+  }, [isOpen])
+
   // simulated AI reply generator
   const getAIReply = (query: string): string => {
     const q = query.toLowerCase().trim()

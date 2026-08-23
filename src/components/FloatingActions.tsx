@@ -5,7 +5,29 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function FloatingActions() {
   const [visible, setVisible] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+
+  // Listen to mobile resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 680)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Listen to AI chat toggle event
+  useEffect(() => {
+    const handleChatToggle = (e: Event) => {
+      const customEvent = e as CustomEvent
+      setChatOpen(customEvent.detail.open)
+    }
+    window.addEventListener('ai-chat-toggle', handleChatToggle)
+    return () => window.removeEventListener('ai-chat-toggle', handleChatToggle)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,9 +77,13 @@ export default function FloatingActions() {
       {visible && (
         <motion.div
           initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{
+            opacity: (chatOpen && isMobile) ? 0 : 1,
+            x: (chatOpen && isMobile) ? 100 : 0,
+            pointerEvents: (chatOpen && isMobile) ? 'none' : 'auto',
+          }}
           exit={{ opacity: 0, x: 20 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           ref={menuRef}
           style={{
             position: 'fixed',
