@@ -7,9 +7,44 @@ export default function Footer() {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:'32px', marginBottom:'48px' }} className="footer-top">
           {/* Logo */}
           <div>
-            <div style={{ display:'flex', alignItems:'baseline', gap:'1px', marginBottom:'12px' }}>
-              <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:'var(--green)', lineHeight:1, letterSpacing:'-0.04em' }}>V.R.</span>
-              <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:'#fff', lineHeight:1, letterSpacing:'-0.04em', textTransform:'uppercase' }}>ASPHODEL</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+              <div style={{ width: '44px', height: '40px', flexShrink: 0 }} className="footer-logo-wrapper">
+                <svg viewBox="20 20 60 55" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
+                  <defs>
+                    <mask id="footer-cutout-mask">
+                      <rect x="20" y="20" width="60" height="55" fill="white" />
+                      <circle cx="70" cy="45" r="4.2" fill="black">
+                        <animate 
+                          attributeName="opacity" 
+                          values="1;0;1" 
+                          dur="1.8s" 
+                          repeatCount="indefinite" 
+                        />
+                      </circle>
+                    </mask>
+                  </defs>
+
+                  {/* V-Left */}
+                  <polygon points="20,20 45,75 35,75" fill="#ffffff"/>
+                  
+                  {/* V-Right / R stem */}
+                  <polygon points="45,75 55,75 70,35 60,35" fill="#ffffff" mask="url(#footer-cutout-mask)"/>
+                  
+                  {/* R-Loop */}
+                  <polygon points="60,35 80,35 80,55 60,55" fill="#ffffff" mask="url(#footer-cutout-mask)"/>
+                  
+                  {/* R-Leg */}
+                  <polygon points="60,55 70,55 80,75 70,75" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
+                <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '18px', color: '#ffffff', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
+                  V.R. Asphodel
+                </span>
+                <span style={{ fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '1.5px' }}>
+                  Креатив и Маркетинг
+                </span>
+              </div>
             </div>
             <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.3)', lineHeight:1.65, maxWidth:'220px' }}>
               Сайты и реклама под ключ для малого бизнеса.
