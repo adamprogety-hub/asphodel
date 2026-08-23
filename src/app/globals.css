@@ -668,7 +668,24 @@ body.modal-open .page-blur-wrapper {
     padding: 36px 28px !important;
   }
   .contact-modal-photo,
-  .contact-modal-glow {
+  .contact-photo-glow {
     display: none !important;
   }
 }
+
+/* ── AI Chat Widget: Responsive ─────────────────────────────────────── */
+@media (max-width: 480px) {
+  .ai-chat-window {
+    width: calc(100% - 32px) !important;
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 84px !important;
+    height: 80vh !important;
+    max-height: 500px !important;
+  }
+  .ai-chat-bubble {
+    left: 16px !important;
+    bottom: 16px !important;
+  }
+}
+

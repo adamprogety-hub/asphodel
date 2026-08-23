@@ -114,7 +114,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
               {/* ── LAYER 2: Photo — sits ABOVE card bg, extends left ── */}
               {/* Purple aura glow behind the team photo */}
               <div
-                className="contact-modal-glow"
+                className="contact-photo-glow"
                 style={{
                   position: 'absolute',
                   left: '-80px',

@@ -109,7 +109,7 @@ export default function AIChatWidget() {
   return (
     <>
       {/* ── Chat Widget Bubble (Bottom-Left) ── */}
-      <div style={{ position: 'fixed', bottom: '24px', left: '24px', zIndex: 40000 }} className="contact-modal-glow">
+      <div style={{ position: 'fixed', bottom: '24px', left: '24px', zIndex: 40000 }} className="ai-chat-bubble">
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="ИИ-Ассистент"
@@ -185,7 +185,7 @@ export default function AIChatWidget() {
               flexDirection: 'column',
               overflow: 'hidden',
             }}
-            className="contact-modal-glow"
+            className="ai-chat-window"
           >
             {/* Header */}
             <div style={{
