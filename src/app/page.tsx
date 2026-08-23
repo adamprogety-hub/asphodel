@@ -14,7 +14,6 @@ import FAQ            from '@/components/sections/FAQ'
 import FinalCTA       from '@/components/sections/FinalCTA'
 import Footer         from '@/components/sections/Footer'
 import CookieConsent  from '@/components/CookieConsent'
-import PrivacyModal   from '@/components/PrivacyModal'
 import FloatingActions from '@/components/FloatingActions'
 
 const R = '28px'
@@ -69,9 +68,6 @@ export default function HomePage() {
 
       {/* Floating cookie consent pop-up */}
       <CookieConsent />
-
-      {/* Global privacy policy modal popup */}
-      <PrivacyModal />
 
       {/* Floating action buttons stack (Calls, Messengers, Scroll-to-top) */}
       <FloatingActions />

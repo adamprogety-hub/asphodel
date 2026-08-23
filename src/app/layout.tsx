@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Preloader from '@/components/Preloader'
+import ContactModalProvider from '@/components/ContactModal'
+import PrivacyModal from '@/components/PrivacyModal'
 
 export const metadata: Metadata = {
   title: 'V.R. Asphodel — Сайты и реклама под ключ',
@@ -12,7 +14,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru">
       <body className="antialiased">
         <Preloader />
-        {children}
+        <ContactModalProvider>
+          <div className="page-blur-wrapper">
+            {children}
+          </div>
+          <PrivacyModal />
+        </ContactModalProvider>
       </body>
     </html>
   )

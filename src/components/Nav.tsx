@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useContactModal } from '@/components/ContactModal'
+
 
 const links = [
   { label: 'Услуги',    href: '#services' },
@@ -14,6 +16,7 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { openModal } = useContactModal()
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 70)
@@ -130,9 +133,16 @@ export default function Nav() {
             <Link href="#about" style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.55)', textDecoration: 'none', transition: 'color 0.2s' }} className="hover:text-white">
               О нас
             </Link>
-            <Link href="#contact" style={{ fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px', color: '#000', background: '#ffffff', padding: '9px 20px', borderRadius: 'var(--r-pill)', textDecoration: 'none', transition: 'opacity 0.2s', whiteSpace: 'nowrap' }} className="hover:opacity-85">
+            <button
+              onClick={() => openModal({
+                title: 'Написать нам',
+                description: 'Расскажите о задаче в двух словах — ответим быстро и по существу.',
+              })}
+              style={{ fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px', color: '#000', background: '#ffffff', padding: '9px 20px', borderRadius: 'var(--r-pill)', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}
+              className="hover:opacity-85"
+            >
               Задать вопрос
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Hamburger toggle */}
@@ -191,18 +201,23 @@ export default function Nav() {
                 >
                   О нас
                 </Link>
-                <Link
-                  href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    openModal({
+                      title: 'Написать нам',
+                      description: 'Расскажите о задаче в двух словах — ответим быстро и по существу.',
+                    })
+                  }}
                   style={{
                     fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
                     color: '#000', background: '#ffffff', padding: '12px',
-                    borderRadius: 'var(--r-pill)', textDecoration: 'none', textAlign: 'center',
-                    display: 'block', marginTop: '6px'
+                    borderRadius: 'var(--r-pill)', border: 'none', cursor: 'pointer',
+                    textAlign: 'center', display: 'block', width: '100%', marginTop: '6px'
                   }}
                 >
                   Задать вопрос
-                </Link>
+                </button>
               </div>
             </motion.div>
           )}

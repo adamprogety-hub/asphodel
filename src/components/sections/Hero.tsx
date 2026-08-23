@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
-
+import { useContactModal } from '@/components/ContactModal'
 
 
 const workSlides = [
@@ -15,6 +15,7 @@ const workSlides = [
 
 export default function Hero() {
   const [slideIdx, setSlideIdx] = useState(0)
+  const { openModal } = useContactModal()
 
   const nextSlide = () => setSlideIdx((prev) => (prev + 1) % workSlides.length)
   const prevSlide = () => setSlideIdx((prev) => (prev - 1 + workSlides.length) % workSlides.length)
@@ -70,14 +71,17 @@ export default function Hero() {
 
               {/* Dual CTA — green primary + outlined secondary */}
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <Link
-                  href="#contact"
+                <button
+                  onClick={() => openModal({
+                    title: 'Расскажите о проекте',
+                    description: 'Ответим в течение рабочего дня. Уточним задачу и предложим варианты решения.',
+                  })}
                   style={{
                     fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
                     color: 'var(--dark)', background: 'var(--green)',
-                    padding: '13px 28px', borderRadius: 'var(--r-pill)', textDecoration: 'none',
+                    padding: '13px 28px', borderRadius: 'var(--r-pill)',
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    transition: 'opacity 0.2s',
+                    transition: 'opacity 0.2s', border: 'none', cursor: 'pointer',
                   }}
                   className="hover:opacity-85"
                 >
@@ -85,7 +89,7 @@ export default function Hero() {
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                </Link>
+                </button>
 
                 <Link
                   href="#about"
@@ -244,13 +248,16 @@ export default function Hero() {
             }}>
               Просто напишите нам — расскажите о задаче.
             </p>
-            <Link
-              href="#contact"
+            <button
+              onClick={() => openModal({
+                title: 'Бесплатная консультация',
+                description: 'Просто расскажите о задаче — созвонимся, разберём ситуацию и предложим решение.',
+              })}
               style={{
                 fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '12px',
-                color: '#000', textDecoration: 'none',
+                color: '#000', textDecoration: 'none', background: 'none', border: 'none',
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
-                flexShrink: 0
+                flexShrink: 0, cursor: 'pointer', padding: 0,
               }}
               className="group"
             >
@@ -264,7 +271,7 @@ export default function Hero() {
                   <path d="M2 12L12 2M12 2H4M12 2v8" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-            </Link>
+            </button>
           </div>
         </div>
       </motion.div>

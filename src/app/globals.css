@@ -639,3 +639,36 @@ body {
 }
 
 
+
+/* ── Contact Modal: Page Blur Effect ────────────────────────────────── */
+.page-blur-wrapper {
+  transition: filter 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+  /* NOTE: NO will-change here — it would create a new stacking context
+     and break position:fixed elements (FloatingActions, Nav, etc.) */
+}
+
+body.modal-open .page-blur-wrapper {
+  filter: blur(8px);
+  will-change: filter; /* only active during modal transition */
+}
+
+/* ── Contact Modal: Responsive ─────────────────────────────────────── */
+@media (max-width: 680px) {
+  .contact-modal-outer {
+    height: auto !important;
+    min-height: 520px;
+  }
+  .contact-modal-form-panel {
+    position: relative !important;
+    width: 100% !important;
+    top: auto !important; right: auto !important; bottom: auto !important;
+    padding: 36px 28px !important;
+  }
+  .contact-modal-photo,
+  .contact-modal-glow {
+    display: none !important;
+  }
+}

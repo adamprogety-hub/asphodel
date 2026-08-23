@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
+import { useContactModal } from '@/components/ContactModal'
+
 
 // ── Pricing plans ─────────────────────────────────────────────
 const plans = [
@@ -68,6 +69,7 @@ export default function Calculator() {
   const [st, setSt] = useState<ST|null>(null)
   const [tx, setTx] = useState<boolean|null>(null)
   const [pl, setPl] = useState<Set<PL>>(new Set())
+  const { openModal } = useContactModal()
 
   const tog  = (k: SK) => setSv(s => ({ ...s, [k]: !s[k] }))
   const togP = (p: PL) => setPl(prev => { const s = new Set(prev); s.has(p) ? s.delete(p) : s.add(p); return s })
@@ -133,9 +135,23 @@ export default function Calculator() {
               </ul>
 
               {/* CTA */}
-              <Link href="#contact" style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'13px', color: p.dark?'#000':'#fff', background: p.dark?'var(--green)':'rgba(255,255,255,0.08)', padding:'12px', borderRadius:'10px', textDecoration:'none', transition:'opacity 0.2s' }} className="hover:opacity-80">
+              <button
+                onClick={() => openModal({
+                  title: 'Уточнить смету',
+                  description: 'Заполните — пришлём точный расчёт в течение 24 часов с учётом ваших параметров.',
+                })}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  gap: '8px', fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px',
+                  color: p.dark ? '#000' : '#fff',
+                  background: p.dark ? 'var(--green)' : 'rgba(255,255,255,0.08)',
+                  padding: '12px', borderRadius: '10px', border: 'none',
+                  cursor: 'pointer', transition: 'opacity 0.2s', width: '100%',
+                }}
+                className="hover:opacity-80"
+              >
                 Обсудить →
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -226,9 +242,16 @@ export default function Calculator() {
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.2)', marginBottom:'20px', fontStyle:'italic' }}>
                       * Предварительно. Рекламный бюджет идёт напрямую в платформу, не нам.
                     </p>
-                    <Link href="#contact" style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', color:'#000', background:'var(--green)', padding:'13px 28px', borderRadius:'var(--r-pill)', textDecoration:'none', transition:'opacity 0.2s' }} className="hover:opacity-85">
+                    <button
+                      onClick={() => openModal({
+                        title: 'Уточнить смету',
+                        description: 'Заполните — пришлём точный расчёт в течение 24 часов с учётом ваших параметров.',
+                      })}
+                      style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', color:'#000', background:'var(--green)', padding:'13px 28px', borderRadius:'var(--r-pill)', border:'none', cursor:'pointer', transition:'opacity 0.2s' }}
+                      className="hover:opacity-85"
+                    >
                       Обсудить и уточнить →
-                    </Link>
+                    </button>
                   </motion.div>
                 ) : (
                   <motion.div 

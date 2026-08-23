@@ -14,7 +14,7 @@ export default function PrivacyModal() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 60000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -45,9 +45,17 @@ export default function PrivacyModal() {
               </h3>
               <button
                 onClick={() => setIsOpen(false)}
-                style={{ background: 'none', border: 'none', fontSize: '22px', cursor: 'pointer', color: '#888' }}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer', color: '#888',
+                  width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'opacity 0.2s', padding: 0
+                }}
+                className="hover:opacity-70"
               >
-                ×
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
               </button>
             </div>
 

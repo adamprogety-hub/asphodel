@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
+import { useContactModal } from '@/components/ContactModal'
+
 
 
 // Pill tag component — Titan "Sport center" label
@@ -17,24 +19,37 @@ const Tag = ({ label }: { label: string }) => (
 )
 
 // "More ↗" pill button — Titan style
-const MoreBtn = ({ href, label = 'Подробнее', dark = false }: { href: string; label?: string; dark?: boolean }) => (
-  <Link href={href} style={{
+const MoreBtn = ({ href, label = 'Подробнее', dark = false, onClick }: { href?: string; label?: string; dark?: boolean; onClick?: () => void }) => {
+  const sharedStyle: React.CSSProperties = {
     display: 'inline-flex', alignItems: 'center', gap: '8px',
     fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px',
     color: dark ? '#111' : '#fff',
     background: dark ? 'transparent' : '#111',
     border: dark ? '1px solid #111' : 'none',
-    padding: '10px 20px', borderRadius: 'var(--r-pill)', textDecoration: 'none',
-    transition: 'opacity 0.2s',
-  }} className="hover:opacity-75">
-    {label}
+    padding: '10px 20px', borderRadius: 'var(--r-pill)',
+    transition: 'opacity 0.2s', cursor: 'pointer',
+  }
+  const arrow = (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
       <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
-  </Link>
-)
+  )
+  if (onClick) {
+    return (
+      <button onClick={onClick} style={{ ...sharedStyle, textDecoration: 'none' }} className="hover:opacity-75">
+        {label}{arrow}
+      </button>
+    )
+  }
+  return (
+    <Link href={href ?? '#'} style={{ ...sharedStyle, textDecoration: 'none' }} className="hover:opacity-75">
+      {label}{arrow}
+    </Link>
+  )
+}
 
 export default function About() {
+  const { openModal } = useContactModal()
   return (
     <section id="about" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '380px 1fr', gap: '60px', alignItems: 'start' }} className="about-grid">
@@ -48,7 +63,13 @@ export default function About() {
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.78, marginBottom:'28px' }}>
             Нас двое — Илья Хаймин (бренд-менеджер, 5+ лет) и Александр Герасимов (маркетолог, 6 лет). Помогаем начинающим предпринимателям и фрилансерам получить первых клиентов из интернета.
           </p>
-          <MoreBtn href="#contact" label="Обсудить проект" />
+          <MoreBtn
+            label="Обсудить проект"
+            onClick={() => openModal({
+              title: 'Обсудить проект',
+              description: 'Расскажите о задаче — пришлём предложение в течение рабочего дня.',
+            })}
+          />
         </motion.div>
 
         {/* Right: 2 dark zone cards — Titan "Power zone / Cardio zone" */}
