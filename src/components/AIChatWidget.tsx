@@ -182,226 +182,247 @@ export default function AIChatWidget() {
               width: '360px',
               height: '490px',
               zIndex: 40000,
-              background: '#14141B',
-              border: '1px solid rgba(255,255,255,0.08)',
               borderRadius: '24px',
               boxShadow: '0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.05)',
-              display: 'flex',
-              flexDirection: 'column',
               overflow: 'hidden',
+              padding: '1px', /* reveals the 1px neon gradient border */
+              background: 'rgba(255, 255, 255, 0.04)', /* backup border color */
             }}
             className="ai-chat-window"
           >
-            {/* Header */}
+            {/* Rotating Neon Gradient Border */}
             <div style={{
-              padding: '14px 20px',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              background: 'rgba(255,255,255,0.02)',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                {/* AI Avatar */}
-                <div style={{
-                  width: '36px', height: '36px', borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: '0 0 10px rgba(124,58,237,0.3)',
-                  position: 'relative',
-                }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                    <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
-                    <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="#fff" />
-                  </svg>
-                  <span style={{
-                    position: 'absolute', bottom: '-1px', right: '-1px',
-                    width: '8px', height: '8px', borderRadius: '50%',
-                    background: 'var(--green)', border: '2px solid #14141B',
-                  }} />
-                </div>
-                <div>
-                  <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '15px', color: '#fff', letterSpacing: '-0.01em', display: 'block', lineHeight: 1.2 }}>
-                    Ася
-                  </span>
-                  <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>
-                    ИИ-Консультант V.R. Asphodel
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                style={{
-                  background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
-                  cursor: 'pointer', transition: 'color 0.2s', display: 'flex', padding: 0
-                }}
-                className="hover:text-white"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
+              position: 'absolute',
+              inset: '-150%',
+              background: 'conic-gradient(from 0deg, transparent 35%, #7C3AED 60%, #10B981 85%, transparent 100%)',
+              animation: 'rotate-glow 6s linear infinite',
+              zIndex: 0,
+              pointerEvents: 'none',
+            }} />
 
-            {/* Messages Feed */}
-            <div
-              ref={feedRef}
-              style={{
-                flex: 1,
-                overflowY: 'auto',
-                padding: '20px',
+            {/* Inner Content Area (masks the center of the card) */}
+            <div style={{
+              position: 'relative',
+              zIndex: 1,
+              background: '#14141B',
+              borderRadius: '23px',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+            }}>
+              {/* Header */}
+              <div style={{
+                padding: '14px 20px',
+                borderBottom: '1px solid rgba(255,255,255,0.06)',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-              }}
-              className="chat-feed"
-            >
-              {messages.map(m => (
-                <div
-                  key={m.id}
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                background: 'rgba(255,255,255,0.02)',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {/* AI Avatar */}
+                  <div style={{
+                    width: '36px', height: '36px', borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 0 10px rgba(124,58,237,0.3)',
+                    position: 'relative',
+                  }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                      <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
+                      <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="#fff" />
+                    </svg>
+                    <span style={{
+                      position: 'absolute', bottom: '-1px', right: '-1px',
+                      width: '8px', height: '8px', borderRadius: '50%',
+                      background: 'var(--green)', border: '2px solid #14141B',
+                    }} />
+                  </div>
+                  <div>
+                    <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '15px', color: '#fff', letterSpacing: '-0.01em', display: 'block', lineHeight: 1.2 }}>
+                      Ася
+                    </span>
+                    <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>
+                      ИИ-Консультант V.R. Asphodel
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
                   style={{
-                    alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
-                    maxWidth: '85%',
-                    display: 'flex',
-                    gap: '8px',
-                    flexDirection: m.sender === 'user' ? 'row-reverse' : 'row',
+                    background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer', transition: 'color 0.2s', display: 'flex', padding: 0
                   }}
+                  className="hover:text-white"
                 >
-                  {/* Bot message Avatar */}
-                  {m.sender === 'bot' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Messages Feed */}
+              <div
+                ref={feedRef}
+                style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                }}
+                className="chat-feed"
+              >
+                {messages.map(m => (
+                  <div
+                    key={m.id}
+                    style={{
+                      alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
+                      maxWidth: '85%',
+                      display: 'flex',
+                      gap: '8px',
+                      flexDirection: m.sender === 'user' ? 'row-reverse' : 'row',
+                    }}
+                  >
+                    {/* Bot message Avatar */}
+                    {m.sender === 'bot' && (
+                      <div style={{
+                        width: '28px', height: '28px', borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        flexShrink: 0, marginTop: '2px',
+                      }}>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+                          <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
+                        </svg>
+                      </div>
+                    )}
+
+                    <div style={{
+                      background: m.sender === 'user' ? '#7C3AED' : 'rgba(255,255,255,0.06)',
+                      color: '#fff',
+                      padding: '10px 14px',
+                      borderRadius: m.sender === 'user' ? '16px 16px 2px 16px' : '2px 16px 16px 16px',
+                      fontSize: '13px',
+                      fontFamily: 'var(--ff-b)',
+                      lineHeight: 1.5,
+                      whiteSpace: 'pre-line',
+                    }}>
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Typing indicator */}
+                {isTyping && (
+                  <div style={{ alignSelf: 'flex-start', display: 'flex', gap: '8px', maxWidth: '85%' }}>
                     <div style={{
                       width: '28px', height: '28px', borderRadius: '50%',
                       background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      flexShrink: 0, marginTop: '2px',
+                      flexShrink: 0,
                     }}>
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
                         <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
                       </svg>
                     </div>
-                  )}
-
-                  <div style={{
-                    background: m.sender === 'user' ? '#7C3AED' : 'rgba(255,255,255,0.06)',
-                    color: '#fff',
-                    padding: '10px 14px',
-                    borderRadius: m.sender === 'user' ? '16px 16px 2px 16px' : '2px 16px 16px 16px',
-                    fontSize: '13px',
-                    fontFamily: 'var(--ff-b)',
-                    lineHeight: 1.5,
-                    whiteSpace: 'pre-line',
-                  }}>
-                    {m.text}
-                  </div>
-                </div>
-              ))}
-
-              {/* Typing indicator */}
-              {isTyping && (
-                <div style={{ alignSelf: 'flex-start', display: 'flex', gap: '8px', maxWidth: '85%' }}>
-                  <div style={{
-                    width: '28px', height: '28px', borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-                      <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
-                    </svg>
-                  </div>
-                  <div style={{ background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '2px 16px 16px 16px', display: 'flex', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
-                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.1s infinite alternate' }} />
-                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.2s infinite alternate' }} />
-                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.3s infinite alternate' }} />
+                    <div style={{ background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '2px 16px 16px 16px', display: 'flex', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
+                        <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.1s infinite alternate' }} />
+                        <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.2s infinite alternate' }} />
+                        <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.3s infinite alternate' }} />
+                      </div>
                     </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Suggestions */}
+              {messages.length === 1 && !isTyping && (
+                <div style={{
+                  padding: '0 20px 16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px',
+                }}>
+                  <span style={{ fontFamily: 'var(--ff-b)', fontSize: '10px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Популярные вопросы:
+                  </span>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {suggestions.map((s, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSend(s.query)}
+                        style={{
+                          fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.7)',
+                          background: 'rgba(255,255,255,0.04)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          padding: '6px 12px', borderRadius: 'var(--r-pill)',
+                          cursor: 'pointer', transition: 'all 0.2s',
+                        }}
+                        className="hover:bg-white/10 hover:border-white/15"
+                      >
+                        {s.label}
+                      </button>
+                    ))}
                   </div>
                 </div>
               )}
-            </div>
 
-            {/* Suggestions */}
-            {messages.length === 1 && !isTyping && (
-              <div style={{
-                padding: '0 20px 16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '6px',
-              }}>
-                <span style={{ fontFamily: 'var(--ff-b)', fontSize: '10px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Популярные вопросы:
-                </span>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {suggestions.map((s, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleSend(s.query)}
-                      style={{
-                        fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.7)',
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        padding: '6px 12px', borderRadius: 'var(--r-pill)',
-                        cursor: 'pointer', transition: 'all 0.2s',
-                      }}
-                      className="hover:bg-white/10 hover:border-white/15"
-                    >
-                      {s.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Input form */}
-            <form
-              onSubmit={e => { e.preventDefault(); handleSend(input) }}
-              style={{
-                padding: '16px 20px 20px',
-                borderTop: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex',
-                gap: '8px',
-                background: 'rgba(255,255,255,0.01)',
-              }}
-            >
-              <input
-                type="text"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                placeholder="Спросить ассистента..."
+              {/* Input form */}
+              <form
+                onSubmit={e => { e.preventDefault(); handleSend(input) }}
                 style={{
-                  flex: 1,
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '12px',
-                  padding: '10px 14px',
-                  color: '#fff',
-                  fontFamily: 'var(--ff-b)',
-                  fontSize: '13px',
-                  outline: 'none',
-                  boxSizing: 'border-box',
+                  padding: '16px 20px 20px',
+                  borderTop: '1px solid rgba(255,255,255,0.06)',
+                  display: 'flex',
+                  gap: '8px',
+                  background: 'rgba(255,255,255,0.01)',
                 }}
-                className="focus:border-white/15"
-              />
-              <button
-                type="submit"
-                aria-label="Отправить"
-                style={{
-                  width: '38px', height: '38px', borderRadius: '10px',
-                  background: 'var(--green)',
-                  border: 'none',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', color: '#000',
-                  transition: 'opacity 0.2s',
-                }}
-                className="hover:opacity-85"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-              </button>
-            </form>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  placeholder="Спросить ассистента..."
+                  style={{
+                    flex: 1,
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '12px',
+                    padding: '10px 14px',
+                    color: '#fff',
+                    fontFamily: 'var(--ff-b)',
+                    fontSize: '13px',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                  className="focus:border-white/15"
+                />
+                <button
+                  type="submit"
+                  aria-label="Отправить"
+                  style={{
+                    width: '38px', height: '38px', borderRadius: '10px',
+                    background: 'var(--green)',
+                    border: 'none',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', color: '#000',
+                    transition: 'opacity 0.2s',
+                  }}
+                  className="hover:opacity-85"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -410,6 +431,10 @@ export default function AIChatWidget() {
         @keyframes bounce {
           0% { transform: translateY(0); }
           100% { transform: translateY(-4px); }
+        }
+        @keyframes rotate-glow {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
         .chat-feed::-webkit-scrollbar {
           width: 4px;
