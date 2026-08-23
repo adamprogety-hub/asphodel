@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
+import LiquidButton from '@/components/LiquidButton'
 
 
 const faqs = [
@@ -14,8 +15,9 @@ const faqs = [
 ]
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number|null>(null)
+  const [open, setOpen] = useState<number | null>(null)
   const { openModal } = useContactModal()
+
   return (
     <section id="faq" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px', position: 'relative', overflow: 'hidden' }}>
       {/* Background decoration: alternating top-left grid */}
@@ -29,17 +31,18 @@ export default function FAQ() {
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1, marginBottom:'24px' }}>
             Часто спрашивают.
           </h2>
-          <button
+          <LiquidButton
+            variant="green"
             onClick={() => openModal({
               title: 'Задать вопрос',
               description: 'Если не нашли ответ — напишите нам, ответим быстро и по существу.',
             })}
-            style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'13px', color:'#000', background:'var(--green)', padding:'10px 22px', borderRadius:'var(--r-pill)', border:'none', cursor:'pointer', transition:'opacity 0.2s' }}
-            className="hover:opacity-85"
+            style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'13px', padding:'10px 22px' }}
           >
             Задать вопрос →
-          </button>
+          </LiquidButton>
         </motion.div>
+
 
         <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)' }}>
           {faqs.map((f, i) => (

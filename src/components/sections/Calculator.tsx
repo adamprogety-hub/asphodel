@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
+import LiquidButton from '@/components/LiquidButton'
+
 
 
 // ── Pricing plans ─────────────────────────────────────────────
@@ -242,16 +244,17 @@ export default function Calculator() {
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.2)', marginBottom:'20px', fontStyle:'italic' }}>
                       * Предварительно. Рекламный бюджет идёт напрямую в платформу, не нам.
                     </p>
-                    <button
+                    <LiquidButton
+                      variant="green"
                       onClick={() => openModal({
                         title: 'Уточнить смету',
                         description: 'Заполните — пришлём точный расчёт в течение 24 часов с учётом ваших параметров.',
                       })}
-                      style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', color:'#000', background:'var(--green)', padding:'13px 28px', borderRadius:'var(--r-pill)', border:'none', cursor:'pointer', transition:'opacity 0.2s' }}
-                      className="hover:opacity-85"
+                      style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', padding:'13px 28px' }}
                     >
                       Обсудить и уточнить →
-                    </button>
+                    </LiquidButton>
+
                   </motion.div>
                 ) : (
                   <motion.div 

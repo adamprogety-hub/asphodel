@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
+import LiquidButton from '@/components/LiquidButton'
 
 
 const workSlides = [
@@ -71,25 +72,22 @@ export default function Hero() {
 
               {/* Dual CTA — green primary + outlined secondary */}
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <button
+                <LiquidButton
+                  variant="green"
                   onClick={() => openModal({
                     title: 'Расскажите о проекте',
                     description: 'Ответим в течение рабочего дня. Уточним задачу и предложим варианты решения.',
                   })}
                   style={{
                     fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
-                    color: 'var(--dark)', background: 'var(--green)',
-                    padding: '13px 28px', borderRadius: 'var(--r-pill)',
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    transition: 'opacity 0.2s', border: 'none', cursor: 'pointer',
+                    padding: '13px 28px',
                   }}
-                  className="hover:opacity-85"
                 >
                   Нужен сайт
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                </button>
+                </LiquidButton>
 
                 <Link
                   href="#about"

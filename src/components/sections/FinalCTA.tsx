@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import LiquidButton from '@/components/LiquidButton'
 
 export default function FinalCTA() {
   const [form, setForm] = useState({ name:'', contact:'', message:'' })
@@ -12,6 +13,7 @@ export default function FinalCTA() {
     padding:'14px 18px', outline:'none', transition:'border-color 0.2s',
     boxSizing:'border-box', borderRadius:'12px',
   }
+
 
   return (
     <section id="contact" style={{ background:'#fff', padding:'clamp(60px,7vw,96px) 40px' }}>
@@ -55,12 +57,17 @@ export default function FinalCTA() {
               </label>
             </div>
 
-            <button type="submit" style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', color:'#000', background:'var(--green)', padding:'14px 32px', borderRadius:'var(--r-pill)', border:'none', cursor:'pointer', transition:'opacity 0.2s', textAlign:'left', width:'fit-content', display:'flex', alignItems:'center', gap:'8px' }} className="hover:opacity-85">
+            <LiquidButton
+              variant="green"
+              type="submit"
+              style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px', padding:'14px 32px', width:'fit-content' }}
+            >
               Отправить заявку
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                 <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </button>
+            </LiquidButton>
+
           </motion.form>
         ) : (
           <div style={{ background:'var(--dark)', borderRadius:'18px', padding:'48px', textAlign:'center' }}>

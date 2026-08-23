@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
+import LiquidButton from '@/components/LiquidButton'
 
 
 // Process — Titan "How we work" style: white bg, pill tag, list of steps with numbered circles
@@ -29,16 +30,16 @@ export default function Process() {
             <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.75, marginBottom:'28px', maxWidth:'340px' }}>
               Сделали процесс простым и прозрачным — вы понимаете что происходит на каждом шаге.
             </p>
-            <button
+            <LiquidButton
+              variant="dark"
               onClick={() => openModal({
                 title: 'Записаться на созвон',
                 description: '20–30 минут. Вы расскажете о задаче, мы зададим вопросы. Бесплатно, без обязательств.',
               })}
-              style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'13px', color:'#fff', background:'#111', padding:'10px 22px', borderRadius:'var(--r-pill)', border:'none', cursor:'pointer', transition:'opacity 0.2s' }}
-              className="hover:opacity-75"
+              style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'13px', padding:'10px 22px' }}
             >
               Начать →
-            </button>
+            </LiquidButton>
           </motion.div>
 
           {/* Right: steps */}

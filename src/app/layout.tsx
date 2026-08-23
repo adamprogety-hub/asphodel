@@ -4,6 +4,7 @@ import Preloader from '@/components/Preloader'
 import ContactModalProvider from '@/components/ContactModal'
 import PrivacyModal from '@/components/PrivacyModal'
 import AIChatWidget from '@/components/AIChatWidget'
+import GooeyFilter from '@/components/GooeyFilter'
 
 export const metadata: Metadata = {
   title: 'V.R. Asphodel — Сайты и реклама под ключ',
@@ -21,8 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <PrivacyModal />
           <AIChatWidget />
+          <GooeyFilter />
         </ContactModalProvider>
       </body>
     </html>
   )
 }
+
