@@ -24,7 +24,7 @@ export default function AIChatWidget() {
     {
       id: 'init',
       sender: 'bot',
-      text: 'Привет! Я ИИ-ассистент V.R. Asphodel. Помогу рассчитать цену сайта, подобрать тариф под ваш бюджет или сориентировать по рекламе. Задайте мне любой вопрос!',
+      text: 'Привет! Я Ася, виртуальный ассистент V.R. Asphodel. Помогу рассчитать цену сайта, подобрать тариф под ваш бюджет или сориентировать по рекламе. Задайте мне любой вопрос!',
     },
   ])
   const [input, setInput] = useState('')
@@ -181,23 +181,40 @@ export default function AIChatWidget() {
           >
             {/* Header */}
             <div style={{
-              padding: '16px 20px',
+              padding: '14px 20px',
               borderBottom: '1px solid rgba(255,255,255,0.06)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               background: 'rgba(255,255,255,0.02)',
             }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '15px', color: '#fff', letterSpacing: '-0.01em' }}>
-                    ИИ-Ассистент
-                  </span>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {/* AI Avatar */}
+                <div style={{
+                  width: '36px', height: '36px', borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: '0 0 10px rgba(124,58,237,0.3)',
+                  position: 'relative',
+                }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
+                    <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="#fff" />
+                  </svg>
+                  <span style={{
+                    position: 'absolute', bottom: '-1px', right: '-1px',
+                    width: '8px', height: '8px', borderRadius: '50%',
+                    background: 'var(--green)', border: '2px solid #14141B',
+                  }} />
                 </div>
-                <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>
-                  Отвечает моментально
-                </span>
+                <div>
+                  <span style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '15px', color: '#fff', letterSpacing: '-0.01em', display: 'block', lineHeight: 1.2 }}>
+                    Ася
+                  </span>
+                  <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>
+                    ИИ-Консультант V.R. Asphodel
+                  </span>
+                </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -232,14 +249,31 @@ export default function AIChatWidget() {
                   key={m.id}
                   style={{
                     alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
-                    maxWidth: '82%',
+                    maxWidth: '85%',
+                    display: 'flex',
+                    gap: '8px',
+                    flexDirection: m.sender === 'user' ? 'row-reverse' : 'row',
                   }}
                 >
+                  {/* Bot message Avatar */}
+                  {m.sender === 'bot' && (
+                    <div style={{
+                      width: '28px', height: '28px', borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0, marginTop: '2px',
+                    }}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+                        <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
+                      </svg>
+                    </div>
+                  )}
+
                   <div style={{
                     background: m.sender === 'user' ? '#7C3AED' : 'rgba(255,255,255,0.06)',
                     color: '#fff',
                     padding: '10px 14px',
-                    borderRadius: m.sender === 'user' ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
+                    borderRadius: m.sender === 'user' ? '16px 16px 2px 16px' : '2px 16px 16px 16px',
                     fontSize: '13px',
                     fontFamily: 'var(--ff-b)',
                     lineHeight: 1.5,
@@ -252,11 +286,23 @@ export default function AIChatWidget() {
 
               {/* Typing indicator */}
               {isTyping && (
-                <div style={{ alignSelf: 'flex-start', background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '16px 16px 16px 2px' }}>
-                  <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
-                    <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.1s infinite alternate' }} />
-                    <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.2s infinite alternate' }} />
-                    <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.3s infinite alternate' }} />
+                <div style={{ alignSelf: 'flex-start', display: 'flex', gap: '8px', maxWidth: '85%' }}>
+                  <div style={{
+                    width: '28px', height: '28px', borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+                      <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
+                    </svg>
+                  </div>
+                  <div style={{ background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '2px 16px 16px 16px', display: 'flex', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
+                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.1s infinite alternate' }} />
+                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.2s infinite alternate' }} />
+                      <span style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.6)', borderRadius: '50%', animation: 'bounce 0.6s 0.3s infinite alternate' }} />
+                    </div>
                   </div>
                 </div>
               )}
