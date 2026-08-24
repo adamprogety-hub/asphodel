@@ -5,6 +5,7 @@ import ContactModalProvider from '@/components/ContactModal'
 import PrivacyModal from '@/components/PrivacyModal'
 import AIChatWidget from '@/components/AIChatWidget'
 import GooeyFilter from '@/components/GooeyFilter'
+import CookieConsent from '@/components/CookieConsent'
 
 export const metadata: Metadata = {
   title: 'V.R. Asphodel — Сайты и реклама под ключ',
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="page-blur-wrapper">
             {children}
           </div>
+          <CookieConsent />
           <PrivacyModal />
           <AIChatWidget />
           <GooeyFilter />
@@ -28,4 +30,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+
 

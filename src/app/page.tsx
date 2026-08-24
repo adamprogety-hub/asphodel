@@ -13,8 +13,8 @@ import Reviews        from '@/components/sections/Reviews'
 import FAQ            from '@/components/sections/FAQ'
 import FinalCTA       from '@/components/sections/FinalCTA'
 import Footer         from '@/components/sections/Footer'
-import CookieConsent  from '@/components/CookieConsent'
 import FloatingActions from '@/components/FloatingActions'
+
 
 const R = '28px'
 
@@ -66,11 +66,9 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Floating cookie consent pop-up */}
-      <CookieConsent />
-
       {/* Floating action buttons stack (Calls, Messengers, Scroll-to-top) */}
       <FloatingActions />
     </>
   )
 }
+
