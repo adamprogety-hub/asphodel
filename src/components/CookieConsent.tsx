@@ -38,18 +38,19 @@ export default function CookieConsent() {
   }
 
   const bannerVariants = {
-    idle: { opacity: 1, y: 0, x: '-50%', scale: 1 },
+    idle: { opacity: 1, y: 0, x: '-50%', scale: 1, rotate: 0 },
     attention: {
-      y: -12,
-      scale: 1.05,
-      x: ['-50%', '-52%', '-48%', '-51%', '-49%', '-50%'], // Shake
+      y: -14,
+      scale: [1, 1.05, 1.01, 1.04, 1],
+      rotate: [0, -2.5, 2.5, -1.5, 1.5, 0],
       transition: {
-        x: { duration: 0.4, ease: 'easeInOut' },
+        rotate: { duration: 0.5, ease: 'easeInOut' },
+        scale: { duration: 0.5, ease: 'easeInOut' },
         y: { type: 'spring', stiffness: 350, damping: 15 },
-        scale: { type: 'spring', stiffness: 350, damping: 15 },
       }
     }
   }
+
 
   return (
     <AnimatePresence>
