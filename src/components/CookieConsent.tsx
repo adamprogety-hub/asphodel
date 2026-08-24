@@ -18,9 +18,9 @@ export default function CookieConsent() {
 
   useEffect(() => {
     const handleAttention = () => {
-      // Trigger rotating border neon glow attention animation
+      // Trigger solid purple border neon glow attention feedback
       setAttentionActive(true)
-      setTimeout(() => setAttentionActive(false), 2000)
+      setTimeout(() => setAttentionActive(false), 1500)
     }
     window.addEventListener('trigger-cookie-attention', handleAttention)
     return () => window.removeEventListener('trigger-cookie-attention', handleAttention)
@@ -69,106 +69,82 @@ export default function CookieConsent() {
             zIndex: 99999,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '1px', /* reveals the 1px neon gradient border */
-            background: attentionActive ? 'rgba(255, 255, 255, 0.02)' : 'rgba(255, 255, 255, 0.08)',
+            gap: '12px',
+            background: 'rgba(20, 20, 27, 0.82)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: attentionActive ? '1px solid var(--green)' : '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: '9999px',
+            padding: '6px 6px 6px 14px',
             boxShadow: attentionActive
-              ? '0 20px 45px rgba(16, 185, 129, 0.35), 0 0 30px rgba(124, 90, 237, 0.2)'
+              ? '0 20px 45px rgba(208, 123, 255, 0.35), 0 0 30px rgba(208, 123, 255, 0.15)'
               : '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(124, 58, 237, 0.03)',
             maxWidth: 'calc(100% - 32px)',
-            overflow: 'hidden',
-            transition: 'background 0.4s ease, box-shadow 0.4s ease',
+            transition: 'border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          {/* Rotating Conic Gradient Border Layer */}
-          <div style={{
-            position: 'absolute',
-            inset: '-250%',
-            background: 'conic-gradient(from 0deg, transparent 35%, #7C3AED 55%, #00E5FF 75%, #10B981 90%, transparent 100%)',
-            animation: 'rotate-glow 4s linear infinite',
-            zIndex: 0,
-            pointerEvents: 'none',
-            opacity: attentionActive ? 1 : 0,
-            transition: 'opacity 0.4s ease',
-          }} />
+          {/* Vector Cookie Icon + Text */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z" />
+              <path d="M8.5 8.5v.01" />
+              <path d="M16 15.5v.01" />
+              <path d="M12 12v.01" />
+              <path d="M11 16v.01" />
+              <path d="M7 13v.01" />
+            </svg>
+            <p style={{
+              fontFamily: 'var(--ff-b)',
+              fontWeight: 500,
+              fontSize: '12px',
+              color: 'rgba(255, 255, 255, 0.85)',
+              margin: 0,
+              letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
+            }}>
+              <span className="hidden sm:inline">Мы используем файлы cookie для аналитики</span>
+              <span className="inline sm:hidden">Используем cookie</span>
+            </p>
+          </div>
 
-          {/* Inner Content Area (masks the center of the card) */}
-          <div style={{
-            position: 'relative',
-            zIndex: 1,
-            background: '#14141B',
-            borderRadius: '9998px',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            padding: '6px 6px 6px 14px',
-          }}>
-            {/* Vector Cookie Icon + Text */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z" />
-                <path d="M8.5 8.5v.01" />
-                <path d="M16 15.5v.01" />
-                <path d="M12 12v.01" />
-                <path d="M11 16v.01" />
-                <path d="M7 13v.01" />
-              </svg>
-              <p style={{
+          {/* Action Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <button
+              onClick={handleDecline}
+              style={{
                 fontFamily: 'var(--ff-b)',
                 fontWeight: 500,
-                fontSize: '12px',
-                color: 'rgba(255, 255, 255, 0.85)',
-                margin: 0,
-                letterSpacing: '-0.01em',
-                whiteSpace: 'nowrap',
-              }}>
-                <span className="hidden sm:inline">Мы используем файлы cookie для аналитики</span>
-                <span className="inline sm:hidden">Используем cookie</span>
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <button
-                onClick={handleDecline}
-                style={{
-                  fontFamily: 'var(--ff-b)',
-                  fontWeight: 500,
-                  fontSize: '11px',
-                  color: 'rgba(255, 255, 255, 0.45)',
-                  background: 'none',
-                  border: 'none',
-                  padding: '6px 12px',
-                  borderRadius: '9999px',
-                  cursor: 'pointer',
-                  transition: 'color 0.2s',
-                }}
-                className="hover:text-white"
-              >
-                Отклонить
-              </button>
-              <button
-                onClick={handleAccept}
-                style={{
-                  fontFamily: 'var(--ff-b)',
-                  fontWeight: 600,
-                  fontSize: '11px',
-                  color: '#000',
-                  background: 'var(--green)',
-                  border: 'none',
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  cursor: 'pointer',
-                  transition: 'opacity 0.2s',
-                }}
-                className="hover:opacity-85"
-              >
-                Принять
-              </button>
-            </div>
+                fontSize: '11px',
+                color: 'rgba(255, 255, 255, 0.45)',
+                background: 'none',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '9999px',
+                cursor: 'pointer',
+                transition: 'color 0.2s',
+              }}
+              className="hover:text-white"
+            >
+              Отклонить
+            </button>
+            <button
+              onClick={handleAccept}
+              style={{
+                fontFamily: 'var(--ff-b)',
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#000',
+                background: 'var(--green)',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '9999px',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s',
+              }}
+              className="hover:opacity-85"
+            >
+              Принять
+            </button>
           </div>
         </motion.div>
       )}
