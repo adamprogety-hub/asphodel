@@ -9,8 +9,8 @@ export default function CookieConsent() {
     // Check if user already accepted cookies
     const consent = localStorage.getItem('cookie-consent')
     if (!consent) {
-      // Small timeout to show banner after initial render
-      const timer = setTimeout(() => setVisible(true), 1200)
+      // Show banner shortly after render
+      const timer = setTimeout(() => setVisible(true), 1500)
       return () => clearTimeout(timer)
     }
   }, [])
@@ -21,7 +21,7 @@ export default function CookieConsent() {
   }
 
   const handleDecline = () => {
-    // Redirect to Yandex as requested
+    // Redirect to fallback page
     window.location.href = 'https://yandex.ru'
   }
 
@@ -29,62 +29,89 @@ export default function CookieConsent() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.95 }}
+          initial={{ opacity: 0, y: 40, x: '-50%', scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
+          exit={{ opacity: 0, y: 30, x: '-50%', scale: 0.95 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           style={{
             position: 'fixed',
             bottom: '24px',
-            right: '24px',
-            zIndex: 1000,
-            maxWidth: '380px',
-            background: 'var(--dark-2)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '16px',
-            padding: '24px',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.3)',
+            left: '50%',
+            zIndex: 50000,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            background: 'rgba(20, 20, 27, 0.8)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '9999px',
+            padding: '6px 6px 6px 14px',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(124, 58, 237, 0.03)',
+            maxWidth: 'calc(100% - 32px)',
           }}
         >
-          {/* Header icon + title */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <span style={{ fontSize: '20px', color: 'var(--green)' }}>🍪</span>
-            <p style={{ fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '15px', color: '#fff', letterSpacing: '-0.01em' }}>
-              Мы используем файлы cookie
+          {/* Vector Cookie Icon + Text */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z" />
+              <path d="M8.5 8.5v.01" />
+              <path d="M16 15.5v.01" />
+              <path d="M12 12v.01" />
+              <path d="M11 16v.01" />
+              <path d="M7 13v.01" />
+            </svg>
+            <p style={{
+              fontFamily: 'var(--ff-b)',
+              fontWeight: 500,
+              fontSize: '12px',
+              color: 'rgba(255, 255, 255, 0.85)',
+              margin: 0,
+              letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
+            }}>
+              <span className="hidden sm:inline">Мы используем файлы cookie для аналитики</span>
+              <span className="inline sm:hidden">Используем cookie</span>
             </p>
           </div>
 
-          {/* Description */}
-          <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: '20px' }}>
-            Оставаясь на сайте, вы соглашаетесь на сбор аналитических данных для улучшения работы нашего сервиса.
-          </p>
-
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: '8px' }}>
+          {/* Action Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <button
+              onClick={handleDecline}
+              style={{
+                fontFamily: 'var(--ff-b)',
+                fontWeight: 500,
+                fontSize: '11px',
+                color: 'rgba(255, 255, 255, 0.45)',
+                background: 'none',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '9999px',
+                cursor: 'pointer',
+                transition: 'color 0.2s',
+              }}
+              className="hover:text-white"
+            >
+              Отклонить
+            </button>
             <button
               onClick={handleAccept}
               style={{
-                flex: 1, fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '13px',
-                color: '#000', background: 'var(--green)', border: 'none',
-                padding: '10px 16px', borderRadius: '10px', cursor: 'pointer',
-                transition: 'opacity 0.2s', textAlign: 'center',
+                fontFamily: 'var(--ff-b)',
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#000',
+                background: 'var(--green)',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '9999px',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s',
               }}
               className="hover:opacity-85"
             >
               Принять
-            </button>
-            <button
-              onClick={handleDecline}
-              style={{
-                flex: 1, fontFamily: 'var(--ff-b)', fontWeight: 500, fontSize: '13px',
-                color: 'rgba(255,255,255,0.7)', background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.15)',
-                padding: '10px 16px', borderRadius: '10px', cursor: 'pointer',
-                transition: 'border-color 0.2s, color 0.2s', textAlign: 'center',
-              }}
-              className="hover:border-white hover:text-white"
-            >
-              Отклонить
             </button>
           </div>
         </motion.div>
