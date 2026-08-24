@@ -182,9 +182,10 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                     <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </button>
-                <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:sub, marginTop:'4px' }}>
-                  Никакого спама. Только материал и изредка полезные советы.
+                <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:sub, marginTop:'4px', opacity: 0.7 }}>
+                  Мы НЕ занимаемся рекламными рассылками. Данная форма нужна для одного конкретного действия.
                 </p>
+
               </motion.form>
             ) : (
               <motion.div key="success" initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} transition={{ duration:0.4 }} style={{ textAlign:'center', padding:'40px 20px' }}>

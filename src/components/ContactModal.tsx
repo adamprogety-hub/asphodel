@@ -280,8 +280,9 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                         </button>
 
                         <p style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(0,0,0,0.4)', marginTop: '4px', lineHeight: 1.5 }}>
-                          Ответим в течение рабочего дня. Никакого спама.
+                          Мы НЕ занимаемся рекламными рассылками. Данная форма нужна для одного конкретного действия.
                         </p>
+
                       </form>
                     </motion.div>
                   ) : (
