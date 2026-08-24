@@ -90,10 +90,15 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (localStorage.getItem('cookie-consent') !== 'accepted') {
+      window.dispatchEvent(new Event('trigger-cookie-attention'))
+      return
+    }
     setSent(true)
     // TODO: send to CRM / email service
     console.log('Lead magnet:', m.id, form)
   }
+
 
   return (
     <motion.div

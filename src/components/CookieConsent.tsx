@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
+  const [attentionActive, setAttentionActive] = useState(false)
 
   useEffect(() => {
     // Check if user already accepted cookies
@@ -13,6 +14,17 @@ export default function CookieConsent() {
       const timer = setTimeout(() => setVisible(true), 1500)
       return () => clearTimeout(timer)
     }
+  }, [])
+
+  useEffect(() => {
+    const handleAttention = () => {
+      // Make sure the banner is visible if it was somehow dismissed or not loaded yet
+      setVisible(true)
+      setAttentionActive(true)
+      setTimeout(() => setAttentionActive(false), 800)
+    }
+    window.addEventListener('trigger-cookie-attention', handleAttention)
+    return () => window.removeEventListener('trigger-cookie-attention', handleAttention)
   }, [])
 
   const handleAccept = () => {
@@ -25,12 +37,28 @@ export default function CookieConsent() {
     window.location.href = 'https://yandex.ru'
   }
 
+  const bannerVariants = {
+    idle: { opacity: 1, y: 0, x: '-50%', scale: 1 },
+    attention: {
+      y: -12,
+      scale: 1.05,
+      x: ['-50%', '-52%', '-48%', '-51%', '-49%', '-50%'], // Shake
+      transition: {
+        x: { duration: 0.4, ease: 'easeInOut' },
+        y: { type: 'spring', stiffness: 350, damping: 15 },
+        scale: { type: 'spring', stiffness: 350, damping: 15 },
+      }
+    }
+  }
+
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
+          variants={bannerVariants as any}
+
+          animate={attentionActive ? 'attention' : 'idle'}
           initial={{ opacity: 0, y: 40, x: '-50%', scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
           exit={{ opacity: 0, y: 30, x: '-50%', scale: 0.95 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           style={{
@@ -44,11 +72,14 @@ export default function CookieConsent() {
             background: 'rgba(20, 20, 27, 0.8)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            border: attentionActive ? '1px solid var(--green)' : '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: '9999px',
             padding: '6px 6px 6px 14px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(124, 58, 237, 0.03)',
+            boxShadow: attentionActive
+              ? '0 20px 45px rgba(108,255,155,0.45), 0 0 35px rgba(108,255,155,0.3)'
+              : '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(124, 58, 237, 0.03)',
             maxWidth: 'calc(100% - 32px)',
+            transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
           }}
         >
           {/* Vector Cookie Icon + Text */}

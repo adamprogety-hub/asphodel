@@ -7,12 +7,22 @@ export default function FinalCTA() {
   const [form, setForm] = useState({ name:'', contact:'', message:'' })
   const [sent, setSent] = useState(false)
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (localStorage.getItem('cookie-consent') !== 'accepted') {
+      window.dispatchEvent(new Event('trigger-cookie-attention'))
+      return
+    }
+    setSent(true)
+  }
+
   const inp: React.CSSProperties = {
     width:'100%', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px',
     color:'#111', background:'#F5F5F5', border:'1px solid transparent',
     padding:'14px 18px', outline:'none', transition:'border-color 0.2s',
     boxSizing:'border-box', borderRadius:'12px',
   }
+
 
 
   return (
@@ -33,7 +43,8 @@ export default function FinalCTA() {
         {!sent ? (
           <motion.form
             initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7, delay:0.1 }}
-            onSubmit={e=>{ e.preventDefault(); setSent(true) }}
+            onSubmit={handleSubmit}
+
             style={{ display:'flex', flexDirection:'column', gap:'10px' }}
           >
             <input placeholder="Ваше имя" required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} style={inp} className="focus:border-[#111] placeholder:text-[#bbb]" />

@@ -49,9 +49,14 @@ export default function ContactModalProvider({ children }: { children: React.Rea
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (localStorage.getItem('cookie-consent') !== 'accepted') {
+      window.dispatchEvent(new Event('trigger-cookie-attention'))
+      return
+    }
     setSent(true)
     console.log('Contact form submitted:', { ...config, ...form })
   }
+
 
   const CARD = '#F1EFEA' // light theme warm off-white background
 
