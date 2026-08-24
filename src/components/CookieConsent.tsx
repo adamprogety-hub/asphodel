@@ -18,10 +18,9 @@ export default function CookieConsent() {
 
   useEffect(() => {
     const handleAttention = () => {
-      // Make sure the banner is visible if it was somehow dismissed or not loaded yet
-      setVisible(true)
+      // Clean, static color highlighting without flashing / unmounting
       setAttentionActive(true)
-      setTimeout(() => setAttentionActive(false), 800)
+      setTimeout(() => setAttentionActive(false), 1500)
     }
     window.addEventListener('trigger-cookie-attention', handleAttention)
     return () => window.removeEventListener('trigger-cookie-attention', handleAttention)
@@ -38,36 +37,36 @@ export default function CookieConsent() {
   }
 
   const bannerVariants = {
-    idle: { opacity: 1, y: 0, x: '-50%', scale: 1, rotate: 0 },
-    attention: {
-      y: -14,
-      scale: [1, 1.05, 1.01, 1.04, 1],
-      rotate: [0, -2.5, 2.5, -1.5, 1.5, 0],
-      transition: {
-        rotate: { duration: 0.5, ease: 'easeInOut' },
-        scale: { duration: 0.5, ease: 'easeInOut' },
-        y: { type: 'spring', stiffness: 350, damping: 15 },
-      }
+    hidden: { opacity: 0, y: 40, x: '-50%', scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      x: '-50%', 
+      scale: 1,
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+    },
+    exit: { 
+      opacity: 0, 
+      y: 30, 
+      x: '-50%', 
+      scale: 0.95,
+      transition: { duration: 0.3, ease: 'easeIn' }
     }
   }
-
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           variants={bannerVariants as any}
-
-          animate={attentionActive ? 'attention' : 'idle'}
-          initial={{ opacity: 0, y: 40, x: '-50%', scale: 0.95 }}
-          exit={{ opacity: 0, y: 30, x: '-50%', scale: 0.95 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           style={{
             position: 'fixed',
             bottom: '24px',
             left: '50%',
             zIndex: 99999,
-
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
@@ -78,12 +77,13 @@ export default function CookieConsent() {
             borderRadius: '9999px',
             padding: '6px 6px 6px 14px',
             boxShadow: attentionActive
-              ? '0 20px 45px rgba(108,255,155,0.45), 0 0 35px rgba(108,255,155,0.3)'
+              ? '0 20px 45px rgba(16, 185, 129, 0.4), 0 0 30px rgba(16, 185, 129, 0.2)'
               : '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(124, 58, 237, 0.03)',
             maxWidth: 'calc(100% - 32px)',
-            transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+            transition: 'border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
+
           {/* Vector Cookie Icon + Text */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
