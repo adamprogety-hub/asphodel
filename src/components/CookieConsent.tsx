@@ -65,7 +65,8 @@ export default function CookieConsent() {
             position: 'fixed',
             bottom: '24px',
             left: '50%',
-            zIndex: 50000,
+            zIndex: 99999,
+
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
