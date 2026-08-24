@@ -183,8 +183,9 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                   </svg>
                 </button>
                 <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:sub, marginTop:'4px', opacity: 0.7 }}>
-                  Мы НЕ занимаемся рекламными рассылками. Данная форма нужна для одного конкретного действия.
+                  Мы НЕ занимаемся рекламными рассылками. Данные нужны исключительно для отправки вам этого материала.
                 </p>
+
 
               </motion.form>
             ) : (

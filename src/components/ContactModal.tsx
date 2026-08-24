@@ -280,8 +280,9 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                         </button>
 
                         <p style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(0,0,0,0.4)', marginTop: '4px', lineHeight: 1.5 }}>
-                          Мы НЕ занимаемся рекламными рассылками. Данная форма нужна для одного конкретного действия.
+                          Мы НЕ занимаемся рекламными рассылками. Данные нужны исключительно для связи с вами по вашему проекту.
                         </p>
+
 
                       </form>
                     </motion.div>
