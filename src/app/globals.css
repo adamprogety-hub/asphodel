@@ -713,3 +713,17 @@ body.modal-open .page-blur-wrapper {
   }
 }
 
+
+/* ── Success card: mobile image positioning ─────────────────────────── */
+@media (max-width: 640px) {
+  .success-smart {
+    left: -60px !important;
+    height: 90% !important;
+    bottom: -30px !important;
+  }
+  .success-letter {
+    right: -100px !important;
+    height: 65% !important;
+    bottom: 0px !important;
+  }
+}

@@ -57,7 +57,7 @@ export default function Portfolio() {
               Кейсы
             </span>
             <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1 }}>
-              Наши проекты.
+              Наши проекты
             </h2>
           </div>
           {/* Arrows container - visible only on mobile when slider is active */}

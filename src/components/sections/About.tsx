@@ -30,10 +30,10 @@ export default function About() {
         <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
           <Tag label="О нас" />
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(26px,2.8vw,40px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'20px' }}>
-            Делаем маркетинг для тех, кто только выходит на рынок.
+            Помогаем предпринимателям получать заявки из интернета
           </h2>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.78, marginBottom:'28px' }}>
-            Нас двое — Илья Хаймин (бренд-менеджер, 5+ лет) и Александр Герасимов (маркетолог, 6 лет). Помогаем начинающим предпринимателям и фрилансерам наладить стабильный поток заявок из интернета.
+            Нас двое — Илья Хаймин (бренд-менеджер, 5+ лет) и Александр Герасимов (маркетолог, 6 лет). Делаем сайты и настраиваем рекламу — так, чтобы вы могли заниматься делом, а не разбираться в инструментах.
           </p>
           <LiquidButton
             variant="dark"

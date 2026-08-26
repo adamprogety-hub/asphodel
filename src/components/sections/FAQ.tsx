@@ -36,7 +36,7 @@ export default function FAQ() {
             Вопросы
           </span>
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1, marginBottom:'24px' }}>
-            Часто спрашивают.
+            Часто спрашивают
           </h2>
           <LiquidButton
             variant="green"

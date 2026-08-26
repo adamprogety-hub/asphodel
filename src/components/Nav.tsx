@@ -25,15 +25,18 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll + add body class when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
+      document.body.classList.add('burger-open')
     } else {
       document.body.style.overflow = ''
+      document.body.classList.remove('burger-open')
     }
     return () => {
       document.body.style.overflow = ''
+      document.body.classList.remove('burger-open')
     }
   }, [mobileMenuOpen])
 
@@ -45,7 +48,7 @@ export default function Nav() {
           position: 'fixed',
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 100,
+          zIndex: 2000,
 
           /* Scroll state & mobile menu state transitions */
           top:          (scrolled || mobileMenuOpen) ? '14px' : '0px',
@@ -242,7 +245,8 @@ export default function Nav() {
               background: 'rgba(10, 10, 12, 0.65)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
-              zIndex: 90,
+              // z:1900 — under header (2000) but above FloatingActions (800) and AIChatWidget (800)
+              zIndex: 1900,
               pointerEvents: 'auto',
             }}
           />

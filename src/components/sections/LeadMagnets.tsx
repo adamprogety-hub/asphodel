@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ContactInput from '@/components/ContactInput'
 
 // ── Types ────────────────────────────────────────────────────────
 interface MagnetProps {
@@ -68,8 +69,10 @@ const magnets: MagnetProps[] = [
 
 // ── Single magnet block ──────────────────────────────────────────
 function MagnetBlock({ m }: { m: MagnetProps }) {
-  const [form, setForm] = useState({ name:'', email:'' })
+  const [form, setForm] = useState({ name:'', email:'', website:'' })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const isDark  = m.bg === 'dark'
   const isGreen = m.bg === 'green'
@@ -88,15 +91,43 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
     boxSizing:'border-box', borderRadius:'10px',
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (form.website) return
     if (localStorage.getItem('cookie-consent') !== 'accepted') {
       window.dispatchEvent(new Event('trigger-cookie-attention'))
       return
     }
-    setSent(true)
-    // TODO: send to CRM / email service
-    console.log('Lead magnet:', m.id, form)
+    // source: lead-ads / lead-site / lead-brief
+    const sourceMap: Record<string, string> = {
+      'ads-checklist':  'lead-ads',
+      'site-checklist': 'lead-site',
+      'brief-template': 'lead-brief',
+    }
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    form.name,
+          contact: form.email,
+          message: `Запрос материала: ${m.title}`,
+          website: form.website,
+          source:  sourceMap[m.id] || 'lead-other',
+        }),
+      })
+      if (res.ok) {
+        setSent(true)
+      } else {
+        setError('Не удалось отправить. Напишите напрямую: @AGerasimov_Marketing')
+      }
+    } catch {
+      setError('Нет связи. Напишите напрямую: @AGerasimov_Marketing')
+    } finally {
+      setLoading(false)
+    }
   }
 
 
@@ -146,10 +177,22 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                   value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))}
                   style={inp}
                 />
-                <input
-                  type="text" placeholder="Telegram @username или email" required
-                  value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))}
+                <ContactInput
+                  required
+                  value={form.email}
+                  onChange={val => setForm(f => ({ ...f, email: val }))}
                   style={inp}
+                />
+                {/* Honeypot — скрыто от людей, видно ботам */}
+                <input
+                  type="text"
+                  name="website"
+                  value={form.website}
+                  onChange={e => setForm(f => ({ ...f, website: e.target.value }))}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                 />
                 
                 {/* Privacy Policy Checkbox */}
@@ -169,19 +212,28 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                   </label>
                 </div>
 
-                <button type="submit" style={{
+                <button type="submit" disabled={loading} style={{
                   fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'14px',
                   color: isDark ? '#000' : '#fff',
                   background: isDark ? 'var(--green)' : '#111',
                   padding:'13px 28px', borderRadius:'var(--r-pill)', border:'none',
-                  cursor:'pointer', transition:'opacity 0.2s',
+                  cursor: loading ? 'default' : 'pointer',
+                  opacity: loading ? 0.6 : 1,
+                  transition:'opacity 0.2s',
                   display:'flex', alignItems:'center', gap:'8px', width:'fit-content', marginTop:'4px',
                 }} className="hover:opacity-85">
-                  {m.cta}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  {loading ? 'Отправляем...' : m.cta}
+                  {!loading && (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
                 </button>
+                {error && (
+                  <p style={{ fontFamily:'var(--ff-b)', fontSize:'12px', color: isDark ? '#ff8080' : '#c0392b', lineHeight:1.5, marginTop:'4px' }}>
+                    {error}
+                  </p>
+                )}
                 <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:sub, marginTop:'4px', opacity: 0.7 }}>
                   Мы НЕ занимаемся рекламными рассылками. Данные нужны исключительно для отправки вам этого материала.
                 </p>

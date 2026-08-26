@@ -38,7 +38,7 @@ export default function Services() {
           className="services-grid"
         >
           {/* Row 1, Col 1: asterisk + Professional */}
-          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-browser" title="Уникальный дизайн" text="Никаких шаблонов — проектируем уникальный интерфейс под ваш продукт" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-browser" title="Уникальный дизайн" text="Проектируем сайт под ваш продукт — без шаблонов" />
           {/* Row 1, Col 2: CENTER — big brand visual, rowSpan 3 */}
           <div style={{
             gridRow: '1 / 4', borderRadius: '18px',
@@ -81,17 +81,17 @@ export default function Services() {
             </div>
           </div>
           {/* Row 1, Col 3 */}
-          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-yandex" title="Яндекс Директ" text="Жестко чистим мусорный трафик и боремся за конверсии" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-yandex" title="Яндекс Директ" text="Убираем нецелевые клики — бюджет идёт на тех, кто ищет ваш продукт" />
 
           {/* Row 2, Col 1 */}
-          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-safe" title="Честные медиапланы" text="Рассчитываем окупаемость рекламы до её запуска" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-safe" title="Честные планы расходов" text="До запуска рассчитываем: сколько заявок ожидать и по какой цене" />
           {/* Row 2, Col 3 */}
-          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-chat" title="Трафик-системы" text="От точечного парсинга аудиторий до умных чат-ботов" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-chat" title="Аудитория и автоматизация" text="Находим нужных людей и показываем им вашу рекламу" />
 
           {/* Row 3, Col 1: number */}
-          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-calendar" title="5+ лет опыта" text="Создаем сайты, которые вызывают доверие с первой секунды" />
+          <Cell spriteClass="bento-sprite-sheet1 sprite-s1-calendar" title="5+ лет опыта" text="Делаем сайты, которым доверяют с первого экрана" />
           {/* Row 3, Col 3: wide with text */}
-          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-graph" title="100% прозрачность" text="Еженедельные отчеты о цене лида простым языком" />
+          <Cell spriteClass="bento-sprite-sheet2 sprite-s2-graph" title="100% прозрачность" text="Раз в неделю присылаем отчёт о заявках понятным языком" />
         </motion.div>
       </div>
     </section>

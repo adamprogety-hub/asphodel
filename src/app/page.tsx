@@ -14,6 +14,7 @@ import FAQ            from '@/components/sections/FAQ'
 import FinalCTA       from '@/components/sections/FinalCTA'
 import Footer         from '@/components/sections/Footer'
 import FloatingActions from '@/components/FloatingActions'
+// import Reels from '@/components/sections/Reels' // временно скрыто
 
 
 const R = '28px'

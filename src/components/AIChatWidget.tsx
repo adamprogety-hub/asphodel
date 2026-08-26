@@ -39,9 +39,15 @@ export default function AIChatWidget() {
     }
   }, [messages, isTyping])
 
-  // Dispatch custom window event when open state changes
+  // Dispatch custom window event when open state changes + manage body class
   useEffect(() => {
     window.dispatchEvent(new CustomEvent('ai-chat-toggle', { detail: { open: isOpen } }))
+    if (isOpen) {
+      document.body.classList.add('ai-chat-open')
+    } else {
+      document.body.classList.remove('ai-chat-open')
+    }
+    return () => document.body.classList.remove('ai-chat-open')
   }, [isOpen])
 
   // simulated AI reply generator
@@ -68,7 +74,7 @@ export default function AIChatWidget() {
     }
 
     if (q.includes('реклам') || q.includes('директ') || q.includes('трафик') || q.includes('яндекс') || q.includes('настрой')) {
-      return 'Настройкой рекламы занимается наш маркетолог Александр (опыт 6+ лет). Мы настраиваем Яндекс.Директ под ключ:\n1. Делаем глубокий анализ конкурентов.\n2. Парсим ключевые фразы и жестко отсекаем мусор.\n3. Пишем цепляющие офферы.\nСтоимость настройки — от 35 000 ₽.'
+      return 'Настройкой рекламы занимается наш маркетолог Александр (опыт 6+ лет). Настраиваем Яндекс.Директ под ключ:\n1. Анализируем конкурентов и аудиторию.\n2. Убираем нецелевые запросы — бюджет идёт на тех, кто ищет ваш продукт.\n3. Пишем объявления под вашу задачу.\nСтоимость настройки — от 35 000 ₽.'
     }
 
     if (q.includes('привет') || q.includes('здравствуй') || q.includes('ку') || q.includes('hello')) {
@@ -83,7 +89,7 @@ export default function AIChatWidget() {
       })
     }, 3500)
 
-    return 'Я пока только учусь и ещё не знаю точного ответа на этот вопрос (моя бета-версия сейчас в активной разработке 🛠️).\n\nДавайте я сейчас открою форму обратной связи, вы укажете свой телефон или Telegram, и наши ребята свяжутся с вами, чтобы лично ответить на ваш вопрос!'
+    return 'Я пока только учусь и ещё не знаю точного ответа на этот вопрос (моя бета-версия сейчас в активной разработке 🛠️).\n\nНапишите напрямую в Telegram @AGerasimov_Marketing — Александр ответит на любой вопрос.'
   }
 
   const handleSend = (textToSend: string) => {
@@ -113,8 +119,31 @@ export default function AIChatWidget() {
 
   return (
     <>
+      {/* ── Blur Overlay: covers content + FloatingActions when chat is open ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setIsOpen(false)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              // z:1000 — above FloatingActions (z:800) and content, below chat window (z:1300) and header (z:2000)
+              zIndex: 1000,
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              background: 'rgba(10, 10, 18, 0.5)',
+              pointerEvents: 'auto',
+            }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* ── Chat Widget Bubble (Bottom-Left) ── */}
-      <div style={{ position: 'fixed', bottom: '24px', left: '24px', zIndex: 40000 }} className="ai-chat-bubble">
+      <div style={{ position: 'fixed', bottom: '24px', left: '24px', zIndex: isOpen ? 1300 : 800 }} className="ai-chat-bubble">
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="ИИ-Ассистент"
@@ -181,7 +210,7 @@ export default function AIChatWidget() {
               left: '24px',
               width: '360px',
               height: '490px',
-              zIndex: 40000,
+              zIndex: 1300,
               borderRadius: '24px',
               boxShadow: '0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.05)',
               overflow: 'hidden',

@@ -92,7 +92,7 @@ export default function Calculator() {
             Тарифы и цены
           </span>
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1 }}>
-            Форматы работы.
+            Форматы работы
           </h2>
         </motion.div>
 

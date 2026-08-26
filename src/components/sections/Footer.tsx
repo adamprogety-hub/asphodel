@@ -61,7 +61,28 @@ export default function Footer() {
 
         <div style={{ borderTop:'1px solid rgba(255,255,255,0.07)', paddingTop:'24px', display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>© 2025 V. R. Asphodel</p>
-          <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>Илья Хаймин · Александр Герасимов</p>
+          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
+            {[
+              { label: '+7 999 991-03-13', href: 'tel:+79999910313' },
+              { label: 'a.gerasimov.marketing@yandex.ru', href: 'mailto:a.gerasimov.marketing@yandex.ru' },
+              { label: 'Telegram', href: 'https://t.me/AGerasimov_Marketing' },
+            ].map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                style={{
+                  fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '12px',
+                  color: 'rgba(255,255,255,0.25)', textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
+                className="hover:text-white"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

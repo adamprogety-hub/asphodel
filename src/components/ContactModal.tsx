@@ -1,6 +1,7 @@
 'use client'
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import ContactInput from '@/components/ContactInput'
 
 // ── Types ──────────────────────────────────────────────────────────
 export interface ModalConfig {
@@ -24,15 +25,19 @@ export const useContactModal = () => useContext(ContactModalContext)
 // ── Provider + Modal ──────────────────────────────────────────────
 export default function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [config, setConfig] = useState<ModalConfig | null>(null)
-  const [form, setForm]     = useState({ name: '', contact: '', message: '' })
+  const [form, setForm]     = useState({ name: '', contact: '', message: '', website: '' })
   const [sent, setSent]     = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError]   = useState('')
 
   const isOpen = config !== null
 
   const openModal = useCallback((c: ModalConfig) => {
     setConfig(c)
     setSent(false)
-    setForm({ name: '', contact: '', message: '' })
+    setLoading(false)
+    setError('')
+    setForm({ name: '', contact: '', message: '', website: '' })
     document.body.classList.add('modal-open')
   }, [])
 
@@ -47,14 +52,31 @@ export default function ContactModalProvider({ children }: { children: React.Rea
     return () => window.removeEventListener('keydown', fn)
   }, [isOpen, closeModal])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (form.website) return
     if (localStorage.getItem('cookie-consent') !== 'accepted') {
       window.dispatchEvent(new Event('trigger-cookie-attention'))
       return
     }
-    setSent(true)
-    console.log('Contact form submitted:', { ...config, ...form })
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'contact-modal' }),
+      })
+      if (res.ok) {
+        setSent(true)
+      } else {
+        setError('Не удалось отправить. Напишите напрямую: @AGerasimov_Marketing')
+      }
+    } catch {
+      setError('Нет связи. Напишите напрямую: @AGerasimov_Marketing')
+    } finally {
+      setLoading(false)
+    }
   }
 
 
@@ -225,10 +247,10 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                           style={inpStyle}
                           className="focus:border-black/25 placeholder:text-black/30"
                         />
-                        <input
-                          type="text" placeholder="Telegram @username или телефон" required
+                        <ContactInput
+                          required
                           value={form.contact}
-                          onChange={e => setForm(f => ({ ...f, contact: e.target.value }))}
+                          onChange={val => setForm(f => ({ ...f, contact: val }))}
                           style={inpStyle}
                           className="focus:border-black/25 placeholder:text-black/30"
                         />
@@ -239,6 +261,17 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                           style={{ ...inpStyle, resize: 'none' as const }}
                           className="focus:border-black/25 placeholder:text-black/30"
+                        />
+                        {/* Honeypot — скрыто от людей, видно ботам */}
+                        <input
+                          type="text"
+                          name="website"
+                          value={form.website}
+                          onChange={e => setForm(f => ({ ...f, website: e.target.value }))}
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
+                          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                         />
 
                         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '2px 0 6px' }}>
@@ -262,22 +295,33 @@ export default function ContactModalProvider({ children }: { children: React.Rea
 
                         <button
                           type="submit"
+                          disabled={loading}
                           style={{
                             fontFamily: 'var(--ff-b)', fontWeight: 700, fontSize: '14px',
                             color: '#000', background: 'var(--green)',
                             padding: '14px 28px',
                             borderRadius: 'var(--r-pill)', border: 'none',
-                            cursor: 'pointer', transition: 'opacity 0.2s',
+                            cursor: loading ? 'default' : 'pointer',
+                            opacity: loading ? 0.6 : 1,
+                            transition: 'opacity 0.2s',
                             display: 'flex', alignItems: 'center', gap: '8px',
                             width: 'fit-content', marginTop: '2px',
                           }}
                           className="hover:opacity-85"
                         >
-                          Отправить заявку
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-                            <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                          {loading ? 'Отправляем...' : 'Написать нам'}
+                          {!loading && (
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                              <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          )}
                         </button>
+
+                        {error && (
+                          <p style={{ fontFamily: 'var(--ff-b)', fontSize: '12px', color: '#c0392b', lineHeight: 1.5, marginTop: '4px' }}>
+                            {error}
+                          </p>
+                        )}
 
                         <p style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(0,0,0,0.4)', marginTop: '4px', lineHeight: 1.5 }}>
                           Мы НЕ занимаемся рекламными рассылками. Данные нужны исключительно для связи с вами по вашему проекту.
@@ -315,21 +359,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                         <p style={{ fontFamily: 'var(--ff-b)', fontSize: '14px', color: '#555', lineHeight: 1.75 }}>
                           Ответим в течение рабочего дня.<br />Ждите — будет интересно.
                         </p>
-                      </div>
-                      <button
-                        onClick={closeModal}
-                        style={{
-                          fontFamily: 'var(--ff-b)', fontWeight: 500, fontSize: '13px',
-                          color: 'rgba(0,0,0,0.6)',
-                          background: 'rgba(0,0,0,0.05)',
-                          border: '1px solid rgba(0,0,0,0.12)',
-                          padding: '10px 24px', borderRadius: 'var(--r-pill)',
-                          cursor: 'pointer', transition: 'background 0.2s',
-                        }}
-                        className="hover:bg-black/10"
-                      >
-                        Закрыть
-                      </button>
+                        </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
