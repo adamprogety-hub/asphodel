@@ -229,11 +229,19 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-card-purple" style={{
-          borderRadius: 'var(--r-md)', padding: '22px 24px',
-          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          minHeight: '160px',
-        }}>
+        <button
+          className="hero-card-purple group"
+          onClick={() => openModal({
+            title: 'Бесплатная консультация',
+            description: 'Просто расскажите о задаче — созвонимся, разберём ситуацию и предложим решение.',
+          })}
+          style={{
+            borderRadius: 'var(--r-md)', padding: '22px 24px',
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+            minHeight: '160px', cursor: 'pointer', border: 'none', textAlign: 'left',
+            width: '100%', transition: 'opacity 0.2s',
+          }}
+        >
           {/* Header at the top */}
           <h4 style={{
             fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: '16px',
@@ -251,21 +259,12 @@ export default function Hero() {
             }}>
               Просто напишите нам — расскажите о задаче.
             </p>
-            <button
-              onClick={() => openModal({
-                title: 'Бесплатная консультация',
-                description: 'Просто расскажите о задаче — созвонимся, разберём ситуацию и предложим решение.',
-              })}
-              style={{
-                fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '12px',
-                color: '#000', textDecoration: 'none', background: 'none', border: 'none',
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                flexShrink: 0, cursor: 'pointer', padding: 0,
-              }}
-              className="group"
-            >
+            <span style={{
+              fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '12px',
+              color: '#000', display: 'inline-flex', alignItems: 'center', gap: '8px', flexShrink: 0,
+            }}>
               <span>Написать</span>
-              <div style={{
+              <span style={{
                 width: '28px', height: '28px', borderRadius: '50%',
                 background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'transform 0.3s ease'
@@ -273,10 +272,10 @@ export default function Hero() {
                 <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                   <path d="M2 12L12 2M12 2H4M12 2v8" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </div>
-            </button>
+              </span>
+            </span>
           </div>
-        </div>
+        </button>
       </motion.div>
     </section>
   )
