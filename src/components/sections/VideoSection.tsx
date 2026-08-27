@@ -16,9 +16,8 @@ export default function VideoSection() {
         {/* Left: text block */}
         <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
           {/* LIVE badge */}
-          <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'#fff', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 14px', marginBottom:'24px' }}>
-            <span style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#FF3B3B', animation:'pulse 1.5s ease-in-out infinite', display:'block' }} />
-            <span style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'12px', color:'#111', letterSpacing:'0.04em' }}>Приветственное видео</span>
+          <div style={{ display:'inline-flex', alignItems:'center', background:'#fff', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
+            <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111' }}>Приветственное видео</span>
           </div>
 
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'18px' }}>
