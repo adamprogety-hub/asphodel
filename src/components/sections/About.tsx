@@ -60,7 +60,7 @@ export default function About() {
             className="about-zone-card"
           >
             {/* Zone label top-left */}
-            <div style={{ display:'flex', flexDirection:'column', gap:'8px', width:'fit-content', zIndex:3 }}>
+            <div style={{ display:'flex', flexDirection:'column', gap:'8px', width:'fit-content', zIndex:3, alignItems:'flex-start' }}>
               <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.1)', borderRadius:'var(--r-pill)', padding:'5px 14px' }}>
                 <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Разработка сайтов</span>
               </div>
@@ -121,7 +121,7 @@ export default function About() {
             style={{ background:'#1E1E1E', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
             className="about-zone-card"
           >
-            <div style={{ display:'flex', flexDirection:'column', gap:'8px', width:'fit-content', zIndex:3 }}>
+            <div style={{ display:'flex', flexDirection:'column', gap:'8px', width:'fit-content', zIndex:3, alignItems:'flex-start' }}>
               <div style={{ display:'inline-flex', alignItems:'center', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px' }}>
                 <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>Реклама и продвижение</span>
               </div>
