@@ -11,7 +11,7 @@ const plans = [
   {
     tag:   'Старт',
     title: 'Лендинг',
-    price: 'от 65 000 ₽',
+    price: 'от 115 000 ₽',
     desc:  'Простой и понятный одностраничный сайт для демонстрации продукта.',
     items: ['Структура и дизайн', 'Верстка (адаптив)', 'Форма заявки', 'Подключение Яндекс.Метрики', 'Инструкция по редактированию'],
     dark: false,
@@ -21,7 +21,7 @@ const plans = [
     tag:   'Всё включено',
     title: 'Сайт + реклама',
     price: 'от 280 000 ₽',
-    desc:  'Сайт с высокой конверсией и настроенный поток заявок в одной услуге.',
+    desc:  'Сайт с предсказуемой конверсией и настроенный поток заявок в одной услуге.',
     items: ['Многостраничный сайт (3–5 стр.)', 'Тексты от нас', 'Настройка рекламы (Яндекс/VK)', 'Ведение первого месяца', 'Еженедельные отчёты'],
     dark: true,
     green: false,
@@ -193,7 +193,7 @@ export default function Calculator() {
                   <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} style={{overflow:'hidden'}}>
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:'10px' }}>Какой сайт?</p>
                     <div style={{ display:'flex', flexDirection:'column', gap:'6px', marginBottom:'16px' }}>
-                      {([{v:'landing' as ST,l:'Лендинг (1 стр.)',p:'от 65 000 ₽'},{v:'multi' as ST,l:'Сайт (3–5 стр.)',p:'от 175 000 ₽'},{v:'large' as ST,l:'Сайт (5+ стр.)',p:'от 225 000 ₽'}]).map(({v,l,p})=>(
+                      {([{v:'landing' as ST,l:'Лендинг (1 стр.)',p:'от 115 000 ₽'},{v:'multi' as ST,l:'Сайт (3–5 стр.)',p:'от 175 000 ₽'},{v:'large' as ST,l:'Сайт (5+ стр.)',p:'от 225 000 ₽'}]).map(({v,l,p})=>(
                         <button key={v} onClick={()=>setSt(v)} style={{...calcBtn(st===v), justifyContent:'space-between'}}>
                           <span style={{display:'flex',alignItems:'center',gap:'10px'}}><Dot on={st===v}/>{l}</span>
                           <span style={{fontSize:'12px',opacity:0.5}}>{p}</span>
