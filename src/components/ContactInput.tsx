@@ -16,8 +16,10 @@ function detectType(val: string): 'phone' | 'telegram' | 'email' | 'unknown' {
   const v = val.trim()
   if (!v) return 'unknown'
   if (v.startsWith('@')) return 'telegram'
-  if (v.includes('@')) return 'email'
+  if (v.includes('@') && !v.startsWith('@')) return 'email'
   if (/^[+78\d]/.test(v)) return 'phone'
+  // Если начинается с латинской буквы без @ — считаем телеграмом
+  if (/^[a-zA-Z]/.test(v)) return 'telegram'
   return 'unknown'
 }
 
@@ -26,9 +28,9 @@ function sanitizeTelegram(raw: string): string {
   const withoutAt = raw.startsWith('@') ? raw.slice(1) : raw
   // Только латинские буквы, цифры и подчёркивание
   const clean = withoutAt.replace(/[^a-zA-Z0-9_]/g, '')
-  // Первый символ должен быть буквой (не цифра и не _)
+  // Первый символ должен быть буквой
   const firstOk = clean.replace(/^[^a-zA-Z]+/, '')
-  // Максимум 31 символ после @ (32 включая @)
+  // Максимум 31 символ после @
   const trimmed = firstOk.slice(0, 31)
   return trimmed ? `@${trimmed}` : '@'
 }
@@ -85,13 +87,11 @@ export default function ContactInput({
     // для phone — onChange вызывается через imask accept
   }
 
-  // ── Блокируем кириллицу на keydown для Telegram ───────────────────
+  // ── Блокируем кириллицу на keydown ВСЕГДА ────────────────────────
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const currentVal = inputRef.current?.value ?? ''
-    if (currentVal.startsWith('@') || e.key === '@') {
-      if (e.key.length === 1 && /[\u0400-\u04FF]/.test(e.key)) {
-        e.preventDefault()
-      }
+    // Кириллица запрещена в любом контактном поле
+    if (e.key.length === 1 && /[\u0400-\u04FF]/.test(e.key)) {
+      e.preventDefault()
     }
   }
 
