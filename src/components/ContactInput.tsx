@@ -16,10 +16,21 @@ function detectType(val: string): 'phone' | 'telegram' | 'email' | 'unknown' {
   const v = val.trim()
   if (!v) return 'unknown'
   if (v.startsWith('@')) return 'telegram'
-  if (v.includes('@') && !v.startsWith('+') && !/^\d/.test(v.charAt(0)) === false) return 'email'
   if (v.includes('@')) return 'email'
   if (/^[+78\d]/.test(v)) return 'phone'
   return 'unknown'
+}
+
+// ── Санитайзер Telegram: только латиница + цифры + _ после @ ─────────
+function sanitizeTelegram(raw: string): string {
+  const withoutAt = raw.startsWith('@') ? raw.slice(1) : raw
+  // Только латинские буквы, цифры и подчёркивание
+  const clean = withoutAt.replace(/[^a-zA-Z0-9_]/g, '')
+  // Первый символ должен быть буквой (не цифра и не _)
+  const firstOk = clean.replace(/^[^a-zA-Z]+/, '')
+  // Максимум 31 символ после @ (32 включая @)
+  const trimmed = firstOk.slice(0, 31)
+  return trimmed ? `@${trimmed}` : '@'
 }
 
 const PHONE_MASK = '+{7} (000) 000-00-00'
@@ -27,9 +38,9 @@ const PHONE_MASK = '+{7} (000) 000-00-00'
 export default function ContactInput({
   value, onChange, style, className, required, id,
 }: ContactInputProps) {
-  const inputRef  = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const maskRef   = useRef<any>(null)
+  const maskRef  = useRef<any>(null)
   const [type, setType] = useState<'phone' | 'telegram' | 'email' | 'unknown'>('unknown')
 
   // ── Инициализируем / убираем маску в зависимости от типа ─────────
@@ -38,27 +49,14 @@ export default function ContactInput({
     if (!el) return
 
     if (type === 'phone') {
-      // Применяем маску телефона
-      maskRef.current = IMask(el, {
-        mask: PHONE_MASK,
-        lazy: false, // показывает шаблон сразу
-      })
-      maskRef.current.on('accept', () => {
-        onChange(maskRef.current!.value)
-      })
+      maskRef.current = IMask(el, { mask: PHONE_MASK, lazy: false })
+      maskRef.current.on('accept', () => onChange(maskRef.current!.value))
     } else {
-      // Убираем маску для Telegram / email / пустого
-      if (maskRef.current) {
-        maskRef.current.destroy()
-        maskRef.current = null
-      }
+      if (maskRef.current) { maskRef.current.destroy(); maskRef.current = null }
     }
 
     return () => {
-      if (maskRef.current) {
-        maskRef.current.destroy()
-        maskRef.current = null
-      }
+      if (maskRef.current) { maskRef.current.destroy(); maskRef.current = null }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type])
@@ -74,15 +72,27 @@ export default function ContactInput({
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
     const newType = detectType(raw)
+    if (newType !== type) setType(newType)
 
-    if (newType !== type) {
-      setType(newType)
+    if (newType === 'telegram') {
+      const sanitized = sanitizeTelegram(raw)
+      if (inputRef.current) inputRef.current.value = sanitized
+      onChange(sanitized)
+      return
     }
 
-    if (newType !== 'phone') {
-      onChange(raw)
-    }
+    if (newType !== 'phone') onChange(raw)
     // для phone — onChange вызывается через imask accept
+  }
+
+  // ── Блокируем кириллицу на keydown для Telegram ───────────────────
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const currentVal = inputRef.current?.value ?? ''
+    if (currentVal.startsWith('@') || e.key === '@') {
+      if (e.key.length === 1 && /[\u0400-\u04FF]/.test(e.key)) {
+        e.preventDefault()
+      }
+    }
   }
 
   // ── Placeholder ───────────────────────────────────────────────────
@@ -102,6 +112,7 @@ export default function ContactInput({
       required={required}
       defaultValue={value}
       onChange={handleInput}
+      onKeyDown={handleKeyDown}
       style={style}
       className={className}
       autoComplete="off"
