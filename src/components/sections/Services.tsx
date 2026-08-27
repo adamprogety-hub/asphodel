@@ -60,7 +60,7 @@ export default function Services() {
               transform: 'translate(-50%, -50%)'
             }} />
             <img 
-              src="/services_brand_image.png" 
+              src="/services_brand_image.webp" loading="lazy" decoding="async" 
               alt="VR Brand Visual" 
               style={{ 
                 width: '105%', 

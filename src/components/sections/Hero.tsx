@@ -115,8 +115,11 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, delay: 0.15 }}
-              src="/hero_img.png"
+              src="/hero_img.webp"
               alt="Иллюстрация Hero"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
               className="w-full h-auto object-contain max-h-[320px] lg:max-h-[680px] mx-auto lg:mx-0"
             />
           </div>
@@ -144,7 +147,7 @@ export default function Hero() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
             {/* Avatar stack */}
             <div style={{ display: 'flex', flexShrink: 0 }}>
-              {['/avatars/avatar1.jpg', '/avatars/avatar2.jpg', '/avatars/avatar3.jpg'].map((src, i) => (
+              {['/avatars/avatar1.webp', '/avatars/avatar2.webp', '/avatars/avatar3.webp'].map((src, i) => (
                 <img key={i} src={src} alt="Клиент" style={{
                   width: '34px', height: '34px', borderRadius: '50%',
                   objectFit: 'cover', border: '2px solid #fff',

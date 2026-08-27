@@ -157,7 +157,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
               />
 
               <img
-                src="/modal_team.png"
+                src="/modal_team.webp" loading="lazy" decoding="async"
                 alt="Команда V.R. Asphodel"
                 className="contact-modal-photo"
                 style={{

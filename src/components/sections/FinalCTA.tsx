@@ -136,7 +136,7 @@ export default function FinalCTA() {
           }}>
             {/* Смартфон слева — отзеркален по горизонтали */}
             <img
-              src="/smart.png"
+              src="/smart.webp"
               alt=""
               aria-hidden
               className="success-smart"
@@ -150,7 +150,7 @@ export default function FinalCTA() {
             />
             {/* Письмо справа */}
             <img
-              src="/letter.png"
+              src="/letter.webp"
               alt=""
               aria-hidden
               className="success-letter"
