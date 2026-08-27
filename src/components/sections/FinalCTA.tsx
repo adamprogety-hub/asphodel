@@ -53,7 +53,7 @@ export default function FinalCTA() {
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Контакт
           </span>
-          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(32px,4vw,58px)', color:'#111', letterSpacing:'-0.03em', lineHeight:1.08, marginBottom:'18px' }}>
+          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.1, marginBottom:'18px' }}>
             Расскажите о задаче
           </h2>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.75 }}>

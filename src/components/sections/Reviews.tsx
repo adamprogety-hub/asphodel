@@ -54,7 +54,7 @@ export default function Reviews() {
           <div>
             <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'18px' }}>Отзывы</span>
             <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.1 }}>
-              Что говорят клиенты.
+              Что говорят клиенты
             </h2>
           </div>
           {/* Arrows container - visible only on mobile when slider is active */}

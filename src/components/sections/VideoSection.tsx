@@ -21,8 +21,8 @@ export default function VideoSection() {
             <span style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'12px', color:'#111', letterSpacing:'0.04em' }}>Приветственное видео</span>
           </div>
 
-          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(26px,2.8vw,40px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'18px' }}>
-            Познакомьтесь с командой лично.
+          <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'18px' }}>
+            Познакомьтесь с командой лично
           </h2>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.78, marginBottom:'28px' }}>
             Мы записали короткое видео — рассказали кто мы, как работаем и почему это важно. Смотрите прямо здесь, без перехода.
