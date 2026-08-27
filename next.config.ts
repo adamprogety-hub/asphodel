@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'standalone', // Для Docker/Timeweb — создаёт автономный server.js
 };
 
 export default nextConfig;
