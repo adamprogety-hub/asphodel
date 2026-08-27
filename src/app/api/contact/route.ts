@@ -5,12 +5,19 @@ import nodemailer from 'nodemailer'
 const transporter = nodemailer.createTransport({
   host:   process.env.SMTP_HOST   || 'smtp.yandex.ru',
   port:   Number(process.env.SMTP_PORT || 465),
-  secure: true, // SSL на 465
+  secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 })
+
+// ── Маппинг источника → PDF-файл ──────────────────────────────────
+const downloadMap: Record<string, string> = {
+  'lead-ads':   '/downloads/checklist-ads.pdf',
+  'lead-site':  '/downloads/checklist-site.pdf',
+  'lead-brief': '/downloads/brief-template.pdf',
+}
 
 // ── POST /api/contact ──────────────────────────────────────────────
 export async function POST(req: NextRequest) {
@@ -71,7 +78,8 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({ from, to, subject, html })
 
-    return NextResponse.json({ ok: true })
+    const downloadUrl = downloadMap[source] || null
+    return NextResponse.json({ ok: true, downloadUrl })
   } catch (err) {
     console.error('[contact API] SMTP error:', err)
     return NextResponse.json({ ok: false, error: 'Ошибка отправки' }, { status: 500 })

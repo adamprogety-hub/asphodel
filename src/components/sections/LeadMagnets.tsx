@@ -73,6 +73,7 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
 
   const isDark  = m.bg === 'dark'
   const isGreen = m.bg === 'green'
@@ -118,8 +119,10 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
           source:  sourceMap[m.id] || 'lead-other',
         }),
       })
-      if (res.ok) {
+      const data = await res.json()
+      if (res.ok && data.ok) {
         setSent(true)
+        if (data.downloadUrl) setDownloadUrl(data.downloadUrl)
       } else {
         setError('Не удалось отправить. Напишите напрямую: @AGerasimov_Marketing')
       }
@@ -247,10 +250,29 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                     <path d="M4 11l5 5L18 6" stroke={isDark?'#000':'var(--green)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <p style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:textC, marginBottom:'10px' }}>Отправили!</p>
-                <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:sub, lineHeight:1.65 }}>
-                  Проверьте Telegram или email. Если что-то не пришло — напишите нам напрямую.
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'20px', color:textC, marginBottom:'10px' }}>Готово!</p>
+                <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:sub, lineHeight:1.65, marginBottom: downloadUrl ? '24px' : '0' }}>
+                  {downloadUrl ? 'Нажмите кнопку ниже — файл загрузится сразу.' : 'Проверьте Telegram или email. Если что-то не пришло — напишите нам напрямую.'}
                 </p>
+                {downloadUrl && (
+                  <a
+                    href={downloadUrl}
+                    download
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      background: isDark ? 'var(--green)' : '#111',
+                      color: isDark ? '#000' : '#fff',
+                      fontFamily: 'var(--ff-b)', fontWeight: 600, fontSize: '14px',
+                      padding: '12px 24px', borderRadius: 'var(--r-pill)',
+                      textDecoration: 'none', transition: 'opacity 0.2s',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Скачать {m.fileName.includes('brief') ? 'шаблон' : 'чек-лист'}
+                  </a>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
