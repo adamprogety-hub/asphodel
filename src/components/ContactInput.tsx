@@ -28,7 +28,8 @@ export default function ContactInput({
   value, onChange, style, className, required, id,
 }: ContactInputProps) {
   const inputRef  = useRef<HTMLInputElement>(null)
-  const maskRef   = useRef<IMask.InputMask<IMask.MaskedPatternOptions> | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const maskRef   = useRef<any>(null)
   const [type, setType] = useState<'phone' | 'telegram' | 'email' | 'unknown'>('unknown')
 
   // ── Инициализируем / убираем маску в зависимости от типа ─────────
