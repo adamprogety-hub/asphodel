@@ -52,7 +52,19 @@ export default function ContactInput({
 
     if (type === 'phone') {
       maskRef.current = IMask(el, { mask: PHONE_MASK, lazy: false })
-      maskRef.current.on('accept', () => onChange(maskRef.current!.value))
+      maskRef.current.on('accept', () => {
+        const unmasked = maskRef.current?.unmaskedValue ?? ''
+        if (!unmasked) {
+          // Пользователь стёр всё — сбрасываем маску и даём начать заново
+          maskRef.current?.destroy()
+          maskRef.current = null
+          if (inputRef.current) inputRef.current.value = ''
+          setType('unknown')
+          onChange('')
+        } else {
+          onChange(maskRef.current!.value)
+        }
+      })
     } else {
       if (maskRef.current) { maskRef.current.destroy(); maskRef.current = null }
     }
