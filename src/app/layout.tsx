@@ -87,6 +87,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
+      <head>
+        {/* Preload hero image — критично для LCP */}
+        <link rel="preload" as="image" href="/hero_img.webp" fetchPriority="high" />
+      </head>
       <body className="antialiased">
         <JsonLd />
         <Preloader />

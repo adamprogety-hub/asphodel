@@ -10,8 +10,8 @@ export default function Preloader() {
     // Disable body scroll when preloader is active
     document.body.style.overflow = 'hidden'
 
-    // We calculate progress based on a precise 1.8s timeline (duration = 1800ms)
-    const duration = 1800
+    // Fast preloader: 600ms animation for good LCP score
+    const duration = 600
     const startTime = Date.now()
     let bentoInterval: any = null
 
@@ -35,16 +35,14 @@ export default function Preloader() {
         clearInterval(interval)
         if (bentoInterval) clearInterval(bentoInterval)
         
-        // Stabilize for 500ms, then trigger exit transition
+        // Exit immediately, then unmount after transition (400ms)
         setTimeout(() => {
           setPhase(1)
           document.body.style.overflow = ''
-          
-          // Unmount after the transition completes (800ms)
           setTimeout(() => {
             setPhase(2)
-          }, 800)
-        }, 500)
+          }, 400)
+        }, 0)
       }
     }, 30)
 
