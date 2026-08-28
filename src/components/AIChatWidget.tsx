@@ -179,17 +179,20 @@ export default function AIChatWidget() {
               </motion.div>
             ) : (
               <motion.div
-                key="asya"
+                key="chat-icon"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.1 }}
                 style={{
                   position: 'absolute', inset: 0,
-                  backgroundImage: 'url(/asya-avatar.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center top',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff',
                 }}
-              />
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </motion.div>
             )}
           </AnimatePresence>
         </button>
