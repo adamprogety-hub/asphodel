@@ -28,6 +28,9 @@ export function track(
   payload?: Record<string, unknown>,
 ) {
   try {
+    // Не трекаем на localhost — только на продакшне
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') return
+
     const data = {
       user_id:    getUserId(),
       session_id: getSessionId(),
