@@ -63,6 +63,7 @@ export default function Portfolio() {
           {/* Arrows container - visible only on mobile when slider is active */}
           <div style={{ display: mounted && isMobile ? 'flex' : 'none', gap: '8px' }}>
             <motion.button 
+              aria-label="Предыдущий проект"
               whileHover="hover"
               whileTap="hover"
               onClick={prevSlide}
@@ -102,6 +103,7 @@ export default function Portfolio() {
               </div>
             </motion.button>
             <motion.button 
+              aria-label="Следующий проект"
               whileHover="hover"
               whileTap="hover"
               onClick={nextSlide}

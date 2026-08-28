@@ -60,6 +60,7 @@ export default function Reviews() {
           {/* Arrows container - visible only on mobile when slider is active */}
           <div style={{ display: mounted && isMobile ? 'flex' : 'none', gap: '8px' }}>
             <motion.button 
+              aria-label="Предыдущий отзыв"
               whileHover="hover"
               whileTap="hover"
               onClick={prevSlide}
@@ -99,6 +100,7 @@ export default function Reviews() {
               </div>
             </motion.button>
             <motion.button 
+              aria-label="Следующий отзыв"
               whileHover="hover"
               whileTap="hover"
               onClick={nextSlide}
