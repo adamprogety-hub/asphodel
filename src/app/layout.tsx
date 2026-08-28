@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Manrope, Inter } from 'next/font/google'
 import './globals.css'
 import Preloader from '@/components/Preloader'
 import ContactModalProvider from '@/components/ContactModal'
@@ -8,6 +9,20 @@ import GooeyFilter from '@/components/GooeyFilter'
 import CookieConsent from '@/components/CookieConsent'
 import PageTracker from '@/components/PageTracker'
 import JsonLd from '@/components/JsonLd'
+
+const manrope = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--ff-d',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500'],
+  variable: '--ff-b',
+  display: 'swap',
+})
 
 const BASE_URL = 'https://vr-asphodel.ru'
 
@@ -86,7 +101,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={`${manrope.variable} ${inter.variable}`}>
       <head>
         {/* Preload hero image — критично для LCP */}
         <link rel="preload" as="image" href="/hero_img.webp" fetchPriority="high" />
