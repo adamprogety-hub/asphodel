@@ -17,6 +17,8 @@ export default function LiquidButton({
   disabled,
 }: LiquidButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
+  // Cached rect — обновляем один раз при mouseenter, не на каждый mousemove
+  const cachedRect = useRef<DOMRect | null>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -29,9 +31,17 @@ export default function LiquidButton({
   const springX = useSpring(x, springConfig)
   const springY = useSpring(y, springConfig)
 
+  // Читаем геометрию один раз при входе мыши — не на каждый mousemove
+  const handleMouseEnter = () => {
+    if (buttonRef.current) {
+      cachedRect.current = buttonRef.current.getBoundingClientRect()
+    }
+    setIsHovered(true)
+  }
+
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!buttonRef.current) return
-    const rect = buttonRef.current.getBoundingClientRect()
+    const rect = cachedRect.current
+    if (!rect) return
     const mouseX = e.clientX - rect.left
     const mouseY = e.clientY - rect.top
     setMousePosition({ x: mouseX, y: mouseY })
@@ -63,7 +73,7 @@ export default function LiquidButton({
     <motion.button
       ref={buttonRef as any}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
