@@ -76,8 +76,8 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
   const [error, setError] = useState('')
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
 
-  const isDark  = m.bg === 'dark'
-  const isGreen = m.bg === 'green'
+  const isDark  = mag.bg === 'dark'
+  const isGreen = mag.bg === 'green'
   const bg      = isDark ? '#141414' : isGreen ? 'var(--green)' : '#fff'
   const textC   = isDark ? '#fff' : '#111'
   const sub     = isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.55)'
@@ -149,7 +149,7 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
         {/* Left: description */}
         <div style={{ padding:'48px 40px', borderRight:`1px solid ${brd}` }} className="magnet-left">
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color: isDark ? 'var(--green)' : isGreen ? '#000' : '#111', border:`1px solid ${brd}`, borderRadius:'var(--r-pill)', padding:'5px 16px', marginBottom:'22px', letterSpacing:'0.02em' }}>
-            {m.tag}
+            {mag.tag}
           </span>
           <h3 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(20px,2.2vw,30px)', color:textC, letterSpacing:'-0.02em', lineHeight:1.15, marginBottom:'16px' }}>
             {mag.title}
@@ -160,7 +160,7 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
 
           {/* Checklist items */}
           <ul style={{ listStyle:'none', padding:0, display:'flex', flexDirection:'column', gap:'10px' }}>
-            {m.items.map((item,i) => (
+            {mag.items.map((item,i) => (
               <li key={i} style={{ display:'flex', gap:'12px', alignItems:'flex-start' }}>
                 <span style={{ width:'18px', height:'18px', borderRadius:'50%', background: isDark ? 'rgba(208, 123, 255, 0.15)' : 'rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:'1px' }}>
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
@@ -179,7 +179,7 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
             {!sent ? (
               <m.form key="form" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
                 <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.5vw,20px)', color:textC, marginBottom:'8px', lineHeight:1.3 }}>
-                  Оставьте контакт — пришлём {m.fileName.includes('brief') ? 'шаблон' : 'чек-лист'} сразу:
+                  Оставьте контакт — пришлём {mag.fileName.includes('brief') ? 'шаблон' : 'чек-лист'} сразу:
                 </p>
                 <input
                   type="text" placeholder="Ваше имя" required
@@ -231,7 +231,7 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
                   transition:'opacity 0.2s',
                   display:'flex', alignItems:'center', gap:'8px', width:'fit-content', marginTop:'4px',
                 }} className="hover:opacity-85">
-                  {loading ? 'Отправляем...' : m.cta}
+                  {loading ? 'Отправляем...' : mag.cta}
                   {!loading && (
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -276,7 +276,7 @@ function MagnetBlock({ mag }: { mag: MagnetProps }) {
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 2v8m0 0l-3-3m3 3l3-3M2 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                    Скачать {m.fileName.includes('brief') ? 'шаблон' : 'чек-лист'}
+                    Скачать {mag.fileName.includes('brief') ? 'шаблон' : 'чек-лист'}
                   </a>
                 )}
               </m.div>
