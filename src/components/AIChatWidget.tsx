@@ -154,6 +154,7 @@ export default function AIChatWidget() {
             cursor: 'pointer', padding: 0, overflow: 'hidden',
             transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
             outline: 'none', background: '#10101A',
+            position: 'relative',
           }}
           className="hover:scale-105"
         >
@@ -165,7 +166,8 @@ export default function AIChatWidget() {
                 animate={{ opacity: 1, rotate: 0 }}
                 exit={{ opacity: 0, rotate: 45 }}
                 style={{
-                  width: '100%', height: '100%', background: '#10101A',
+                  position: 'absolute', inset: 0,
+                  background: '#10101A',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--green)',
                 }}
@@ -176,14 +178,17 @@ export default function AIChatWidget() {
                 </svg>
               </motion.div>
             ) : (
-              <motion.img
+              <motion.div
                 key="asya"
-                src="/asya-avatar.png"
-                alt="Ася"
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                style={{
+                  position: 'absolute', inset: 0,
+                  backgroundImage: 'url(/asya-avatar.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center top',
+                }}
               />
             )}
           </AnimatePresence>
