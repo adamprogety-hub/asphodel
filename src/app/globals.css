@@ -98,12 +98,12 @@ body {
 }
 
 .bento-sprite-sheet1 {
-  background-image: url('/icons_3d_sheet_1.jpg');
+  background-image: url('/icons_3d_sheet_1.webp');
   background-size: 300px 300px !important; /* Square canvas (3 cells of 100px) */
 }
 
 .bento-sprite-sheet2 {
-  background-image: url('/icons_3d_sheet_2.png');
+  background-image: url('/icons_3d_sheet_2.webp');
   background-size: 300px 300px !important; /* Square canvas (3 cells of 100px) */
 }
 

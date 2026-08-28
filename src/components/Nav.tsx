@@ -152,6 +152,9 @@ export default function Nav() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-hamburger"
+            aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu-drawer"
             style={{
               display: 'none',
               flexDirection: 'column',
