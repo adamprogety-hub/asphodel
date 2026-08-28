@@ -10,6 +10,9 @@ interface Props {
 /**
  * Обёртка вокруг секции — измеряет время пребывания пользователя
  * в зоне видимости через IntersectionObserver.
+ *
+ * Flush через visibilitychange + sendBeacon — надёжно работает
+ * даже при закрытии вкладки.
  */
 export default function SectionTracker({ id, children }: Props) {
   const ref       = useRef<HTMLDivElement>(null)
@@ -19,16 +22,36 @@ export default function SectionTracker({ id, children }: Props) {
     const el = ref.current
     if (!el || typeof IntersectionObserver === 'undefined') return
 
+    // ── Flush: отправляет накопленное время ──────────────────────────
+    const flush = (useBeacon = false) => {
+      if (enterTime.current === null) return
+      const seconds = Math.round((Date.now() - enterTime.current) / 1000)
+      enterTime.current = null
+      if (seconds < 2) return
+
+      if (useBeacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
+        // sendBeacon гарантированно отправляется даже при закрытии страницы
+        const data = JSON.stringify({
+          user_id:    localStorage.getItem('_uid') || 'anon',
+          session_id: sessionStorage.getItem('_sid') || '',
+          event:      'section_time',
+          page:       window.location.pathname,
+          referrer:   document.referrer || '',
+          payload:    { section: id, seconds },
+        })
+        navigator.sendBeacon('/api/track', new Blob([data], { type: 'application/json' }))
+      } else {
+        track('section_time', { section: id, seconds })
+      }
+    }
+
+    // ── IntersectionObserver ─────────────────────────────────────────
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           enterTime.current = Date.now()
         } else if (enterTime.current !== null) {
-          const seconds = Math.round((Date.now() - enterTime.current) / 1000)
-          enterTime.current = null
-          if (seconds >= 2) {
-            track('section_time', { section: id, seconds })
-          }
+          flush()
         }
       },
       { threshold: 0.3 },
@@ -36,13 +59,24 @@ export default function SectionTracker({ id, children }: Props) {
 
     observer.observe(el)
 
-    return () => {
-      // Финальный flush при размонтировании
-      if (enterTime.current !== null) {
-        const seconds = Math.round((Date.now() - enterTime.current) / 1000)
-        if (seconds >= 2) track('section_time', { section: id, seconds })
+    // ── visibilitychange: закрытие вкладки / переключение ────────────
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        flush(true) // sendBeacon — надёжнее fetch при unload
+      } else {
+        // Страница снова видима — перезапускаем таймер
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.7) {
+          enterTime.current = Date.now()
+        }
       }
+    }
+
+    document.addEventListener('visibilitychange', onVisibilityChange)
+
+    return () => {
+      flush() // финальный flush при размонтировании в SPA
       observer.disconnect()
+      document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [id])
 
