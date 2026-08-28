@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
@@ -57,7 +57,7 @@ export default function CookieConsent() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           variants={bannerVariants as any}
           initial="hidden"
           animate="visible"
@@ -146,7 +146,7 @@ export default function CookieConsent() {
               Принять
             </button>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

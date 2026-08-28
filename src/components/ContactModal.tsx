@@ -108,7 +108,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
             padding: '20px',
           }}>
             {/* ── Backdrop ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
               onClick={closeModal}
@@ -121,7 +121,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
             />
 
             {/* ── Outer wrapper: overflow VISIBLE so people escape the card ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.93, y: 28 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.93, y: 28 }}
@@ -216,7 +216,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
 
                 <AnimatePresence mode="wait">
                   {!sent ? (
-                    <motion.div
+                    <m.div
                       key="form"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                       exit={{ opacity: 0, x: -16 }}
@@ -334,9 +334,9 @@ export default function ContactModalProvider({ children }: { children: React.Rea
 
 
                       </form>
-                    </motion.div>
+                    </m.div>
                   ) : (
-                    <motion.div
+                    <m.div
                       key="success"
                       initial={{ opacity: 0, scale: 0.96 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -365,11 +365,11 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                           Ответим в течение рабочего дня.<br />Ждите — будет интересно.
                         </p>
                         </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         )}
       </AnimatePresence>

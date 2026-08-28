@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
 import LiquidButton from '@/components/LiquidButton'
 
@@ -87,19 +87,19 @@ export default function Calculator() {
       <div style={{ maxWidth:'1280px', margin:'0 auto', position: 'relative', zIndex: 2 }}>
 
         {/* Header */}
-        <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }} style={{ marginBottom:'40px' }}>
+        <m.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }} style={{ marginBottom:'40px' }}>
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'18px' }}>
             Тарифы и цены
           </span>
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(28px,3vw,44px)', color:'#fff', letterSpacing:'-0.025em', lineHeight:1.1 }}>
             Форматы работы
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* ── Pricing cards ── */}
         <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'10px', marginBottom:'16px' }} className="calculator-plans-grid">
           {plans.map((p, idx) => (
-            <motion.div key={idx}
+            <m.div key={idx}
               initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
               transition={{ duration:0.6, delay:idx*0.08 }}
               className={p.dark ? 'pricing-card pricing-card-featured' : 'pricing-card'}
@@ -154,12 +154,12 @@ export default function Calculator() {
               >
                 Обсудить →
               </button>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* ── Calculator ── */}
-        <motion.div
+        <m.div
           initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}
           className="calculator-card"
           style={{ borderRadius:'18px', padding:'40px', marginTop:'10px' }}
@@ -190,7 +190,7 @@ export default function Calculator() {
               {/* Step 2 — site type */}
               <AnimatePresence>
                 {sv.site && (
-                  <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} style={{overflow:'hidden'}}>
+                  <m.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} style={{overflow:'hidden'}}>
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:'10px' }}>Какой сайт?</p>
                     <div style={{ display:'flex', flexDirection:'column', gap:'6px', marginBottom:'16px' }}>
                       {([{v:'landing' as ST,l:'Лендинг (1 стр.)',p:'от 115 000 ₽'},{v:'multi' as ST,l:'Сайт (3–5 стр.)',p:'от 175 000 ₽'},{v:'large' as ST,l:'Сайт (5+ стр.)',p:'от 225 000 ₽'}]).map(({v,l,p})=>(
@@ -206,21 +206,21 @@ export default function Calculator() {
                         <button key={String(v)} onClick={()=>setTx(v)} style={{...calcBtn(tx===v), flex:1}}><Dot on={tx===v}/>{l}</button>
                       ))}
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
 
               {/* Step 3 — platforms */}
               <AnimatePresence>
                 {(sv.adsSetup||sv.adsManage) && (
-                  <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} style={{overflow:'hidden'}}>
+                  <m.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}} style={{overflow:'hidden'}}>
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:'10px' }}>Площадки?</p>
                     <div style={{ display:'flex', flexDirection:'column', gap:'6px' }}>
                       {([{v:'yandex' as PL,l:'Яндекс Директ'},{v:'vk' as PL,l:'VK Реклама'},{v:'telegram' as PL,l:'Telegram Ads'}]).map(({v,l})=>(
                         <button key={v} onClick={()=>togP(v)} style={calcBtn(pl.has(v))}><Check on={pl.has(v)}/>{l}</button>
                       ))}
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -229,7 +229,7 @@ export default function Calculator() {
             <div style={{ display:'flex', flexDirection:'column', justifyContent:'center' }}>
               <AnimatePresence mode="wait">
                 {min > 0 ? (
-                  <motion.div key="result" initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} exit={{opacity:0}} transition={{duration:0.4}}>
+                  <m.div key="result" initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} exit={{opacity:0}} transition={{duration:0.4}}>
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:600, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase', color:'var(--green)', marginBottom:'10px' }}>Ориентировочная стоимость</p>
                     <p style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(36px,4vw,56px)', color:'#fff', letterSpacing:'-0.03em', lineHeight:1, marginBottom:'20px' }}>
                       от {fmt(min)}
@@ -255,9 +255,9 @@ export default function Calculator() {
                       Обсудить и уточнить →
                     </LiquidButton>
 
-                  </motion.div>
+                  </m.div>
                 ) : (
-                  <motion.div 
+                  <m.div 
                     key="placeholder" 
                     initial={{opacity:0}} 
                     animate={{opacity:1}} 
@@ -302,12 +302,12 @@ export default function Calculator() {
                     }}>
                       Выберите что нужно слева —<br />увидите стоимость здесь.
                     </p>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
       </div>
     </section>

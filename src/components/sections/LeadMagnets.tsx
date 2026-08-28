@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { track } from '@/lib/track'
 import ContactInput from '@/components/ContactInput'
 
@@ -141,7 +141,7 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
 
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
       style={{ background:bg, borderRadius:'24px', overflow:'hidden' }}
     >
@@ -177,7 +177,7 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
         <div style={{ padding:'48px 40px', display:'flex', flexDirection:'column', justifyContent:'center' }} className="magnet-right">
           <AnimatePresence mode="wait">
             {!sent ? (
-              <motion.form key="form" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
+              <m.form key="form" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
                 <p style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.5vw,20px)', color:textC, marginBottom:'8px', lineHeight:1.3 }}>
                   Оставьте контакт — пришлём {m.fileName.includes('brief') ? 'шаблон' : 'чек-лист'} сразу:
                 </p>
@@ -248,9 +248,9 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                 </p>
 
 
-              </motion.form>
+              </m.form>
             ) : (
-              <motion.div key="success" initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} transition={{ duration:0.4 }} style={{ textAlign:'center', padding:'40px 20px' }}>
+              <m.div key="success" initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} transition={{ duration:0.4 }} style={{ textAlign:'center', padding:'40px 20px' }}>
                 <div style={{ width:'56px', height:'56px', borderRadius:'50%', background:isDark?'var(--green)':'#111', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 20px' }}>
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                     <path d="M4 11l5 5L18 6" stroke={isDark?'#000':'var(--green)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -279,12 +279,12 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                     Скачать {m.fileName.includes('brief') ? 'шаблон' : 'чек-лист'}
                   </a>
                 )}
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -294,7 +294,7 @@ export default function LeadMagnets() {
     <section id="lead-magnets" style={{ background:'var(--dark)', padding:'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth:'1280px', margin:'0 auto' }}>
         {/* Header */}
-        <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }} style={{ marginBottom:'40px' }}>
+        <m.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }} style={{ marginBottom:'40px' }}>
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'18px' }}>
             Полезные материалы
           </span>
@@ -302,7 +302,7 @@ export default function LeadMagnets() {
             Материалы, с которыми вы<br />
             <span style={{ color: 'var(--green)' }}>ВСЕ</span> поймете
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* 3 magnets stacked */}
         <div style={{ display:'flex', flexDirection:'column', gap:'12px' }}>

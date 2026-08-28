@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef } from 'react'
-import { motion, useSpring, useMotionValue } from 'framer-motion'
+import { m, useSpring, useMotionValue } from 'framer-motion'
 
 interface LiquidButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
@@ -70,7 +70,7 @@ export default function LiquidButton({
   const isGreen = variant === 'green'
 
   return (
-    <motion.button
+    <m.button
       ref={buttonRef as any}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -110,7 +110,7 @@ export default function LiquidButton({
         pointerEvents: 'none',
       }}>
         {/* Blob 1: Follows Cursor */}
-        <motion.div
+        <m.div
           style={{
             position: 'absolute',
             width: '90px',
@@ -134,7 +134,7 @@ export default function LiquidButton({
         />
 
         {/* Blob 2: Static / Floating Left */}
-        <motion.div
+        <m.div
           style={{
             position: 'absolute',
             width: '70px',
@@ -155,7 +155,7 @@ export default function LiquidButton({
         />
 
         {/* Blob 3: Static / Floating Right */}
-        <motion.div
+        <m.div
           style={{
             position: 'absolute',
             width: '80px',
@@ -189,6 +189,6 @@ export default function LiquidButton({
       }}>
         {children}
       </span>
-    </motion.button>
+    </m.button>
   )
 }

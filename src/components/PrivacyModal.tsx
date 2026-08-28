@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 export default function PrivacyModal() {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,7 +16,7 @@ export default function PrivacyModal() {
       {isOpen && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 60000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -25,7 +25,7 @@ export default function PrivacyModal() {
           />
 
           {/* Modal Content */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -100,7 +100,7 @@ export default function PrivacyModal() {
             >
               Понятно
             </button>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>

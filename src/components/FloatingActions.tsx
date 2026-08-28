@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { track } from '@/lib/track'
 
 export default function FloatingActions() {
@@ -58,7 +58,7 @@ export default function FloatingActions() {
           {/* ── Blur Overlay: covers content + AIChatWidget when messenger menu is open ── */}
           <AnimatePresence>
             {menuOpen && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export default function FloatingActions() {
             )}
           </AnimatePresence>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
@@ -115,7 +115,7 @@ export default function FloatingActions() {
               {/* Flyout Menu (slides to the left) */}
               <AnimatePresence>
                 {menuOpen && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 15 }}
@@ -169,7 +169,7 @@ export default function FloatingActions() {
                     >
                       MAX
                     </a>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
 
@@ -204,7 +204,7 @@ export default function FloatingActions() {
                 <polyline points="5 12 12 5 19 12"/>
               </svg>
             </button>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

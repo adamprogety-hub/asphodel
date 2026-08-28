@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const reviews = [
   { name:'Марина К.',   role:'Служба дезинфекции участков',  text:'Разработали промо-сайт и запустили рекламу точно к началу сезона. Поток звонков пошел сразу, причем клиенты целевые — с большими участками. Очень довольны подходом.', avatar: '/avatars/avatar2.webp' },
@@ -59,7 +59,7 @@ export default function Reviews() {
           </div>
           {/* Arrows container - visible only on mobile when slider is active */}
           <div style={{ display: mounted && isMobile ? 'flex' : 'none', gap: '8px' }}>
-            <motion.button 
+            <m.button 
               aria-label="Предыдущий отзыв"
               whileHover="hover"
               whileTap="hover"
@@ -68,7 +68,7 @@ export default function Reviews() {
               className="hover:border-black hover:text-black"
             >
               <div style={{ position: 'relative', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <motion.svg
+                <m.svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
                   variants={{
                     normal: { opacity: 1, scale: 1, rotate: 0 },
@@ -80,8 +80,8 @@ export default function Reviews() {
                   style={{ position: 'absolute' }}
                 >
                   <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </motion.svg>
-                <motion.div
+                </m.svg>
+                <m.div
                   variants={{
                     normal: { opacity: 0, scale: 0 },
                     hover: { opacity: 1, scale: 1 }
@@ -98,8 +98,8 @@ export default function Reviews() {
                   }}
                 />
               </div>
-            </motion.button>
-            <motion.button 
+            </m.button>
+            <m.button 
               aria-label="Следующий отзыв"
               whileHover="hover"
               whileTap="hover"
@@ -108,7 +108,7 @@ export default function Reviews() {
               className="hover:opacity-90"
             >
               <div style={{ position: 'relative', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <motion.svg
+                <m.svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
                   variants={{
                     normal: { opacity: 1, scale: 1, rotate: 0 },
@@ -120,8 +120,8 @@ export default function Reviews() {
                   style={{ position: 'absolute' }}
                 >
                   <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </motion.svg>
-                <motion.div
+                </m.svg>
+                <m.div
                   variants={{
                     normal: { opacity: 0, scale: 0 },
                     hover: { opacity: 1, scale: 1 }
@@ -138,7 +138,7 @@ export default function Reviews() {
                   }}
                 />
               </div>
-            </motion.button>
+            </m.button>
           </div>
         </div>
 
@@ -147,7 +147,7 @@ export default function Reviews() {
           /* Mobile Slider with Framer Motion */
           <div style={{ position: 'relative', minHeight: '260px', width: '100%', display: 'flex', alignItems: 'center' }}>
             <AnimatePresence initial={false} mode="wait">
-              <motion.div
+              <m.div
                 key={activeIdx}
                 variants={slideVariants}
                 initial="enter"
@@ -187,14 +187,14 @@ export default function Reviews() {
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.35)' }}>{reviews[activeIdx].role}</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         ) : (
           /* Desktop 3-column Grid */
           <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'12px' }} className="reviews-cards-grid">
             {reviews.map((r, idx) => (
-              <motion.div key={idx}
+              <m.div key={idx}
                 initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
                 transition={{ duration:0.6, delay:idx*0.1 }}
                 style={{ background:'#141414', borderRadius:'18px', padding:'28px' }}
@@ -214,7 +214,7 @@ export default function Reviews() {
                     <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.35)' }}>{r.role}</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         )}

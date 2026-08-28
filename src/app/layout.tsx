@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope, Inter } from 'next/font/google'
+import { LazyMotion, domAnimation } from 'framer-motion'
 import './globals.css'
 import Preloader from '@/components/Preloader'
 import ContactModalProvider from '@/components/ContactModal'
@@ -111,18 +112,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/hero_img.webp" fetchPriority="high" />
       </head>
       <body className="antialiased">
-        <JsonLd />
-        <Preloader />
-        <PageTracker />
-        <ContactModalProvider>
-          <div className="page-blur-wrapper">
-            {children}
-          </div>
-          <CookieConsent />
-          <PrivacyModal />
-          <AIChatWidget />
-          <GooeyFilter />
-        </ContactModalProvider>
+        <LazyMotion features={domAnimation} strict>
+          <JsonLd />
+          <Preloader />
+          <PageTracker />
+          <ContactModalProvider>
+            <div className="page-blur-wrapper">
+              {children}
+            </div>
+            <CookieConsent />
+            <PrivacyModal />
+            <AIChatWidget />
+            <GooeyFilter />
+          </ContactModalProvider>
+        </LazyMotion>
       </body>
     </html>
   )

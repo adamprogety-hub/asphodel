@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import LiquidButton from '@/components/LiquidButton'
 import ContactInput from '@/components/ContactInput'
 import { track } from '@/lib/track'
@@ -69,7 +69,7 @@ export default function FinalCTA() {
         </div>
 
         {!sent ? (
-          <motion.form
+          <m.form
             initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.1 }}
             onSubmit={handleSubmit}
 
@@ -132,7 +132,7 @@ export default function FinalCTA() {
               </p>
             )}
 
-          </motion.form>
+          </m.form>
         ) : (
           <div style={{
             background:'var(--dark)', borderRadius:'18px', padding:'48px',

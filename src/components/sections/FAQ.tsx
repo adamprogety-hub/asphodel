@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
 import LiquidButton from '@/components/LiquidButton'
@@ -31,7 +31,7 @@ export default function FAQ() {
       <ShimmeringGrid position="left" id="faq" />
 
       <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '360px 1fr', gap: '80px', position: 'relative', zIndex: 2 }} className="faq-grid">
-        <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
+        <m.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Вопросы
           </span>
@@ -48,7 +48,7 @@ export default function FAQ() {
           >
             Задать вопрос →
           </LiquidButton>
-        </motion.div>
+        </m.div>
 
 
         <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)' }}>
@@ -56,11 +56,11 @@ export default function FAQ() {
             <div key={i} style={{ borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
               <button onClick={()=>setOpen(open===i?null:i)} style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'22px 0', background:'none', border:'none', cursor:'pointer', textAlign:'left', gap:'20px' }}>
                 <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(15px,1.4vw,18px)', color:'#fff', lineHeight:1.3 }}>{f.q}</span>
-                <motion.span animate={{ rotate: open===i ? 45 : 0 }} transition={{ duration:0.2 }} style={{ fontFamily:'var(--ff-b)', fontWeight:300, fontSize:'24px', color:'var(--green)', flexShrink:0, lineHeight:1 }}>+</motion.span>
+                <m.span animate={{ rotate: open===i ? 45 : 0 }} transition={{ duration:0.2 }} style={{ fontFamily:'var(--ff-b)', fontWeight:300, fontSize:'24px', color:'var(--green)', flexShrink:0, lineHeight:1 }}>+</m.span>
               </button>
-              <motion.div initial={false} animate={{ height: open===i ? 'auto' : 0, opacity: open===i ? 1 : 0 }} transition={{ duration:0.28 }} style={{ overflow:'hidden' }}>
+              <m.div initial={false} animate={{ height: open===i ? 'auto' : 0, opacity: open===i ? 1 : 0 }} transition={{ duration:0.28 }} style={{ overflow:'hidden' }}>
                 <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'rgba(255,255,255,0.5)', lineHeight:1.75, paddingBottom:'22px', maxWidth:'540px' }}>{f.a}</p>
-              </motion.div>
+              </m.div>
             </div>
           ))}
         </div>

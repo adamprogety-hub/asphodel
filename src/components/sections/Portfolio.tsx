@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const cases = [
   { niche:'Шкафы автоматики',    tag:'Под ключ',  result:'Сайт-каталог продукции и запуск рекламы в Яндекс Директ для B2B-продаж.',    price:'Стоимость сайта: от 175 000 ₽', img: '/projects/project1.webp' },
@@ -62,7 +62,7 @@ export default function Portfolio() {
           </div>
           {/* Arrows container - visible only on mobile when slider is active */}
           <div style={{ display: mounted && isMobile ? 'flex' : 'none', gap: '8px' }}>
-            <motion.button 
+            <m.button 
               aria-label="Предыдущий проект"
               whileHover="hover"
               whileTap="hover"
@@ -71,7 +71,7 @@ export default function Portfolio() {
               className="hover:border-white hover:text-white"
             >
               <div style={{ position: 'relative', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <motion.svg
+                <m.svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
                   variants={{
                     normal: { opacity: 1, scale: 1, rotate: 0 },
@@ -83,8 +83,8 @@ export default function Portfolio() {
                   style={{ position: 'absolute' }}
                 >
                   <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </motion.svg>
-                <motion.div
+                </m.svg>
+                <m.div
                   variants={{
                     normal: { opacity: 0, scale: 0 },
                     hover: { opacity: 1, scale: 1 }
@@ -101,8 +101,8 @@ export default function Portfolio() {
                   }}
                 />
               </div>
-            </motion.button>
-            <motion.button 
+            </m.button>
+            <m.button 
               aria-label="Следующий проект"
               whileHover="hover"
               whileTap="hover"
@@ -111,7 +111,7 @@ export default function Portfolio() {
               className="hover:opacity-90"
             >
               <div style={{ position: 'relative', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <motion.svg
+                <m.svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
                   variants={{
                     normal: { opacity: 1, scale: 1, rotate: 0 },
@@ -123,8 +123,8 @@ export default function Portfolio() {
                   style={{ position: 'absolute' }}
                 >
                   <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </motion.svg>
-                <motion.div
+                </m.svg>
+                <m.div
                   variants={{
                     normal: { opacity: 0, scale: 0 },
                     hover: { opacity: 1, scale: 1 }
@@ -141,7 +141,7 @@ export default function Portfolio() {
                   }}
                 />
               </div>
-            </motion.button>
+            </m.button>
           </div>
         </div>
 
@@ -150,7 +150,7 @@ export default function Portfolio() {
           /* Mobile Slider with Framer Motion */
           <div style={{ position: 'relative', minHeight: '390px', width: '100%', display: 'flex', alignItems: 'center' }}>
             <AnimatePresence initial={false} mode="wait">
-              <motion.div
+              <m.div
                 key={activeIdx}
                 variants={slideVariants}
                 initial="enter"
@@ -192,14 +192,14 @@ export default function Portfolio() {
                     </svg>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         ) : (
           /* Desktop 4-column Grid */
           <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'10px' }} className="portfolio-cards-grid">
             {cases.map((c, idx) => (
-              <motion.div key={idx}
+              <m.div key={idx}
                 initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
                 transition={{ duration:0.6, delay:idx*0.07 }}
                 className="portfolio-card group"
@@ -223,7 +223,7 @@ export default function Portfolio() {
                     </svg>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         )}

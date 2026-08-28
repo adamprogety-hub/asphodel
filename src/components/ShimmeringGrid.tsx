@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 export default function ShimmeringGrid({ 
   position = 'right', 

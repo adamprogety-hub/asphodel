@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
 
 
@@ -178,7 +178,7 @@ export default function Nav() {
         {/* Mobile Drawer (Transparent background — blends with header) */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -225,7 +225,7 @@ export default function Nav() {
                   Задать вопрос
                 </button>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </header>
@@ -233,7 +233,7 @@ export default function Nav() {
       {/* Full screen backdrop blur & darken overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

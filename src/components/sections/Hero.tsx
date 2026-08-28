@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
@@ -193,7 +193,7 @@ export default function Hero() {
 
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
             <AnimatePresence mode="wait">
-              <motion.p
+              <m.p
                 key={slideIdx}
                 initial={{ opacity: 0, x: 8 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -202,14 +202,14 @@ export default function Hero() {
                 style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.72 }}
               >
                 {workSlides[slideIdx].text}
-              </motion.p>
+              </m.p>
             </AnimatePresence>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
             <p style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: 'rgba(255,255,255,0.25)' }}>V. R. Asphodel</p>
             <AnimatePresence mode="wait">
-              <motion.p
+              <m.p
                 key={slideIdx}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -218,7 +218,7 @@ export default function Hero() {
                 style={{ fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '11px', color: 'rgba(255,255,255,0.25)' }}
               >
                 {workSlides[slideIdx].category}
-              </motion.p>
+              </m.p>
             </AnimatePresence>
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use client'
 import { useRef, useState, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 // ─── Stories Data ──────────────────────────────────────────────────────────────
 const stories = [
@@ -15,7 +15,7 @@ const stories = [
 // ─── Video Modal ───────────────────────────────────────────────────────────────
 function VideoModal({ story, onClose }: { story: typeof stories[0]; onClose: () => void }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -29,7 +29,7 @@ function VideoModal({ story, onClose }: { story: typeof stories[0]; onClose: () 
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
-      <motion.div
+      <m.div
         initial={{ scale: 0.85, y: 30, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0.85, y: 30, opacity: 0 }}
@@ -86,15 +86,15 @@ function VideoModal({ story, onClose }: { story: typeof stories[0]; onClose: () 
             <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 
 // ─── Single Story Circle ───────────────────────────────────────────────────────
 function StoryCircle({ story, onClick }: { story: typeof stories[0]; onClick: () => void }) {
   return (
-    <motion.button
+    <m.button
       whileTap={{ scale: 0.93 }}
       onClick={onClick}
       style={{
@@ -139,7 +139,7 @@ function StoryCircle({ story, onClick }: { story: typeof stories[0]; onClick: ()
       }}>
         {story.label}
       </span>
-    </motion.button>
+    </m.button>
   )
 }
 
@@ -173,14 +173,14 @@ export default function Reels() {
           className="stories-track"
         >
           {stories.map((story, i) => (
-            <motion.div
+            <m.div
               key={story.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
               <StoryCircle story={story} onClick={() => setActive(story)} />
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
