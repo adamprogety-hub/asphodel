@@ -12,7 +12,7 @@ import JsonLd from '@/components/JsonLd'
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
-  weight: ['600', '700', '800'],
+  weight: ['700', '800'],   // убрали 600 — -1 woff2 файл
   variable: '--ff-d',
   display: 'swap',
   preload: true,
@@ -22,7 +22,9 @@ const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500'],
   variable: '--ff-b',
-  display: 'swap',
+  // 'optional': браузер не ждёт шрифт, рисует сразу с системным фоллбэком
+  // Inter похож на Arial/Helvetica — разница незаметна в теле тексте
+  display: 'optional',
   preload: false,
 })
 
