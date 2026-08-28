@@ -25,6 +25,10 @@ export default function Services() {
       <ShimmeringGrid position="left" id="services" />
 
       <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+        {/* Скрытый h2 для SEO — дизайн не нарушаем */}
+        <h2 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+          Разработка сайтов и настройка рекламы — наши услуги
+        </h2>
 
         {/* Bento grid — 3 col × 3 row, center = large brand cell */}
         <motion.div
@@ -61,7 +65,7 @@ export default function Services() {
             }} />
             <img 
               src="/services_brand_image.webp" loading="lazy" decoding="async" 
-              alt="VR Brand Visual" 
+              alt="Разработка сайтов и реклама под ключ — V.R. Asphodel" 
               style={{ 
                 width: '105%', 
                 height: 'auto', 
@@ -109,12 +113,12 @@ function Cell({ spriteClass, title, text }: { spriteClass: string; title: string
       overflow: 'hidden',
     }} className="services-card">
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'left' }} className="services-card-info">
-        <h4 style={{
+        <h3 style={{
           fontFamily: 'var(--ff-d)', fontWeight: 800, fontSize: 'clamp(14px, 1.2vw, 16px)',
           color: '#fff', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
           {title}
-        </h4>
+        </h3>
         <p style={{
           fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: 'clamp(12px, 1vw, 13px)',
           color: 'rgba(255, 255, 255, 0.45)', lineHeight: 1.5,
