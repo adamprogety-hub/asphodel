@@ -1,5 +1,5 @@
-'use client'
-import { useReveal } from '@/hooks/useReveal'
+// SERVER COMPONENT — нет 'use client', нет JS в браузере для этой секции
+import { Reveal } from '@/components/Reveal'
 
 // Dark stats bar — matching Creatix "2000+ | 10+ | 800+ | 150M+"
 const stats = [
@@ -10,12 +10,9 @@ const stats = [
 ]
 
 export default function Pains() {
-  const ref = useReveal<HTMLDivElement>()
   return (
     <section id="pains" style={{ background:'var(--dark)', padding:'32px 48px', position:'relative' }}>
-      <div ref={ref} data-rv="fade"
-        style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'0' }}
-      >
+      <Reveal type="fade" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'0' }}>
         {stats.map((s, idx) => (
           <div key={idx} style={{
             paddingLeft: idx === 0 ? 0 : '40px',
@@ -27,7 +24,7 @@ export default function Pains() {
             <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)' }}>{s.label}</p>
           </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   )
 }

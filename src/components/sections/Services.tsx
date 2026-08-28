@@ -1,5 +1,5 @@
-'use client'
-import { useReveal } from '@/hooks/useReveal'
+// SERVER COMPONENT — нет 'use client', нет JS в браузере для этой секции
+import { Reveal } from '@/components/Reveal'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 
 // Titan bottom grid section: dark bento-style grid of features
@@ -19,7 +19,6 @@ const tiles = [
 ]
 
 export default function Services() {
-  const gridRef = useReveal<HTMLDivElement>()
   return (
     <section id="services" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px', position: 'relative', overflow: 'hidden' }}>
       {/* Background decoration: alternating top-left grid */}
@@ -32,7 +31,7 @@ export default function Services() {
         </h2>
 
         {/* Bento grid — 3 col × 3 row, center = large brand cell */}
-        <div ref={gridRef} data-rv="up"
+        <Reveal type="up"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -97,7 +96,7 @@ export default function Services() {
           <Cell spriteClass="bento-sprite-sheet1 sprite-s1-calendar" title="5+ лет опыта" text="Делаем сайты, которым доверяют с первого экрана" />
           {/* Row 3, Col 3: wide with text */}
           <Cell spriteClass="bento-sprite-sheet2 sprite-s2-graph" title="100% прозрачность" text="Раз в неделю присылаем отчёт о заявках понятным языком" />
-        </div>
+        </Reveal>
       </div>
     </section>
   )
