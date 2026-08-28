@@ -1,3 +1,4 @@
+import dynamic         from 'next/dynamic'
 import Nav            from '@/components/Nav'
 import Hero           from '@/components/sections/Hero'
 import About          from '@/components/sections/About'
@@ -5,16 +6,18 @@ import VideoSection   from '@/components/sections/VideoSection'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import Services       from '@/components/sections/Services'
 import Responsibility from '@/components/sections/Responsibility'
-import LeadMagnets    from '@/components/sections/LeadMagnets'
-import Process        from '@/components/sections/Process'
-import Portfolio      from '@/components/sections/Portfolio'
-import Calculator     from '@/components/sections/Calculator'
-import Reviews        from '@/components/sections/Reviews'
-import FAQ            from '@/components/sections/FAQ'
-import FinalCTA       from '@/components/sections/FinalCTA'
-import Footer         from '@/components/sections/Footer'
-import FloatingActions from '@/components/FloatingActions'
 import SectionTracker from '@/components/SectionTracker'
+
+// Below-fold: lazy-loaded для code splitting — не попадают в initial bundle
+const LeadMagnets     = dynamic(() => import('@/components/sections/LeadMagnets'))
+const Process         = dynamic(() => import('@/components/sections/Process'))
+const Portfolio       = dynamic(() => import('@/components/sections/Portfolio'))
+const Calculator      = dynamic(() => import('@/components/sections/Calculator'))
+const Reviews         = dynamic(() => import('@/components/sections/Reviews'))
+const FAQ             = dynamic(() => import('@/components/sections/FAQ'))
+const FinalCTA        = dynamic(() => import('@/components/sections/FinalCTA'))
+const Footer          = dynamic(() => import('@/components/sections/Footer'))
+const FloatingActions = dynamic(() => import('@/components/FloatingActions'))
 // import Reels from '@/components/sections/Reels' // временно скрыто
 
 
