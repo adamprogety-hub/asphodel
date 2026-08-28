@@ -14,6 +14,7 @@ import FAQ            from '@/components/sections/FAQ'
 import FinalCTA       from '@/components/sections/FinalCTA'
 import Footer         from '@/components/sections/Footer'
 import FloatingActions from '@/components/FloatingActions'
+import SectionTracker from '@/components/SectionTracker'
 // import Reels from '@/components/sections/Reels' // временно скрыто
 
 
@@ -26,40 +27,40 @@ export default function HomePage() {
       <main>
         {/* ═══ PLAQUE 1: Hero ═══ */}
         <div style={{ borderRadius: `0 0 ${R} ${R}`, overflow: 'hidden' }}>
-          <Hero />
+          <SectionTracker id="hero"><Hero /></SectionTracker>
         </div>
 
         {/* ─── White sections ─── */}
-        <About />
-        <VideoSection />
+        <SectionTracker id="about"><About /></SectionTracker>
+        <SectionTracker id="video"><VideoSection /></SectionTracker>
 
         {/* ═══ PLAQUE 2: Services + Marquee + Lead Magnets ═══ */}
         <div style={{ borderRadius: R, overflow: 'hidden', margin: '12px 0' }}>
-          <Services />
-          <Responsibility />
-          <LeadMagnets />
+          <SectionTracker id="services"><Services /></SectionTracker>
+          <SectionTracker id="responsibility"><Responsibility /></SectionTracker>
+          <SectionTracker id="lead-magnets"><LeadMagnets /></SectionTracker>
         </div>
 
         {/* ─── White section ─── */}
-        <Process />
+        <SectionTracker id="process"><Process /></SectionTracker>
 
         {/* ═══ PLAQUE 3: Portfolio + Calculator (Seamless Unified Background) ═══ */}
         <div style={{ borderRadius: R, overflow: 'hidden', margin: '12px 0', position: 'relative', background: 'var(--dark)' }}>
           <ShimmeringGrid position="right" height="100%" id="portfolio" />
-          <Portfolio />
-          <Calculator />
+          <SectionTracker id="portfolio"><Portfolio /></SectionTracker>
+          <SectionTracker id="calculator"><Calculator /></SectionTracker>
         </div>
 
         {/* ─── White section ─── */}
-        <Reviews />
+        <SectionTracker id="reviews"><Reviews /></SectionTracker>
 
         {/* ═══ PLAQUE 4: FAQ ═══ */}
         <div style={{ borderRadius: R, overflow: 'hidden', margin: '12px 0' }}>
-          <FAQ />
+          <SectionTracker id="faq"><FAQ /></SectionTracker>
         </div>
 
         {/* ─── White section ─── */}
-        <FinalCTA />
+        <SectionTracker id="final-cta"><FinalCTA /></SectionTracker>
 
         {/* ═══ PLAQUE 5: Footer ═══ */}
         <div style={{ borderRadius: `${R} ${R} 0 0`, overflow: 'hidden' }}>
@@ -72,4 +73,3 @@ export default function HomePage() {
     </>
   )
 }
-
