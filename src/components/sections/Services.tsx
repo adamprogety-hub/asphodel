@@ -19,6 +19,7 @@ const tiles = [
 ]
 
 export default function Services() {
+  const gridRef = useReveal<HTMLDivElement>()
   return (
     <section id="services" style={{ background: 'var(--dark)', padding: 'clamp(60px,7vw,96px) 40px', position: 'relative', overflow: 'hidden' }}>
       {/* Background decoration: alternating top-left grid */}
@@ -31,7 +32,7 @@ export default function Services() {
         </h2>
 
         {/* Bento grid — 3 col × 3 row, center = large brand cell */}
-        <div ref={useReveal<HTMLDivElement>()} data-rv="up"
+        <div ref={gridRef} data-rv="up"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',

@@ -15,6 +15,13 @@ const steps = [
 export default function Process() {
   const { openModal } = useContactModal()
   const refLeft = useReveal<HTMLDivElement>()
+  // Pre-create refs for each step (hooks can't be called inside .map)
+  const stepRefs = [
+    useReveal<HTMLDivElement>(),
+    useReveal<HTMLDivElement>(),
+    useReveal<HTMLDivElement>(),
+    useReveal<HTMLDivElement>(),
+  ]
   return (
     <section id="process" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
@@ -47,8 +54,8 @@ export default function Process() {
           <div style={{ borderTop:'1px solid #eee' }}>
             {steps.map((s, idx) => (
               <div key={idx}
+                ref={stepRefs[idx]}
                 data-rv="right" data-rv-d={String(idx + 1)}
-                ref={useReveal<HTMLDivElement>()}
                 style={{ display:'flex', gap:'20px', padding:'28px 0', borderBottom:'1px solid #eee', alignItems:'flex-start' }}
               >
                 <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'36px', color:'#eee', lineHeight:1, flexShrink:0, width:'52px' }}>{s.n}</span>

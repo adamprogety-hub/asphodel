@@ -4,12 +4,14 @@ import { motion } from 'framer-motion'
 import LiquidButton from '@/components/LiquidButton'
 import ContactInput from '@/components/ContactInput'
 import { track } from '@/lib/track'
+import { useReveal } from '@/hooks/useReveal'
 
 export default function FinalCTA() {
   const [form, setForm] = useState({ name:'', contact:'', message:'', website:'' })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const revealRef = useReveal<HTMLDivElement>()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -54,7 +56,7 @@ export default function FinalCTA() {
   return (
     <section id="contact" style={{ background:'#fff', padding:'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth:'1280px', margin:'0 auto', display:'grid', gridTemplateColumns:'420px 1fr', gap:'80px', alignItems:'start' }} className="contact-grid">
-        <div ref={useReveal<HTMLDivElement>()} data-rv="up">
+        <div ref={revealRef} data-rv="up">
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Контакт
           </span>
