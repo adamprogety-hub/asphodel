@@ -1,7 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
 import LiquidButton from '@/components/LiquidButton'
+import { useReveal } from '@/hooks/useReveal'
 
 
 // Process — Titan "How we work" style: white bg, pill tag, list of steps with numbered circles
@@ -14,13 +14,14 @@ const steps = [
 
 export default function Process() {
   const { openModal } = useContactModal()
+  const refLeft = useReveal<HTMLDivElement>()
   return (
     <section id="process" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }} className="process-grid">
           {/* Left: sticky heading */}
-          <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }} style={{ position:'sticky', top:'80px' }} className="process-left-sticky">
+          <div ref={refLeft} data-rv="left" style={{ position:'sticky', top:'80px' }} className="process-left-sticky">
             <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
               Как работаем
             </span>
@@ -40,14 +41,14 @@ export default function Process() {
             >
               Начать →
             </LiquidButton>
-          </motion.div>
+          </div>
 
           {/* Right: steps */}
           <div style={{ borderTop:'1px solid #eee' }}>
             {steps.map((s, idx) => (
-              <motion.div key={idx}
-                initial={{ opacity:0, x:20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}
-                transition={{ duration:0.6, delay:idx*0.08 }}
+              <div key={idx}
+                data-rv="right" data-rv-d={String(idx + 1)}
+                ref={useReveal<HTMLDivElement>()}
                 style={{ display:'flex', gap:'20px', padding:'28px 0', borderBottom:'1px solid #eee', alignItems:'flex-start' }}
               >
                 <span style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'36px', color:'#eee', lineHeight:1, flexShrink:0, width:'52px' }}>{s.n}</span>
@@ -55,7 +56,7 @@ export default function Process() {
                   <h3 style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'clamp(16px,1.5vw,20px)', color:'#111', marginBottom:'8px', letterSpacing:'-0.01em' }}>{s.title}</h3>
                   <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.7 }}>{s.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

@@ -53,11 +53,7 @@ export default function Hero() {
           
           {/* Left Column: Title and CTAs */}
           <div className="relative z-10 w-full lg:max-w-none">
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
+            <div className="hero-animate-up">
               <h1 style={{
                 fontFamily: 'var(--ff-d)',
                 fontWeight: 800,
@@ -106,7 +102,7 @@ export default function Hero() {
                   О нас и кейсах
                 </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Column: Hero Image (Flow order on mobile, absolute float on desktop) */}
@@ -128,17 +124,15 @@ export default function Hero() {
       </div>
 
       {/* ── Three bottom cards — exact Titan layout ─────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+      <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr',
           gap: '10px',
           padding: '0 40px 36px',
+          animationDelay: '0.25s',
         }}
-        className="hero-bottom-grid"
+        className="hero-bottom-grid hero-animate-up"
       >
         {/* Card 1: WHITE — social proof */}
         <div className="hero-card-white" style={{
@@ -276,7 +270,7 @@ export default function Hero() {
             </span>
           </div>
         </button>
-      </motion.div>
+      </div>
     </section>
   )
 }

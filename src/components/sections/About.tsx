@@ -1,9 +1,9 @@
 'use client'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
 import LiquidButton from '@/components/LiquidButton'
+import { useReveal } from '@/hooks/useReveal'
 
 
 
@@ -22,12 +22,15 @@ const Tag = ({ label }: { label: string }) => (
 
 export default function About() {
   const { openModal } = useContactModal()
+  const refLeft = useReveal<HTMLDivElement>()
+  const refCard1 = useReveal<HTMLDivElement>()
+  const refCard2 = useReveal<HTMLDivElement>()
   return (
     <section id="about" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '380px 1fr', gap: '60px', alignItems: 'start' }} className="about-grid">
 
         {/* Left: tag + heading + text + button */}
-        <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
+        <div ref={refLeft} data-rv="up">
           <Tag label="О нас" />
           <h2 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(26px,2.8vw,40px)', color:'#111', letterSpacing:'-0.025em', lineHeight:1.12, marginBottom:'20px' }}>
             Помогаем предпринимателям получать заявки из интернета
@@ -48,14 +51,14 @@ export default function About() {
               <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </LiquidButton>
-        </motion.div>
+        </div>
 
 
         {/* Right: 2 dark zone cards — Titan "Power zone / Cardio zone" */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '12px', height: '420px' }} className="about-zones-grid">
           {/* Card 1 — Сайты */}
-          <motion.div
-            initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.1 }}
+          <div
+            ref={refCard1} data-rv="up" data-rv-d="1"
             style={{ background:'#141414', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
             className="about-zone-card"
           >
@@ -114,11 +117,11 @@ export default function About() {
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 2 — Реклама */}
-          <motion.div
-            initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.18 }}
+          <div
+            ref={refCard2} data-rv="up" data-rv-d="2"
             style={{ background:'#1E1E1E', borderRadius:'18px', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'20px' }}
             className="about-zone-card"
           >
@@ -176,7 +179,7 @@ export default function About() {
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

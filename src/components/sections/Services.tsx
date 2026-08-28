@@ -1,5 +1,5 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useReveal } from '@/hooks/useReveal'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 
 // Titan bottom grid section: dark bento-style grid of features
@@ -31,8 +31,7 @@ export default function Services() {
         </h2>
 
         {/* Bento grid — 3 col × 3 row, center = large brand cell */}
-        <motion.div
-          initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
+        <div ref={useReveal<HTMLDivElement>()} data-rv="up"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -97,7 +96,7 @@ export default function Services() {
           <Cell spriteClass="bento-sprite-sheet1 sprite-s1-calendar" title="5+ лет опыта" text="Делаем сайты, которым доверяют с первого экрана" />
           {/* Row 3, Col 3: wide with text */}
           <Cell spriteClass="bento-sprite-sheet2 sprite-s2-graph" title="100% прозрачность" text="Раз в неделю присылаем отчёт о заявках понятным языком" />
-        </motion.div>
+        </div>
       </div>
     </section>
   )

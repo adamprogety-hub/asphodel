@@ -727,3 +727,75 @@ body.modal-open .page-blur-wrapper {
     bottom: 0px !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   CSS Scroll-Reveal System — replaces Framer Motion whileInView
+   ══════════════════════════════════════════════════════════════════ */
+
+@keyframes revealFadeUp {
+  from { opacity: 0; transform: translateY(var(--rv-y, 20px)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes revealFadeLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes revealFadeRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes revealFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Hero: above-fold, анимации стартуют сразу */
+@keyframes heroSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-animate-up {
+  animation: heroSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-animate-fade {
+  animation: heroFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll-reveal: скрыты по умолчанию, анимируются по классу .rv */
+[data-rv] {
+  opacity: 0;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.8s;
+  animation-play-state: paused;
+}
+[data-rv].rv {
+  animation-play-state: running;
+}
+[data-rv="up"]    { animation-name: revealFadeUp; }
+[data-rv="left"]  { animation-name: revealFadeLeft; }
+[data-rv="right"] { animation-name: revealFadeRight; }
+[data-rv="fade"]  { animation-name: revealFadeIn; }
+
+/* Delays */
+[data-rv-d="1"] { animation-delay: 0.1s; }
+[data-rv-d="2"] { animation-delay: 0.18s; }
+[data-rv-d="3"] { animation-delay: 0.26s; }
+[data-rv-d="4"] { animation-delay: 0.34s; }
+[data-rv-d="5"] { animation-delay: 0.42s; }
+[data-rv-d="6"] { animation-delay: 0.50s; }
+[data-rv-d="7"] { animation-delay: 0.58s; }
+
+/* Уважаем prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-rv], .hero-animate-up, .hero-animate-fade {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

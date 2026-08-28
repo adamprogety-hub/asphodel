@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useReveal } from '@/hooks/useReveal'
 
 // Replace YOUTUBE_VIDEO_ID with your actual YouTube video or live stream ID
 // For live stream use the livestream URL format
@@ -8,13 +8,15 @@ const VIDEO_ID = 'dQw4w9WgXcQ' // placeholder — замените на ваш I
 
 export default function VideoSection() {
   const [playing, setPlaying] = useState(false)
+  const refLeft = useReveal<HTMLDivElement>()
+  const refRight = useReveal<HTMLDivElement>()
 
   return (
     <section id="video" style={{ background: '#fff', padding: 'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '340px 1fr', gap: '64px', alignItems: 'center' }} className="video-grid">
 
         {/* Left: text block */}
-        <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
+        <div ref={refLeft} data-rv="left">
           {/* LIVE badge */}
           <div style={{ display:'inline-flex', alignItems:'center', background:'#fff', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111' }}>Приветственное видео</span>
@@ -55,11 +57,11 @@ export default function VideoSection() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Right: video player */}
-        <motion.div
-          initial={{ opacity:0, x:20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
+        <div
+          ref={refRight} data-rv="right"
           style={{ borderRadius:'20px', overflow:'hidden', position:'relative', background:'var(--dark)', aspectRatio:'16/9' }}
         >
           {!playing ? (
@@ -102,7 +104,7 @@ export default function VideoSection() {
               style={{ display:'block', minHeight:'320px' }}
             />
           )}
-        </motion.div>
+        </div>
       </div>
 
       {/* Pulse animation */}

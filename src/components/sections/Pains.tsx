@@ -1,5 +1,5 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useReveal } from '@/hooks/useReveal'
 
 // Dark stats bar — matching Creatix "2000+ | 10+ | 800+ | 150M+"
 const stats = [
@@ -10,10 +10,10 @@ const stats = [
 ]
 
 export default function Pains() {
+  const ref = useReveal<HTMLDivElement>()
   return (
     <section id="pains" style={{ background:'var(--dark)', padding:'32px 48px', position:'relative' }}>
-      <motion.div
-        initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ duration:0.7 }}
+      <div ref={ref} data-rv="fade"
         style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'0' }}
       >
         {stats.map((s, idx) => (
@@ -27,7 +27,7 @@ export default function Pains() {
             <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.4)' }}>{s.label}</p>
           </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   )
 }

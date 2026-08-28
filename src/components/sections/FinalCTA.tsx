@@ -54,7 +54,7 @@ export default function FinalCTA() {
   return (
     <section id="contact" style={{ background:'#fff', padding:'clamp(60px,7vw,96px) 40px' }}>
       <div style={{ maxWidth:'1280px', margin:'0 auto', display:'grid', gridTemplateColumns:'420px 1fr', gap:'80px', alignItems:'start' }} className="contact-grid">
-        <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
+        <div ref={useReveal<HTMLDivElement>()} data-rv="up">
           <span style={{ display:'inline-flex', fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'#111', border:'1px solid #ddd', borderRadius:'var(--r-pill)', padding:'6px 18px', marginBottom:'24px' }}>
             Контакт
           </span>
@@ -64,11 +64,11 @@ export default function FinalCTA() {
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.75 }}>
             Напишите несколько слов о том, что хотите сделать. Ответим в течение рабочего дня и предложим варианты решения.
           </p>
-        </motion.div>
+        </div>
 
         {!sent ? (
           <motion.form
-            initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7, delay:0.1 }}
+            initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7, delay:0.1 }}
             onSubmit={handleSubmit}
 
             style={{ display:'flex', flexDirection:'column', gap:'10px' }}
