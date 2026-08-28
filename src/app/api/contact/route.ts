@@ -19,6 +19,23 @@ const downloadMap: Record<string, string> = {
   'lead-brief': '/downloads/brief-template.pdf',
 }
 
+// ── Отправка в Telegram ────────────────────────────────────────────
+async function sendTelegram(text: string) {
+  const token  = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+  if (!token || !chatId) return
+
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id:    chatId,
+      text,
+      parse_mode: 'HTML',
+    }),
+  })
+}
+
 // ── POST /api/contact ──────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
@@ -76,12 +93,36 @@ export async function POST(req: NextRequest) {
       </div>
     `
 
-    await transporter.sendMail({ from, to, subject, html })
+    // ── Telegram уведомление ─────────────────────────────────────
+    const emojiMap: Record<string, string> = {
+      'contact-form':  '📬',
+      'contact-modal': '💬',
+      'lead-ads':      '📋',
+      'lead-site':     '📋',
+      'lead-brief':    '📋',
+    }
+    const emoji = emojiMap[source] || '📬'
+
+    const tgText = [
+      `${emoji} <b>${subject}</b>`,
+      ``,
+      `👤 <b>Имя:</b> ${name}`,
+      `📱 <b>Контакт:</b> ${contact}`,
+      message ? `💬 <b>Сообщение:</b>\n${message}` : null,
+      ``,
+      `🔗 <b>Источник:</b> ${source || 'сайт'}`,
+    ].filter(Boolean).join('\n')
+
+    // Отправляем параллельно — email + Telegram
+    await Promise.allSettled([
+      transporter.sendMail({ from, to, subject, html }),
+      sendTelegram(tgText),
+    ])
 
     const downloadUrl = downloadMap[source] || null
     return NextResponse.json({ ok: true, downloadUrl })
   } catch (err) {
-    console.error('[contact API] SMTP error:', err)
+    console.error('[contact API] error:', err)
     return NextResponse.json({ ok: false, error: 'Ошибка отправки' }, { status: 500 })
   }
 }
