@@ -9,8 +9,8 @@ export default function Responsibility() {
     'Студии йоги', 'Логопеды', 'Свадебные фотографы',
   ]
 
-  // Render 3x for seamless scroll
-  const repeated = [...items, ...items, ...items]
+  // Render 2x for seamless scroll (saves DOM nodes vs 3x)
+  const repeated = [...items, ...items]
 
   return (
     <section style={{ background: '#111', padding: '20px 0', overflow: 'hidden' }}>

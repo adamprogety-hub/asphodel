@@ -111,10 +111,8 @@ export default function Hero() {
 
           {/* Right Column: Hero Image (Flow order on mobile, absolute float on desktop) */}
           <div className="w-full lg:w-[680px] lg:absolute lg:right-[-360px] lg:bottom-0 z-[1] select-none pointer-events-none hero-image-container">
-            <motion.img
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/hero_img.webp"
               alt="Разработка продающих сайтов под ключ — V.R. Asphodel"
               fetchPriority="high"

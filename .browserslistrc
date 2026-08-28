@@ -1,0 +1,6 @@
+# Target modern browsers only — eliminates legacy JS polyfills (~13 KiB)
+# Array.at, Array.flat, Object.fromEntries, Object.hasOwn are native in all targets below
+chrome >= 91
+safari >= 14
+firefox >= 89
+edge >= 91
