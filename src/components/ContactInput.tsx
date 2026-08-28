@@ -52,6 +52,17 @@ export default function ContactInput({
 
     if (type === 'phone') {
       maskRef.current = IMask(el, { mask: PHONE_MASK, lazy: false })
+
+      // После инициализации — ставим курсор на первый пустой символ (_)
+      // чтобы не прыгал в конец строки при переключении с unknown → phone
+      requestAnimationFrame(() => {
+        if (!el || !maskRef.current) return
+        const val = maskRef.current.value
+        const firstEmpty = val.indexOf('_')
+        const pos = firstEmpty !== -1 ? firstEmpty : val.length
+        el.setSelectionRange(pos, pos)
+      })
+
       maskRef.current.on('accept', () => {
         const unmasked = maskRef.current?.unmaskedValue ?? ''
         if (!unmasked) {
