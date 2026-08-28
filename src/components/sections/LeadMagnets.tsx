@@ -69,7 +69,7 @@ const magnets: MagnetProps[] = [
 ]
 
 // ── Single magnet block ──────────────────────────────────────────
-function MagnetBlock({ m }: { m: MagnetProps }) {
+function MagnetBlock({ mag }: { mag: MagnetProps }) {
   const [form, setForm] = useState({ name:'', email:'', website:'' })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -115,9 +115,9 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
         body: JSON.stringify({
           name:    form.name,
           contact: form.email,
-          message: `Запрос материала: ${m.title}`,
+          message: `Запрос материала: ${mag.title}`,
           website: form.website,
-          source:  sourceMap[m.id] || 'lead-other',
+          source:  sourceMap[mag.id] || 'lead-other',
         }),
       })
       const data = await res.json()
@@ -125,8 +125,8 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
         setSent(true)
         if (data.downloadUrl) setDownloadUrl(data.downloadUrl)
         track('lead_form_submit', {
-          magnet_id:    m.id,
-          magnet_title: m.title,
+          magnet_id:    mag.id,
+          magnet_title: mag.title,
           contact_type: form.email.startsWith('@') ? 'telegram' : form.email.startsWith('+') ? 'phone' : 'other',
         })
       } else {
@@ -152,10 +152,10 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
             {m.tag}
           </span>
           <h3 style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'clamp(20px,2.2vw,30px)', color:textC, letterSpacing:'-0.02em', lineHeight:1.15, marginBottom:'16px' }}>
-            {m.title}
+            {mag.title}
           </h3>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:sub, lineHeight:1.75, marginBottom:'28px' }}>
-            {m.desc}
+            {mag.desc}
           </p>
 
           {/* Checklist items */}
@@ -207,10 +207,10 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
                 {/* Privacy Policy Checkbox */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '4px 0 8px' }}>
                   <input
-                    type="checkbox" required defaultChecked id={`privacy-${m.id}`}
+                    type="checkbox" required defaultChecked id={`privacy-${mag.id}`}
                     style={{ marginTop: '3px', cursor: 'pointer', accentColor: 'var(--green)' }}
                   />
-                  <label htmlFor={`privacy-${m.id}`} style={{ fontFamily: 'var(--ff-b)', fontSize: '12px', color: sub, lineHeight: 1.45, cursor: 'pointer' }}>
+                  <label htmlFor={`privacy-${mag.id}`} style={{ fontFamily: 'var(--ff-b)', fontSize: '12px', color: sub, lineHeight: 1.45, cursor: 'pointer' }}>
                     Я согласен с{' '}
                     <span
                       onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-privacy-policy')) }}
@@ -306,7 +306,7 @@ export default function LeadMagnets() {
 
         {/* 3 magnets stacked */}
         <div style={{ display:'flex', flexDirection:'column', gap:'12px' }}>
-          {magnets.map(m => <MagnetBlock key={m.id} m={m} />)}
+          {magnets.map(item => <MagnetBlock key={item.id} mag={item} />)}
         </div>
       </div>
     </section>
