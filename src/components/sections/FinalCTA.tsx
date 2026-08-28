@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import LiquidButton from '@/components/LiquidButton'
 import ContactInput from '@/components/ContactInput'
+import { track } from '@/lib/track'
 
 export default function FinalCTA() {
   const [form, setForm] = useState({ name:'', contact:'', message:'', website:'' })
@@ -27,6 +28,10 @@ export default function FinalCTA() {
       })
       if (res.ok) {
         setSent(true)
+        track('contact_form_submit', {
+          contact_type: form.contact?.startsWith('@') ? 'telegram' : form.contact?.startsWith('+') ? 'phone' : 'other',
+          source: 'final-cta',
+        })
       } else {
         setError('Не удалось отправить. Напишите нам напрямую: @AGerasimov_Marketing')
       }

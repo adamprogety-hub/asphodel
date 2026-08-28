@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { track } from '@/lib/track'
 import ContactInput from '@/components/ContactInput'
 
 // ── Types ────────────────────────────────────────────────────────
@@ -123,6 +124,11 @@ function MagnetBlock({ m }: { m: MagnetProps }) {
       if (res.ok && data.ok) {
         setSent(true)
         if (data.downloadUrl) setDownloadUrl(data.downloadUrl)
+        track('lead_form_submit', {
+          magnet_id:    m.id,
+          magnet_title: m.title,
+          contact_type: form.email.startsWith('@') ? 'telegram' : form.email.startsWith('+') ? 'phone' : 'other',
+        })
       } else {
         setError('Не удалось отправить. Напишите напрямую: @AGerasimov_Marketing')
       }

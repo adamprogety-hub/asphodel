@@ -2,6 +2,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import ContactInput from '@/components/ContactInput'
+import { track } from '@/lib/track'
 
 // ── Types ──────────────────────────────────────────────────────────
 export interface ModalConfig {
@@ -69,6 +70,10 @@ export default function ContactModalProvider({ children }: { children: React.Rea
       })
       if (res.ok) {
         setSent(true)
+        track('contact_form_submit', {
+          contact_type: form.contact?.startsWith('@') ? 'telegram' : form.contact?.startsWith('+') ? 'phone' : 'other',
+          source: 'contact-modal',
+        })
       } else {
         setError('Не удалось отправить. Напишите напрямую: @AGerasimov_Marketing')
       }

@@ -1,4 +1,6 @@
+'use client'
 import Link from 'next/link'
+import { track } from '@/lib/track'
 
 export default function Footer() {
   return (
@@ -63,15 +65,16 @@ export default function Footer() {
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>© 2025 V. R. Asphodel</p>
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
             {[
-              { label: '+7 999 991-03-13', href: 'tel:+79999910313' },
-              { label: 'a.gerasimov.marketing@yandex.ru', href: 'mailto:a.gerasimov.marketing@yandex.ru' },
-              { label: 'Telegram', href: 'https://t.me/AGerasimov_Marketing' },
-            ].map(({ label, href }) => (
+              { label: '+7 999 991-03-13', href: 'tel:+79999910313',                      event: 'click_phone' },
+              { label: 'a.gerasimov.marketing@yandex.ru', href: 'mailto:a.gerasimov.marketing@yandex.ru', event: 'click_email' },
+              { label: 'Telegram', href: 'https://t.me/AGerasimov_Marketing',             event: 'click_telegram' },
+            ].map(({ label, href, event }) => (
               <a
                 key={href}
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                onClick={() => track(event, { location: 'footer' })}
                 style={{
                   fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '12px',
                   color: 'rgba(255,255,255,0.25)', textDecoration: 'none',
