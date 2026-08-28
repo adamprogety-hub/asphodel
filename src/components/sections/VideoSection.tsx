@@ -37,7 +37,8 @@ export default function VideoSection() {
                 <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#f0f0f0', overflow: 'hidden', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, border: '1px solid #e2e2e2' }}>
                   <img 
                     src={p.avatar} 
-                    alt={p.name} 
+                    alt={p.name}
+                    width={72} height={72}
                     style={{ 
                       width: '100%', 
                       height: '100%', 

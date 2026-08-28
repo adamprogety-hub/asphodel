@@ -85,7 +85,8 @@ export default function About() {
 
             {/* Photo background overlay */}
             <img 
-              src="/avatars/ilya.webp" loading="lazy" decoding="async" 
+              src="/avatars/ilya.webp" loading="lazy" decoding="async"
+              width={500} height={500}
               alt="Илья Хаймин" 
               style={{
                 position: 'absolute',
@@ -146,7 +147,8 @@ export default function About() {
 
             {/* Photo background overlay */}
             <img 
-              src="/avatars/alexander.webp" loading="lazy" decoding="async" 
+              src="/avatars/alexander.webp" loading="lazy" decoding="async"
+              width={500} height={500}
               alt="Александр Герасимов" 
               className="about-photo-alexander"
               style={{

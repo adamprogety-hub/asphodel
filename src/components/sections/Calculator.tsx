@@ -278,7 +278,8 @@ export default function Calculator() {
                       margin: '0 auto 16px'
                     }}>
                       <img 
-                        src="/calculator_illustration.webp" loading="lazy" decoding="async" 
+                        src="/calculator_illustration.webp" loading="lazy" decoding="async"
+                        width={400} height={400}
                         alt="Payment Illustration" 
                         style={{ 
                           width: '100%', 

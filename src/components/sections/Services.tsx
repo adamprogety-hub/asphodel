@@ -64,7 +64,8 @@ export default function Services() {
               transform: 'translate(-50%, -50%)'
             }} />
             <img 
-              src="/services_brand_image.webp" loading="lazy" decoding="async" 
+              src="/services_brand_image.webp" loading="lazy" decoding="async"
+              width={700} height={466}
               alt="Разработка сайтов и реклама под ключ — V.R. Asphodel" 
               style={{ 
                 width: '105%', 

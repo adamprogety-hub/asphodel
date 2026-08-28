@@ -148,12 +148,12 @@ export default function AIChatWidget() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="ИИ-Ассистент Ася"
           style={{
-            width: '54px', height: '54px', borderRadius: '50%',
-            border: '2px solid var(--green)',
-            boxShadow: '0 8px 30px rgba(124,58,237,0.35), 0 0 12px rgba(108,255,155,0.2)',
+            width: '46px', height: '46px', borderRadius: '50%',
+            border: '2px solid #a855f7',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             cursor: 'pointer', padding: 0, overflow: 'hidden',
             transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
-            outline: 'none', background: '#10101A',
+            outline: 'none', background: 'var(--dark)',
             position: 'relative',
           }}
           className="hover:scale-105"
@@ -186,7 +186,7 @@ export default function AIChatWidget() {
                 style={{
                   position: 'absolute', inset: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff',
+                  color: '#a855f7',
                 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -197,15 +197,7 @@ export default function AIChatWidget() {
           </AnimatePresence>
         </button>
 
-        {/* Pulse Glow Effect */}
-        {!isOpen && (
-          <div style={{
-            position: 'absolute', inset: 0, borderRadius: '50%',
-            boxShadow: '0 0 0 4px rgba(108,255,155,0.15)',
-            animation: 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-            pointerEvents: 'none', zIndex: -1
-          }} />
-        )}
+
       </div>
 
       {/* ── Chat Window Overlay ── */}

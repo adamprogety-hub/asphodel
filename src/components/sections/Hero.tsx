@@ -148,7 +148,7 @@ export default function Hero() {
             {/* Avatar stack */}
             <div style={{ display: 'flex', flexShrink: 0 }}>
               {['/avatars/avatar1.webp', '/avatars/avatar2.webp', '/avatars/avatar3.webp'].map((src, i) => (
-                <img key={i} src={src} alt={`Довольный клиент V.R. Asphodel ${i + 1}`} style={{
+                <img key={i} src={src} alt={`Довольный клиент V.R. Asphodel ${i + 1}`} width={68} height={68} style={{
                   width: '34px', height: '34px', borderRadius: '50%',
                   objectFit: 'cover', border: '2px solid #fff',
                   marginLeft: i === 0 ? 0 : '-10px',
