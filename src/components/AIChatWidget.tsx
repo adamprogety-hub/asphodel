@@ -146,41 +146,45 @@ export default function AIChatWidget() {
       <div style={{ position: 'fixed', bottom: '24px', left: '24px', zIndex: isOpen ? 1300 : 800 }} className="ai-chat-bubble">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="ИИ-Ассистент"
+          aria-label="ИИ-Ассистент Ася"
           style={{
             width: '54px', height: '54px', borderRadius: '50%',
-            background: '#10101A',
             border: '2px solid var(--green)',
             boxShadow: '0 8px 30px rgba(124,58,237,0.35), 0 0 12px rgba(108,255,155,0.2)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer', color: 'var(--green)',
+            cursor: 'pointer', padding: 0, overflow: 'hidden',
             transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
-            outline: 'none',
+            outline: 'none', background: '#10101A',
           }}
           className="hover:scale-105"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
-              <motion.svg
+              <motion.div
                 key="close"
                 initial={{ opacity: 0, rotate: -45 }}
                 animate={{ opacity: 1, rotate: 0 }}
                 exit={{ opacity: 0, rotate: 45 }}
-                width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+                style={{
+                  width: '100%', height: '100%', background: '#10101A',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: 'var(--green)',
+                }}
               >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </motion.svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </motion.div>
             ) : (
-              <motion.svg
-                key="chat"
+              <motion.img
+                key="asya"
+                src="/asya-avatar.png"
+                alt="Ася"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </motion.svg>
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             )}
           </AnimatePresence>
         </button>
@@ -254,17 +258,17 @@ export default function AIChatWidget() {
                   {/* AI Avatar */}
                   <div style={{
                     width: '36px', height: '36px', borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '0 0 10px rgba(124,58,237,0.3)',
+                    overflow: 'hidden', flexShrink: 0,
+                    border: '1.5px solid rgba(108,255,155,0.3)',
                     position: 'relative',
                   }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                      <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
-                      <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="#fff" />
-                    </svg>
+                    <img
+                      src="/asya-avatar.png"
+                      alt="Ася"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
                     <span style={{
-                      position: 'absolute', bottom: '-1px', right: '-1px',
+                      position: 'absolute', bottom: '0px', right: '0px',
                       width: '8px', height: '8px', borderRadius: '50%',
                       background: 'var(--green)', border: '2px solid #14141B',
                     }} />
@@ -321,13 +325,10 @@ export default function AIChatWidget() {
                     {m.sender === 'bot' && (
                       <div style={{
                         width: '28px', height: '28px', borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        flexShrink: 0, marginTop: '2px',
+                        overflow: 'hidden', flexShrink: 0, marginTop: '2px',
+                        border: '1px solid rgba(108,255,155,0.2)',
                       }}>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-                          <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
-                        </svg>
+                        <img src="/asya-avatar.png" alt="Ася" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     )}
 
@@ -351,13 +352,10 @@ export default function AIChatWidget() {
                   <div style={{ alignSelf: 'flex-start', display: 'flex', gap: '8px', maxWidth: '85%' }}>
                     <div style={{
                       width: '28px', height: '28px', borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #7C3AED 0%, #10B981 100%)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      flexShrink: 0,
+                      overflow: 'hidden', flexShrink: 0,
+                      border: '1px solid rgba(108,255,155,0.2)',
                     }}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-                        <path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-4a6 6 0 0 0-12 0v4a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-4A10 10 0 0 1 12 2z" />
-                      </svg>
+                      <img src="/asya-avatar.png" alt="Ася" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '2px 16px 16px 16px', display: 'flex', alignItems: 'center' }}>
                       <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
