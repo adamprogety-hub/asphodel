@@ -101,7 +101,15 @@ export default function Preloader() {
       <div className="preloader-bottom-bar">
         <div className="p-counter-value">{progress.toString().padStart(2, '0')}%</div>
         <div className="p-progress-track">
-          <div className="p-progress-bar" style={{ width: `${progress}%` }}></div>
+          <div
+            className="p-progress-bar"
+            style={{
+              transform: `scaleX(${progress / 100})`,
+              transformOrigin: 'left',
+              width: '100%',
+              transition: 'transform 0.03s linear',
+            }}
+          />
         </div>
       </div>
     </div>

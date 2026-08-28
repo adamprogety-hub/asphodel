@@ -7,7 +7,7 @@ export default function ShimmeringGrid({
   height = '650px', 
   id = 'default',
   width = 'min(750px, 100%)',
-  cols = 18,
+  cols = 12,
   rows,
   maskCircle = false,
   showRays = true
@@ -23,7 +23,7 @@ export default function ShimmeringGrid({
 }) {
   const finalCols = cols
   const isTall = height.includes('%') || parseInt(height) > 700
-  const finalRows = rows ?? (isTall ? 36 : 16)
+  const finalRows = rows ?? (isTall ? 16 : 12)
   const totalCells = finalCols * finalRows
 
   // State mapping cell index to its glowing status
@@ -56,7 +56,7 @@ export default function ShimmeringGrid({
         }
         return next
       })
-    }, 2800) // Shimmers slowly every 2.8s
+    }, 4000) // Shimmers slowly every 4s
 
     return () => clearInterval(interval)
   }, [totalCells, isTall])
@@ -115,24 +115,16 @@ export default function ShimmeringGrid({
                 boxSizing: 'border-box',
               }}
             >
-              {/* Shimmering glass block overlay */}
-              <motion.div
-                initial={false}
-                animate={{
-                  opacity: isGlowing ? 1 : 0,
-                  backgroundColor: isGlowing ? 'rgba(208, 123, 255, 0.04)' : 'rgba(255, 255, 255, 0)',
-                  boxShadow: isGlowing 
-                    ? 'inset 0 0 10px rgba(208, 123, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08)' 
-                    : 'none',
-                }}
-                transition={{ duration: 2.2, ease: 'easeInOut' }}
+              {/* Shimmering overlay — CSS transition instead of Framer Motion */}
+              <div
                 style={{
                   position: 'absolute',
                   inset: '1px',
                   borderRadius: '3px',
-                  backdropFilter: isGlowing ? 'blur(4px)' : 'none',
-                  WebkitBackdropFilter: isGlowing ? 'blur(4px)' : 'none',
                   pointerEvents: 'none',
+                  transition: 'opacity 2.2s ease-in-out, background-color 2.2s ease-in-out',
+                  opacity: isGlowing ? 1 : 0,
+                  backgroundColor: isGlowing ? 'rgba(208, 123, 255, 0.06)' : 'transparent',
                 }}
               />
             </div>
