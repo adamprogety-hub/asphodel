@@ -211,7 +211,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                 zIndex: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                overflowY: 'auto',
+                overflowY: 'hidden',
               }} className="contact-modal-form-panel">
 
                 <AnimatePresence mode="wait">

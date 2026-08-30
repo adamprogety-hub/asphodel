@@ -47,14 +47,32 @@ const fmt = (n: number) => n.toLocaleString('ru-RU') + ' ₽'
 
 function Check({ on }: { on: boolean }) {
   return (
-    <div style={{ width:'18px', height:'18px', borderRadius:'4px', flexShrink:0, border:`1.5px solid ${on?'var(--green)':'rgba(255,255,255,0.15)'}`, background:on?'var(--green)':'transparent', display:'flex', alignItems:'center', justifyContent:'center', transition:'all 0.2s' }}>
-      {on && <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5L8.5 2" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+    <div style={{
+      width: '18px', height: '18px', borderRadius: '4px', flexShrink: 0,
+      border: `1.5px solid ${on ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.15)'}`,
+      background: on ? 'rgba(0,0,0,0.18)' : 'transparent',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      transition: 'all 0.2s',
+    }}>
+      {on && <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+        <path d="M1.5 5l2.5 2.5L8.5 2" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>}
     </div>
   )
 }
 
 function Dot({ on }: { on: boolean }) {
-  return <div style={{ width:'16px', height:'16px', borderRadius:'50%', flexShrink:0, border:`1.5px solid ${on?'var(--green)':'rgba(255,255,255,0.15)'}`, background:on?'var(--green)':'transparent', transition:'all 0.2s' }} />
+  return (
+    <div style={{
+      width: '16px', height: '16px', borderRadius: '50%', flexShrink: 0,
+      border: `1.5px solid ${on ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.15)'}`,
+      background: 'transparent',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      transition: 'all 0.2s',
+    }}>
+      {on && <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(0,0,0,0.55)' }} />}
+    </div>
+  )
 }
 
 const calcBtn = (active: boolean): React.CSSProperties => ({
