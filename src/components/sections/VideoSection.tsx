@@ -3,9 +3,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useReveal } from '@/hooks/useReveal'
 
-// Replace YOUTUBE_VIDEO_ID with your actual YouTube video or live stream ID
-// For live stream use the livestream URL format
-const VIDEO_ID = 'dQw4w9WgXcQ' // placeholder — замените на ваш ID
 
 export default function VideoSection() {
   const [playing, setPlaying] = useState(false)
@@ -27,7 +24,7 @@ export default function VideoSection() {
             Познакомьтесь с командой лично
           </h2>
           <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'14px', color:'#777', lineHeight:1.78, marginBottom:'28px' }}>
-            Мы записали короткое видео — рассказали кто мы, как работаем и почему это важно. Смотрите прямо здесь, без перехода.
+          Когда вы готовы — мы познакомимся лично: расскажем про себя, покажем кейсы и объясним почему нам доверяют клиенты.
           </p>
 
           {/* Team */}
@@ -65,46 +62,37 @@ export default function VideoSection() {
           ref={refRight} data-rv="right"
           style={{ borderRadius:'20px', overflow:'hidden', position:'relative', background:'var(--dark)', aspectRatio:'16/9' }}
         >
-          {!playing ? (
-            /* Poster / play button */
-            <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', position:'relative', minHeight:'320px' }} onClick={()=>setPlaying(true)}>
-              {/* Dark bg with subtle pattern */}
-              <div style={{ position:'absolute', inset:0, display:'grid', gridTemplateColumns:'repeat(8,1fr)', gridTemplateRows:'repeat(5,1fr)', gap:'2px', padding:'20px', opacity:0.06 }}>
-                {Array.from({length:40}).map((_,i)=><div key={i} style={{ background:'#fff', borderRadius:'1px' }} />)}
-              </div>
+          {/* Заглушка — видео в процессе съёмки */}
+          <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', position:'relative', minHeight:'320px' }}>
+            {/* Фоновая сетка */}
+            <div style={{ position:'absolute', inset:0, display:'grid', gridTemplateColumns:'repeat(8,1fr)', gridTemplateRows:'repeat(5,1fr)', gap:'2px', padding:'20px', opacity:0.06 }}>
+              {Array.from({length:40}).map((_,i)=><div key={i} style={{ background:'#fff', borderRadius:'1px' }} />)}
+            </div>
 
-              {/* Team label */}
-              <div style={{ position:'absolute', top:'20px', left:'20px', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px' }}>
-                <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'rgba(255,255,255,0.6)' }}>V. R. Asphodel · Команда</span>
-              </div>
+            {/* Лейбл */}
+            <div style={{ position:'absolute', top:'20px', left:'20px', background:'rgba(255,255,255,0.08)', borderRadius:'var(--r-pill)', padding:'5px 14px' }}>
+              <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'rgba(255,255,255,0.6)' }}>V. R. Asphodel · Команда</span>
+            </div>
 
-              {/* Play button */}
-              <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:'16px' }}>
-                <div style={{ width:'72px', height:'72px', borderRadius:'50%', background:'var(--green)', display:'flex', alignItems:'center', justifyContent:'center', transition:'transform 0.2s' }} className="hover:scale-110">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 5.14v14l11-7-11-7z" fill="#000"/>
-                  </svg>
-                </div>
-                <p style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'13px', color:'rgba(255,255,255,0.55)' }}>Нажмите чтобы смотреть</p>
+            {/* Центральное сообщение */}
+            <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', textAlign:'center', padding:'0 24px' }}>
+              <div style={{ width:'64px', height:'64px', borderRadius:'50%', background:'rgba(255,255,255,0.08)', border:'1px solid rgba(255,255,255,0.12)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M10 8l6 4-6 4V8z" fill="rgba(255,255,255,0.4)" stroke="none"/>
+                </svg>
               </div>
-
-              {/* Duration badge */}
-              <div style={{ position:'absolute', bottom:'20px', right:'20px', background:'rgba(0,0,0,0.6)', borderRadius:'6px', padding:'4px 10px' }}>
-                <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'12px', color:'#fff' }}>~3 мин</span>
+              <div>
+                <p style={{ fontFamily:'var(--ff-d)', fontWeight:800, fontSize:'16px', color:'rgba(255,255,255,0.85)', marginBottom:'6px' }}>Видео скоро будет</p>
+                <p style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'13px', color:'rgba(255,255,255,0.35)', lineHeight:1.6 }}>Мы готовим приветственное видео для вас</p>
               </div>
             </div>
-          ) : (
-            /* Actual YouTube embed */
-            <iframe
-              width="100%" height="100%"
-              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
-              title="Приветственное видео команды V. R. Asphodel"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ display:'block', minHeight:'320px' }}
-            />
-          )}
+
+            {/* Бейдж снизу */}
+            <div style={{ position:'absolute', bottom:'20px', right:'20px', background:'rgba(0,0,0,0.5)', borderRadius:'6px', padding:'4px 10px' }}>
+              <span style={{ fontFamily:'var(--ff-b)', fontWeight:500, fontSize:'11px', color:'rgba(255,255,255,0.4)' }}>Скоро</span>
+            </div>
+          </div>
         </div>
       </div>
 
