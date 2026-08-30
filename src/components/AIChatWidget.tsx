@@ -28,6 +28,8 @@ export default function AIChatWidget() {
       text: 'Привет! Я Ася, виртуальный ассистент V.R. Asphodel. Помогу рассчитать цену сайта, подобрать тариф под ваш бюджет или сориентировать по рекламе. Задайте мне любой вопрос!',
     },
   ])
+  // История для OpenRouter (role: user/assistant)
+  const [chatHistory, setChatHistory] = useState<{ role: string; content: string }[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const feedRef = useRef<HTMLDivElement>(null)
@@ -67,7 +69,7 @@ export default function AIChatWidget() {
     }
 
     if (q.includes('сайт') || q.includes('лендинг') || q.includes('цена') || q.includes('стоимость') || q.includes('прайс') || q.includes('сколько стоит')) {
-      return 'У нас 3 основных пакета:\n1. Лендинг (одностраничник) — от 115 000 ₽. Идеально для старта.\n2. Многостраничный сайт — от 175 000 ₽.\n3. Рекламная связка (сайт + запуск рекламы) — от 95 000 ₽.\n\nТочную смету можем рассчитать на калькуляторе на сайте или обсудить на бесплатной консультации!'
+      return 'У нас несколько пакетов:\n1. Лендинг — от 115 000 ₽.\n2. Многостраничный сайт — от 175 000 ₽.\n3. Связка Лендинг + реклама — от 130 000 ₽.\n4. Связка Многостраничный + реклама — от 280 000 ₽.\n\nТочную смету рассчитаем на калькуляторе!'
     }
 
     if (q.includes('срок') || q.includes('время') || q.includes('долго')) {
@@ -96,7 +98,7 @@ export default function AIChatWidget() {
   // Чтобы не отправлять дублирующие уведомления — трекаем отправленные сообщения
   const notifiedRef = useRef(false)
 
-  const handleSend = (textToSend: string) => {
+  const handleSend = async (textToSend: string) => {
     if (!textToSend.trim()) return
 
     // User message
@@ -109,44 +111,51 @@ export default function AIChatWidget() {
     setInput('')
 
     // ── Детектор контактов ─────────────────────────────────────
-    // Если пользователь написал телефон, @ник или email — отправляем в API
     if (!notifiedRef.current) {
       const phoneRegex  = /(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}|\+\d{10,13}/
       const tgRegex     = /@[a-zA-Z0-9_]{3,}/
       const emailRegex  = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/
-
-      const phoneMatch = textToSend.match(phoneRegex)
-      const tgMatch    = textToSend.match(tgRegex)
-      const emailMatch = textToSend.match(emailRegex)
-      const contact    = phoneMatch?.[0] || tgMatch?.[0] || emailMatch?.[0]
-
+      const contact = textToSend.match(phoneRegex)?.[0] || textToSend.match(tgRegex)?.[0] || textToSend.match(emailRegex)?.[0]
       if (contact) {
-        notifiedRef.current = true // отправляем только один раз за сессию
+        notifiedRef.current = true
         fetch('/api/contact', {
-          method:  'POST',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name:    'Чат с Асей',
-            contact,
-            message: textToSend,
-            source:  'ai-chat',
-          }),
-        }).catch(() => {/* silent */})
+          body: JSON.stringify({ name: 'Чат с Асей', contact, message: textToSend, source: 'ai-chat' }),
+        }).catch(() => {})
       }
     }
     // ────────────────────────────────────────────────────────────
 
-    // Bot Typing simulated delay
+    // Обновляем историю для OpenRouter
+    const newHistory = [...chatHistory, { role: 'user', content: textToSend }]
+    setChatHistory(newHistory)
+
     setIsTyping(true)
-    setTimeout(() => {
-      setIsTyping(false)
-      const botMsg: Message = {
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newHistory }),
+      })
+      const data = await res.json()
+      const replyText = data.text || 'Не могу ответить прямо сейчас. Напишите нам напрямую: @AGerasimov_Marketing'
+
+      setChatHistory(prev => [...prev, { role: 'assistant', content: replyText }])
+      setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: getAIReply(textToSend),
-      }
-      setMessages(prev => [...prev, botMsg])
-    }, 1200)
+        text: replyText,
+      }])
+    } catch {
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        sender: 'bot',
+        text: 'Что-то пошло не так. Напишите нам напрямую: @AGerasimov_Marketing',
+      }])
+    } finally {
+      setIsTyping(false)
+    }
   }
 
   return (
