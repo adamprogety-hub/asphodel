@@ -13,9 +13,9 @@ import JsonLd from '@/components/JsonLd'
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
-  weight: ['700', '800'],   // убрали 600 — -1 woff2 файл
+  weight: ['800'],   // убрали 700 — теперь 2 woff2 вместо 4 (~62KB экономия)
   variable: '--ff-d',
-  display: 'swap',
+  display: 'optional',   // не блокирует рендер
   preload: true,
 })
 

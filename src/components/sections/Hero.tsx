@@ -115,6 +115,7 @@ export default function Hero() {
               loading="eager"
               width={680}
               height={680}
+              sizes="(max-width: 1024px) 100vw, 680px"
               className="w-full h-auto object-contain max-h-[320px] lg:max-h-[680px] mx-auto lg:mx-0"
             />
           </div>

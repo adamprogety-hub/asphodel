@@ -1,4 +1,5 @@
 // SERVER COMPONENT — нет 'use client', нет JS в браузере для этой секции
+import Image from 'next/image'
 import { Reveal } from '@/components/Reveal'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 
@@ -62,13 +63,14 @@ export default function Services() {
               left: '50%',
               transform: 'translate(-50%, -50%)'
             }} />
-            <img 
-              src="/services_brand_image.webp" loading="lazy" decoding="async"
+            <Image
+              src="/services_brand_image.webp" loading="lazy"
               width={700} height={466}
-              alt="Разработка сайтов и реклама под ключ — V.R. Asphodel" 
-              style={{ 
-                width: '105%', 
-                height: 'auto', 
+              sizes="(max-width:768px) 100vw, 400px"
+              alt="Разработка сайтов и реклама под ключ — V.R. Asphodel"
+              style={{
+                width: '105%',
+                height: 'auto',
                 maxHeight: '310px',
                 objectFit: 'contain',
                 transform: 'rotate(-15deg)',
@@ -76,7 +78,7 @@ export default function Services() {
                 pointerEvents: 'none',
                 position: 'relative',
                 zIndex: 1
-              }} 
+              }}
             />
             <div style={{ position:'absolute', bottom:'20px', left:'20px', zIndex: 2 }}>
               <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', textTransform:'uppercase' }}>
