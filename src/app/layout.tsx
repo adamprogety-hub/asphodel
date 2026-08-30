@@ -108,8 +108,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${manrope.variable} ${inter.variable}`}>
       <head>
-        {/* Preload hero image — критично для LCP */}
-        <link rel="preload" as="image" href="/hero_img.webp" fetchPriority="high" />
+        {/* Preload hero image через next/image URL — должен совпадать с реальным src */}
+        <link
+          rel="preload"
+          as="image"
+          href="/_next/image?url=%2Fhero_img.webp&w=828&q=75"
+          fetchPriority="high"
+        />
       </head>
       <body className="antialiased">
         <LazyMotion features={domAnimation} strict>
