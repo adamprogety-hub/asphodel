@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
@@ -107,13 +108,11 @@ export default function Hero() {
 
           {/* Right Column: Hero Image (Flow order on mobile, absolute float on desktop) */}
           <div className="w-full lg:w-[680px] lg:absolute lg:right-[-360px] lg:bottom-0 z-[1] select-none pointer-events-none hero-image-container">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/hero_img.webp"
               alt="Разработка продающих сайтов под ключ — V.R. Asphodel"
-              fetchPriority="high"
+              priority
               loading="eager"
-              decoding="sync"
               width={680}
               height={680}
               className="w-full h-auto object-contain max-h-[320px] lg:max-h-[680px] mx-auto lg:mx-0"
@@ -142,8 +141,8 @@ export default function Hero() {
             {/* Avatar stack */}
             <div style={{ display: 'flex', flexShrink: 0 }}>
               {['/avatars/avatar1.webp', '/avatars/avatar2.webp', '/avatars/avatar3.webp'].map((src, i) => (
-                <img key={i} src={src} alt={`Довольный клиент V.R. Asphodel ${i + 1}`} width={68} height={68} style={{
-                  width: '34px', height: '34px', borderRadius: '50%',
+                <Image key={i} src={src} alt={`Довольный клиент V.R. Asphodel ${i + 1}`} width={34} height={34} style={{
+                  borderRadius: '50%',
                   objectFit: 'cover', border: '2px solid #fff',
                   marginLeft: i === 0 ? 0 : '-10px',
                 }} />

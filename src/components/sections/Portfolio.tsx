@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import { useState, useEffect, useRef } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 
 const cases = [
@@ -177,7 +178,7 @@ export default function Portfolio() {
                 <div>
                   {/* Screenshot Container */}
                   <div style={{ width:'100%', height:'154px', borderRadius:'12px', overflow:'hidden', position:'relative', border:'1px solid rgba(255, 255, 255, 0.08)', marginBottom:'18px', background:'#1c1c1e' }}>
-                    <img src={cases[activeIdx].img} alt={cases[activeIdx].niche} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top' }} />
+                    <Image src={cases[activeIdx].img} alt={cases[activeIdx].niche} fill sizes="(max-width:768px) 100vw, 25vw" style={{ objectFit:'cover', objectPosition:'top' }} />
                   </div>
 
                   <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:'var(--green)', letterSpacing:'0.08em', textTransform:'uppercase' }}>{cases[activeIdx].tag}</span>
@@ -208,7 +209,7 @@ export default function Portfolio() {
                 <div>
                   {/* Screenshot Container */}
                   <div style={{ width:'100%', height:'154px', borderRadius:'12px', overflow:'hidden', position:'relative', border:'1px solid rgba(255, 255, 255, 0.08)', marginBottom:'18px', background:'#1c1c1e' }}>
-                    <img src={c.img} alt={c.niche} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top', transition:'transform 0.4s ease' }} className="group-hover:scale-[1.04]" />
+                    <Image src={c.img} alt={c.niche} fill sizes="25vw" style={{ objectFit:'cover', objectPosition:'top', transition:'transform 0.4s ease' }} className="group-hover:scale-[1.04]" />
                   </div>
 
                   <span style={{ fontFamily:'var(--ff-b)', fontWeight:400, fontSize:'11px', color:'var(--green)', letterSpacing:'0.08em', textTransform:'uppercase' }}>{c.tag}</span>

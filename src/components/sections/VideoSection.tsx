@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useReveal } from '@/hooks/useReveal'
 
@@ -37,17 +38,17 @@ export default function VideoSection() {
             ].map((p,i) => (
               <div key={i} style={{ display:'flex', alignItems:'center', gap:'12px' }}>
                 <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#f0f0f0', overflow: 'hidden', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, border: '1px solid #e2e2e2' }}>
-                  <img 
-                    src={p.avatar} 
+                  <Image
+                    src={p.avatar}
                     alt={p.name}
                     width={72} height={72}
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover', 
-                      transform: 'scale(2.0) translateY(3px)', 
-                      transformOrigin: 'top center' 
-                    }} 
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transform: 'scale(2.0) translateY(3px)',
+                      transformOrigin: 'top center'
+                    }}
                   />
                 </div>
                 <div>

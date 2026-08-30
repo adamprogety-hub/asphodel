@@ -1,20 +1,19 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { m } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
-export default function ShimmeringGrid({ 
-  position = 'right', 
-  height = '650px', 
+export default function ShimmeringGrid({
+  position = 'right',
+  height = '650px',
   id = 'default',
   width = 'min(750px, 100%)',
   cols = 12,
   rows,
   maskCircle = false,
   showRays = true
-}: { 
+}: {
   position?: 'left' | 'right'
-  height?: string
   id?: string
+  height?: string
   width?: string
   cols?: number
   rows?: number
@@ -26,40 +25,44 @@ export default function ShimmeringGrid({
   const finalRows = rows ?? (isTall ? 16 : 12)
   const totalCells = finalCols * finalRows
 
-  // State mapping cell index to its glowing status
   const [glowingCells, setGlowingCells] = useState<Record<number, boolean>>({})
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isVisible = useRef(false)
 
   useEffect(() => {
     // Initialize a few glowing cells at start
     const initial: Record<number, boolean> = {}
     const initialCount = isTall ? 16 : 8
     for (let i = 0; i < initialCount; i++) {
-      const idx = Math.floor(Math.random() * totalCells)
-      initial[idx] = true
+      initial[Math.floor(Math.random() * totalCells)] = true
     }
     setGlowingCells(initial)
 
+    // IntersectionObserver — pause when offscreen
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible.current = entry.isIntersecting },
+      { rootMargin: '200px' }
+    )
+    if (containerRef.current) observer.observe(containerRef.current)
+
     const interval = setInterval(() => {
+      if (!isVisible.current) return // skip update when offscreen
       setGlowingCells((prev) => {
         const next = { ...prev }
-        // Slowly remove some glows (60% chance to fade out)
         Object.keys(next).forEach((key) => {
-          if (Math.random() > 0.4) {
-            delete next[Number(key)]
-          }
+          if (Math.random() > 0.4) delete next[Number(key)]
         })
-        // Slowly introduce new glows (add new random cells)
         const countToAdd = (isTall ? 8 : 4) + Math.floor(Math.random() * 3)
         for (let i = 0; i < countToAdd; i++) {
-          const randomIdx = Math.floor(Math.random() * totalCells)
-          next[randomIdx] = true
+          next[Math.floor(Math.random() * totalCells)] = true
         }
         return next
       })
-    }, 4000) // Shimmers slowly every 4s
+    }, 4000)
 
-    return () => clearInterval(interval)
+    return () => { clearInterval(interval); observer.disconnect() }
   }, [totalCells, isTall])
+
 
   const isLeft = position === 'left'
   const gradId = `volumetric-ray-grad-${id}`
@@ -70,7 +73,8 @@ export default function ShimmeringGrid({
     : `radial-gradient(ellipse at top ${position}, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 75%)`
 
   return (
-    <div 
+    <div
+      ref={containerRef}
       style={{
         position: 'absolute',
         top: 0,

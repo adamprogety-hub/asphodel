@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import { useContactModal } from '@/components/ContactModal'
@@ -87,10 +88,10 @@ export default function About() {
             </div>
 
             {/* Photo background overlay */}
-            <img 
-              src="/avatars/ilya.webp" loading="lazy" decoding="async"
+            <Image
+              src="/avatars/ilya.webp" loading="lazy"
               width={500} height={500}
-              alt="Илья Хаймин" 
+              alt="Илья Хаймин"
               style={{
                 position: 'absolute',
                 right: '-10px',
@@ -149,10 +150,10 @@ export default function About() {
             </div>
 
             {/* Photo background overlay */}
-            <img 
-              src="/avatars/alexander.webp" loading="lazy" decoding="async"
+            <Image
+              src="/avatars/alexander.webp" loading="lazy"
               width={500} height={500}
-              alt="Александр Герасимов" 
+              alt="Александр Герасимов"
               className="about-photo-alexander"
               style={{
                 position: 'absolute',

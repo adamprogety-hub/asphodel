@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
@@ -277,18 +278,18 @@ export default function Calculator() {
                       mixBlendMode: 'screen',
                       margin: '0 auto 16px'
                     }}>
-                      <img 
-                        src="/calculator_illustration.webp" loading="lazy" decoding="async"
+                      <Image
+                        src="/calculator_illustration.webp" loading="lazy"
                         width={400} height={400}
-                        alt="Payment Illustration" 
-                        style={{ 
-                          width: '100%', 
-                          height: '100%', 
+                        alt="Payment Illustration"
+                        style={{
+                          width: '100%',
+                          height: '100%',
                           objectFit: 'contain',
                           mixBlendMode: 'screen',
                           filter: 'contrast(1.22) brightness(1.12)',
                           transform: 'translateX(12px)'
-                        }} 
+                        }}
                       />
                     </div>
                     <p style={{ 
