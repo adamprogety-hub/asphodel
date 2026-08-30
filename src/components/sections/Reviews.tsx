@@ -178,7 +178,7 @@ export default function Reviews() {
                 <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:'18px', display:'flex', alignItems:'center', gap:'12px' }}>
                   <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#2A2A2A', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, overflow:'hidden', border:'1px solid rgba(255,255,255,0.1)' }}>
                     {reviews[activeIdx].avatar ? (
-                      <Image src={reviews[activeIdx].avatar!} alt={reviews[activeIdx].name} fill style={{ objectFit:'cover' }} sizes="36px" />
+                       <Image src={reviews[activeIdx].avatar!} alt={reviews[activeIdx].name} width={36} height={36} style={{ objectFit:'cover', width:'36px', height:'36px' }} />
                     ) : (
                       <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'var(--green)' }}>{reviews[activeIdx].name[0]}</span>
                     )}
@@ -205,7 +205,7 @@ export default function Reviews() {
                 <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:'18px', display:'flex', alignItems:'center', gap:'12px' }}>
                   <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#2A2A2A', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, overflow:'hidden', border:'1px solid rgba(255,255,255,0.1)' }}>
                     {r.avatar ? (
-                      <Image src={r.avatar!} alt={r.name} fill style={{ objectFit:'cover' }} sizes="36px" />
+                       <Image src={r.avatar!} alt={r.name} width={36} height={36} style={{ objectFit:'cover', width:'36px', height:'36px' }} />
                     ) : (
                       <span style={{ fontFamily:'var(--ff-d)', fontWeight:700, fontSize:'14px', color:'var(--green)' }}>{r.name[0]}</span>
                     )}

@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { useContactModal } from '@/components/ContactModal'
@@ -262,9 +263,10 @@ export default function AIChatWidget() {
                     border: '1.5px solid rgba(108,255,155,0.3)',
                     position: 'relative',
                   }}>
-                    <img
+                    <Image
                       src="/asya-avatar.png"
                       alt="Ася"
+                      width={40} height={40}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                     <span style={{
@@ -328,7 +330,7 @@ export default function AIChatWidget() {
                         overflow: 'hidden', flexShrink: 0, marginTop: '2px',
                         border: '1px solid rgba(108,255,155,0.2)',
                       }}>
-                        <img src="/asya-avatar.png" alt="Ася" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <Image src="/asya-avatar.png" alt="Ася" width={40} height={40} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                       </div>
                     )}
 
@@ -355,7 +357,7 @@ export default function AIChatWidget() {
                       overflow: 'hidden', flexShrink: 0,
                       border: '1px solid rgba(108,255,155,0.2)',
                     }}>
-                      <img src="/asya-avatar.png" alt="Ася" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <Image src="/asya-avatar.png" alt="Ася" width={40} height={40} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '2px 16px 16px 16px', display: 'flex', alignItems: 'center' }}>
                       <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '10px' }}>
