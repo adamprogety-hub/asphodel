@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
       'lead-ads':       '📋 Запрос чек-листа "Реклама"',
       'lead-site':      '📋 Запрос чек-листа "Сайт"',
       'lead-brief':     '📋 Запрос шаблона брифа',
+      'ai-chat':        '🤖 Контакт в чате с Асей',
     }
     const subject = subjectMap[source] || '📬 Новая заявка с сайта'
 
@@ -100,6 +101,7 @@ export async function POST(req: NextRequest) {
       'lead-ads':      '📋',
       'lead-site':     '📋',
       'lead-brief':    '📋',
+      'ai-chat':       '🤖',
     }
     const emoji = emojiMap[source] || '📬'
 

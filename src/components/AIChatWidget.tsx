@@ -93,6 +93,9 @@ export default function AIChatWidget() {
     return 'Я пока только учусь и ещё не знаю точного ответа на этот вопрос (моя бета-версия сейчас в активной разработке 🛠️).\n\nНапишите напрямую в Telegram @AGerasimov_Marketing — Александр ответит на любой вопрос.'
   }
 
+  // Чтобы не отправлять дублирующие уведомления — трекаем отправленные сообщения
+  const notifiedRef = useRef(false)
+
   const handleSend = (textToSend: string) => {
     if (!textToSend.trim()) return
 
@@ -104,6 +107,34 @@ export default function AIChatWidget() {
     }
     setMessages(prev => [...prev, userMsg])
     setInput('')
+
+    // ── Детектор контактов ─────────────────────────────────────
+    // Если пользователь написал телефон, @ник или email — отправляем в API
+    if (!notifiedRef.current) {
+      const phoneRegex  = /(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}|\+\d{10,13}/
+      const tgRegex     = /@[a-zA-Z0-9_]{3,}/
+      const emailRegex  = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/
+
+      const phoneMatch = textToSend.match(phoneRegex)
+      const tgMatch    = textToSend.match(tgRegex)
+      const emailMatch = textToSend.match(emailRegex)
+      const contact    = phoneMatch?.[0] || tgMatch?.[0] || emailMatch?.[0]
+
+      if (contact) {
+        notifiedRef.current = true // отправляем только один раз за сессию
+        fetch('/api/contact', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:    'Чат с Асей',
+            contact,
+            message: textToSend,
+            source:  'ai-chat',
+          }),
+        }).catch(() => {/* silent */})
+      }
+    }
+    // ────────────────────────────────────────────────────────────
 
     // Bot Typing simulated delay
     setIsTyping(true)
