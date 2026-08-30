@@ -42,7 +42,7 @@ const plans = [
 type SK = 'site' | 'adsSetup' | 'adsManage' | 'audit'
 type ST = 'landing' | 'multi' | 'large'
 type PL = 'yandex' | 'vk' | 'telegram'
-const P = { site:{ landing:65000, multi:175000, large:225000 }, texts:25000, setup:{ base:62500, extra:22000 }, manage:35000, audit:20000 }
+const P = { site:{ landing:115000, multi:175000, large:225000 }, texts:25000, setup:{ base:62500, extra:22000 }, manage:35000, audit:20000 }
 const fmt = (n: number) => n.toLocaleString('ru-RU') + ' ₽'
 
 function Check({ on }: { on: boolean }) {

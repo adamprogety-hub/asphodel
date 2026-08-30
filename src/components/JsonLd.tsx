@@ -12,7 +12,7 @@ const localBusiness = {
   url: BASE_URL,
   telephone: '+79999910313',
   email: 'a.gerasimov.marketing@yandex.ru',
-  priceRange: 'от 65 000 ₽',
+  priceRange: 'от 115 000 ₽',
   currenciesAccepted: 'RUB',
   paymentAccepted: 'Перевод, Расчётный счёт',
   address: {
@@ -39,7 +39,7 @@ const localBusiness = {
           name: 'Разработка лендинга',
           description: 'Создание продающего одностраничного сайта под ключ',
         },
-        price: '65000',
+        price: '115000',
         priceCurrency: 'RUB',
       },
       {
@@ -83,7 +83,7 @@ const faqPage = {
       name: 'Сколько стоит сайт?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Лендинг — от 65 000 ₽, мультистраничный — от 175 000 ₽. Точную стоимость обсуждаем на созвоне — она зависит от объёма и задачи.',
+        text: 'Лендинг — от 115 000 ₽, мультистраничный — от 175 000 ₽. Точную стоимость обсуждаем на созвоне — она зависит от объёма и задачи.',
       },
     },
     {
