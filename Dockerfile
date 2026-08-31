@@ -24,16 +24,17 @@ ENV HOSTNAME=0.0.0.0
 RUN addgroup --system --gid 1001 nodejs && \
     adduser  --system --uid 1001 nextjs
 
-# Копируем собранное приложение (standalone output)
+# Копируем всё приложение (стандартный режим — не standalone)
 COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Создаём папку кэша изображений с правильными правами
+# Создаём кэш-директорию с правами записи
 RUN mkdir -p /app/.next/cache/images && \
     chown -R nextjs:nodejs /app/.next/cache
 
 USER nextjs
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
