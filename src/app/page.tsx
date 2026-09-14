@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import Nav            from '@/components/Nav'
 import Hero           from '@/components/sections/Hero'
 import About          from '@/components/sections/About'
+import StoriesBar     from '@/components/sections/StoriesBar'
 import ShimmeringGrid from '@/components/ShimmeringGrid'
 import Services       from '@/components/sections/Services'
 import Responsibility from '@/components/sections/Responsibility'
@@ -32,6 +33,9 @@ export default function HomePage() {
         <div style={{ borderRadius: `0 0 ${R} ${R}`, overflow: 'hidden' }}>
           <SectionTracker id="hero"><Hero /></SectionTracker>
         </div>
+
+        {/* ─── Stories bar ─── */}
+        <StoriesBar />
 
         {/* ─── White sections ─── */}
         <SectionTracker id="about"><About /></SectionTracker>

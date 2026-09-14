@@ -89,10 +89,10 @@ export default function ContactModalProvider({ children }: { children: React.Rea
 
   const inpStyle: React.CSSProperties = {
     width: '100%', boxSizing: 'border-box',
-    fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '14px',
+    fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13.5px',
     color: '#0f0f0f', background: 'rgba(0,0,0,0.05)',
     border: '1px solid rgba(0,0,0,0.1)',
-    padding: '13px 16px', borderRadius: '10px',
+    padding: '9px 14px', borderRadius: '10px',
     outline: 'none', transition: 'border-color 0.2s',
   }
 
@@ -128,8 +128,8 @@ export default function ContactModalProvider({ children }: { children: React.Rea
               transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 position: 'relative', zIndex: 1,
-                width: '100%', maxWidth: '900px',
-                height: '560px',
+                width: '100%', maxWidth: '880px',
+                height: '525px',
                 overflow: 'visible',
               }}
               className="contact-modal-outer"
@@ -149,10 +149,10 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                 className="contact-photo-glow"
                 style={{
                   position: 'absolute',
-                  left: '-80px',
+                  left: '-30px',
                   bottom: '10px',
-                  width: '380px',
-                  height: '380px',
+                  width: '340px',
+                  height: '340px',
                   borderRadius: '50%',
                   background: 'radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)',
                   filter: 'blur(50px)',
@@ -167,9 +167,9 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                 className="contact-modal-photo"
                 style={{
                   position: 'absolute',
-                  left: '-75px',         /* shifted left to give text breathing room */
-                  bottom: '15px',        /* feet inside the modal border */
-                  height: '106%',        /* slightly reduced scale */
+                  left: '-25px',        /* natural, balanced placement inside left half */
+                  bottom: '12px',
+                  height: '101%',        /* proportional scale without overflowing right */
                   width: 'auto',
                   zIndex: 5,
                   pointerEvents: 'none',
@@ -184,7 +184,7 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                 onClick={closeModal}
                 aria-label="Закрыть"
                 style={{
-                  position: 'absolute', top: '22px', right: '22px', zIndex: 20,
+                  position: 'absolute', top: '20px', right: '20px', zIndex: 20,
                   background: 'none',
                   border: 'none',
                   width: '32px', height: '32px',
@@ -196,22 +196,23 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                 }}
                 className="hover:text-black hover:scale-110"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               </button>
 
-              {/* ── LAYER 5: Form panel (right side, above photo z-index) ── */}
+              {/* ── LAYER 5: Form panel (right side, comfortably clear of team photo) ── */}
               <div style={{
                 position: 'absolute',
                 top: 0, right: 0, bottom: 0,
-                width: '55%',
-                padding: '48px 44px 40px',
+                width: '48%',
+                padding: '28px 36px 22px 14px',
                 zIndex: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                overflowY: 'hidden',
+                overflowY: 'auto',
+                scrollbarWidth: 'none',
               }} className="contact-modal-form-panel">
 
                 <AnimatePresence mode="wait">
@@ -224,27 +225,27 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                       style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
                     >
                       {/* Header */}
-                      <div style={{ marginBottom: '24px' }}>
+                      <div style={{ marginBottom: '10px' }}>
                         <h2 style={{
                           fontFamily: 'var(--ff-d)', fontWeight: 800,
-                          fontSize: 'clamp(22px, 2.2vw, 28px)',
+                          fontSize: 'clamp(18px, 1.8vw, 22px)',
                           color: '#0f0f0f',
-                          letterSpacing: '-0.025em', lineHeight: 1.15,
-                          marginBottom: '8px',
+                          letterSpacing: '-0.025em', lineHeight: 1.16,
+                          marginBottom: '4px',
                         }}>
                           {config.title}
                         </h2>
                         <p style={{
-                          fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '14px',
-                          color: '#555', lineHeight: 1.7,
+                          fontFamily: 'var(--ff-b)', fontWeight: 400, fontSize: '13px',
+                          color: '#555', lineHeight: 1.45,
                         }}>
                           {config.description}
                         </p>
                       </div>
 
-                      <div style={{ height: '1px', background: 'rgba(0,0,0,0.08)', marginBottom: '20px' }} />
+                      <div style={{ height: '1px', background: 'rgba(0,0,0,0.08)', marginBottom: '10px' }} />
 
-                      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
+                      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '7px', flex: 1 }}>
                         <input
                           type="text" placeholder="Ваше имя" required
                           value={form.name}
@@ -261,10 +262,10 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                         />
                         <textarea
                           placeholder="Коротко о задаче — что хотите сделать?"
-                          rows={3}
+                          rows={2}
                           value={form.message}
                           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                          style={{ ...inpStyle, resize: 'none' as const }}
+                          style={{ ...inpStyle, minHeight: '56px', resize: 'none' as const }}
                           className="focus:border-black/25 placeholder:text-black/30"
                         />
                         {/* Honeypot — скрыто от людей, видно ботам */}
@@ -279,14 +280,14 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                           style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                         />
 
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '2px 0 6px' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '1px 0 2px' }}>
                           <input
                             type="checkbox" required defaultChecked id="modal-privacy"
                             style={{ marginTop: '3px', cursor: 'pointer', accentColor: 'var(--green)' }}
                           />
                           <label htmlFor="modal-privacy" style={{
-                            fontFamily: 'var(--ff-b)', fontSize: '12px',
-                            color: 'rgba(0,0,0,0.5)', lineHeight: 1.5, cursor: 'pointer',
+                            fontFamily: 'var(--ff-b)', fontSize: '11.5px',
+                            color: 'rgba(0,0,0,0.5)', lineHeight: 1.4, cursor: 'pointer',
                           }}>
                             Я согласен с{' '}
                             <span
@@ -302,33 +303,33 @@ export default function ContactModalProvider({ children }: { children: React.Rea
                           type="submit"
                           disabled={loading}
                           style={{
-                            fontFamily: 'var(--ff-b)', fontWeight: 700, fontSize: '14px',
+                            fontFamily: 'var(--ff-b)', fontWeight: 700, fontSize: '13.5px',
                             color: '#000', background: 'var(--green)',
-                            padding: '14px 28px',
+                            padding: '11px 24px',
                             borderRadius: 'var(--r-pill)', border: 'none',
                             cursor: loading ? 'default' : 'pointer',
                             opacity: loading ? 0.6 : 1,
                             transition: 'opacity 0.2s',
                             display: 'flex', alignItems: 'center', gap: '8px',
-                            width: 'fit-content', marginTop: '2px',
+                            width: 'fit-content', marginTop: '1px',
                           }}
                           className="hover:opacity-85"
                         >
                           {loading ? 'Отправляем...' : 'Написать нам'}
                           {!loading && (
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden>
                               <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           )}
                         </button>
 
                         {error && (
-                          <p style={{ fontFamily: 'var(--ff-b)', fontSize: '12px', color: '#c0392b', lineHeight: 1.5, marginTop: '4px' }}>
+                          <p style={{ fontFamily: 'var(--ff-b)', fontSize: '12px', color: '#c0392b', lineHeight: 1.5, marginTop: '2px' }}>
                             {error}
                           </p>
                         )}
 
-                        <p style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(0,0,0,0.4)', marginTop: '4px', lineHeight: 1.5 }}>
+                        <p style={{ fontFamily: 'var(--ff-b)', fontSize: '10.5px', color: 'rgba(0,0,0,0.4)', marginTop: '6px', lineHeight: 1.4 }}>
                           Мы НЕ занимаемся рекламными рассылками. Данные нужны исключительно для связи с вами по вашему проекту.
                         </p>
 

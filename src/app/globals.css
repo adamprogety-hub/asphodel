@@ -201,6 +201,11 @@ body {
   transform: translateY(-3px) scale(1.01);
 }
 
+.portfolio-more-btn:hover {
+  color: rgba(255,255,255,0.85) !important;
+  border-color: rgba(255,255,255,0.35) !important;
+}
+
 /* Pricing Plans Cards Glassmorphic Glow */
 .pricing-card {
   background: rgba(26, 26, 28, 0.8) !important;

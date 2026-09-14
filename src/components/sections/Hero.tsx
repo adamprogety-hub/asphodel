@@ -167,23 +167,25 @@ export default function Hero() {
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button onClick={prevSlide} style={{
+              <button onClick={prevSlide} aria-label="Предыдущий слайд" style={{
                 width: '28px', height: '28px', borderRadius: '50%',
-                border: '1px solid rgba(255,255,255,0.12)', background: 'transparent',
-                color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '12px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: '1px solid rgba(255,255,255,0.15)', background: 'transparent',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'border-color 0.2s',
               }} className="hover:border-white">
-                ←
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M10 6H2M2 6L5 3M2 6L5 9" stroke="rgba(255,255,255,0.6)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
-              <button onClick={nextSlide} style={{
+              <button onClick={nextSlide} aria-label="Следующий слайд" style={{
                 width: '28px', height: '28px', borderRadius: '50%',
-                border: '1px solid rgba(255,255,255,0.12)', background: 'transparent',
-                color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '12px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: '1px solid rgba(255,255,255,0.15)', background: 'transparent',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'border-color 0.2s',
               }} className="hover:border-white">
-                →
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6H10M10 6L7 3M10 6L7 9" stroke="rgba(255,255,255,0.6)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
             </div>
             <span style={{ fontFamily: 'var(--ff-b)', fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>
