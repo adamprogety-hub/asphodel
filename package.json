@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build && (mkdir -p .next/cache/images && chmod -R 777 .next/cache 2>/dev/null || true)",
+    "build": "next build && (mkdir -p .next/cache/images .next/standalone/.next/cache/images && chmod -R 777 .next 2>/dev/null || true) && (chown -R 2000:2000 .next 2>/dev/null || true)",
     "start": "node server.js",
+    "start:prod": "node server.js",
     "lint": "eslint"
   },
   "dependencies": {

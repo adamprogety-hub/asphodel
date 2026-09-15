@@ -17,20 +17,28 @@ process.env.NODE_ENV = 'production';
 process.env.HOSTNAME = process.env.HOSTNAME || '0.0.0.0';
 process.env.PORT = process.env.PORT || '3000';
 
-// 3. Attempt to ensure image cache directory exists if writable
-try {
-  const cacheDir = path.join(process.cwd(), '.next', 'cache', 'images');
-  fs.mkdirSync(cacheDir, { recursive: true });
-} catch (e) {
-  // Ignored in read-only / restricted container environments
+// 3. Ensure image cache directories exist in both root and standalone locations
+const cacheDirs = [
+  path.join(process.cwd(), '.next', 'cache', 'images'),
+  path.join(process.cwd(), '.next', 'standalone', '.next', 'cache', 'images'),
+  path.join(process.cwd(), 'node_modules', '.cache'),
+];
+
+for (const dir of cacheDirs) {
+  try {
+    fs.mkdirSync(dir, { recursive: true, mode: 0o777 });
+  } catch (e) {
+    // Ignored if non-writable
+  }
 }
 
-// 4. Run standalone server if present, else fallback to next start
+// 4. Run standalone server if present, else fallback to standard next
 const standaloneServer = path.join(process.cwd(), '.next', 'standalone', 'server.js');
 
 if (fs.existsSync(standaloneServer)) {
   console.log(`[Server] Starting Next.js standalone server on ${process.env.HOSTNAME}:${process.env.PORT}`);
-  // Copy or symlink static files into standalone if needed
+
+  // Symlink static files into standalone if needed
   try {
     const staticSrc = path.join(process.cwd(), '.next', 'static');
     const staticDst = path.join(process.cwd(), '.next', 'standalone', '.next', 'static');
