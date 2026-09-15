@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build && (mkdir -p .next/cache/images && chmod -R 777 .next/cache 2>/dev/null || true)",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0",
     "lint": "eslint"
   },
   "dependencies": {
