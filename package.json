@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "node server.js 2>/dev/null || node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
