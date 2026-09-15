@@ -14,7 +14,7 @@ process.on('unhandledRejection', (reason) => {
 
 // 2. Ensure environment defaults for Timeweb Cloud container networking
 process.env.NODE_ENV = 'production';
-process.env.HOSTNAME = process.env.HOSTNAME || '0.0.0.0';
+process.env.HOSTNAME = '0.0.0.0';
 process.env.PORT = process.env.PORT || '3000';
 
 // 3. Ensure image cache directories exist in both root and standalone locations
